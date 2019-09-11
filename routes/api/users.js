@@ -5,7 +5,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const {check, validationResult} = require('express-validator/check');
-
 const User = require('../../models/User');
 
 
@@ -17,6 +16,8 @@ router.post('/',
 [
     check('name','Name is required').not().isEmpty(),
     check('email', 'Valid email is required').isEmail(),
+    check('branch', 'Branch is required').not().isEmpty(),
+    check('year', 'Year is required').not().isEmpty(),
     check('password','Password must have 6 or more characters').isLength({min:6})
 ],
 async function(req,res){
@@ -25,7 +26,7 @@ async function(req,res){
         return res.status(400).json({errors: errors.array()});
     }
 
-    const {name, email, password} = req.body;
+    const {name, email, branch, year, password} = req.body;
 
     try{
         // Check for existing users
@@ -48,6 +49,8 @@ async function(req,res){
         user = new User({
             name,
             email,
+            branch,
+            year,
             avatar,
             password
         });

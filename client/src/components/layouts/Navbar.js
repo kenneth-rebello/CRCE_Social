@@ -18,19 +18,21 @@ const Navbar = (props) => {
     const guestLinks = (
         <ul>
             <li><Link to="/profiles">Profiles</Link></li>
-            <li><Link to="/register">Register</Link></li>
             <li><Link to="/login">Login</Link></li>
+            <li><Link to="/register">Register</Link></li>
         </ul>
     );
 
     return (
-        <nav className="navbar bg-dark">
-            <h1>
-                <Link to="/"><i className="fas fa-code"></i> CRCE Hub</Link>
-            </h1>
-            <Fragment>
+        <nav className="navbar">
+            <div>
+                <h1><Link to="/" className="title">CRCE Hub</Link></h1>
+            </div>
+            <div>
                 { props.isAuth ? authLinks : guestLinks}
-            </Fragment>
+            </div>
+            <label className="underline">.</label>
+            <label className="underline">.</label>
         </nav>
     )
 }

@@ -13,18 +13,19 @@ const Profiles = ({getAllProfiles, profile}) => {
 
     return (
         <Fragment>
-            {profile.loading ? <Spinner/> : <Fragment>
-                <h1 className="large text-primary">Users</h1>
-                <p className="lead">Check out the users of our page</p>
+            {profile.loading ? <Spinner/> : (<Fragment>
+                <div className="plain-page">
+                    <h1 className="heading">All Users</h1>
 
-                <div className="profiles">
-                    {profile.profiles.length>0 ? (
-                        profile.profiles.map(profile => (
-                            <ProfileItem key={profile._id} profile={profile}/>
-                        ))
-                    ) : <h4>No Profiles To Show</h4>}
+                    <div className="profiles">
+                        {profile.profiles.length>0 ? (
+                            profile.profiles.map(profile => (
+                                <ProfileItem key={profile._id} profile={profile}/>
+                            ))
+                        ) : <h4 style="fontSize:60px">No Profiles To Show</h4>}
+                    </div>
                 </div>
-            </Fragment>}
+            </Fragment>)}
         </Fragment>
     )
 }

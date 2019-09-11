@@ -9,21 +9,16 @@ const Landing = ({isAuth}) => {
         return <Redirect to="/dashboard" />;
     }
     return (
-        <section className="landing">
-            <div className="dark-overlay">
-                <div className="landing-inner">
-                <h1 className="x-large">CRCE Hub</h1>
-                <p className="lead">
+        <div className="page">
+            <div className="landing-box">
+                <span className="title">CRCE Hub</span>
+                <p>
                     Create a profile, share posts and get help from
                     other students
                 </p>
-                <div className="buttons">
-                    <Link to="/register" className="btn btn-primary">Sign Up</Link>
-                    <Link to="/login" className="btn btn-light">Login</Link>
-                </div>
-                </div>
+                <Link to="/register">Join CRCE Social today! Click here to register</Link>
             </div>
-        </section>
+        </div>
     )
 }
 

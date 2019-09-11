@@ -3,6 +3,8 @@ import spinner from '../../img/spinner.gif';
 
 export default () => (
     <Fragment>
-        <img src ={spinner} style={{width:'200px', margin:'auto',display:'block'}} alt='Loading...'/>
+        <div className="plain-page">
+            <img src ={spinner} style={{width:'550px', height:'550px', margin:'auto',display:'block'}} alt='Loading...'/>       
+        </div>    
     </Fragment>
 )

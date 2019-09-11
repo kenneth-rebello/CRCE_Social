@@ -26,8 +26,6 @@ router.get('/me', auth, async function(req,res){
 //@desc     Create/Update a user profile
 //@access   Private
 router.post('/', [auth, [
-    check('dept','Department is required').not().isEmpty(),
-    check('batch','Department is required').not().isEmpty(),
     check('skills','Skills required').not().isEmpty()
 ]], 
 async function(req, res){

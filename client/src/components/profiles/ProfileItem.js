@@ -9,14 +9,16 @@ const ProfileItem = ({profile}) => {
 
     return (
         <Fragment>
-            <div className="profile bg-light">
-                <img src={avatar} alt="" className="round-img"/>
-                <div>
+            <div className="profile">
+                <div className="profile-picture">
+                    <img src={avatar} alt=""/>
+                </div>              
+                <div className="profile-details">
                     <h2>{name}</h2>
                     <p>{position}</p>
                     <p className="my-1">{location && <span>{location}</span>}</p>
                     <p>{batch} {dept}</p>
-                    <Link to={`/profile/${_id}`} className="btn btn-primary">View Profile</Link>
+                    <Link to={`/profile/${_id}`} className="btn btn-brick">View Profile</Link>
                 </div>
             </div>
         </Fragment>

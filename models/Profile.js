@@ -9,14 +9,6 @@ const ProfileSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    dept:{
-        type: String,
-        required: true
-    },
-    batch:{
-        type: String,
-        required: true
-    },
     contact:{
         type: [String]
     },
