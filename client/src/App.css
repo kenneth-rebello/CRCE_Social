@@ -1,25 +1,38 @@
+.nav{
+  position: fixed;
+  top: 0;
+  overflow: hidden;
+}
+
+.nav .underline{
+  background-color: firebrick;
+  height: 10px;
+  grid-template-columns: 1fr;
+}
+
+.nav .alerts{
+  width:100%;
+  height:40px;
+  background-color: gold;
+  color:black;
+  grid-template-columns: 1fr;
+  align-items: center;
+  font-size:30px;
+}
+
 .navbar{
   background-color: black;
   color: whitesmoke;
   display: grid;
   grid-template-columns: 3fr 1fr;
   align-items: center;
-  height: 100px;
-  position: fixed;
-  top: 0;
-  overflow: hidden;
+  min-height: 100px;
 }
 
 .navbar li{
   display: inline;
   padding:10px;
   font-size:30px;
-}
-
-.navbar .underline{
-  background-color: firebrick;
-  width: 100%;
-  height: 10px;
 }
 
 .navbar a{
@@ -39,6 +52,7 @@
   font-weight: bolder;
   padding: 50px;
 }
+
 
 .landing-box{
   display: grid;
@@ -64,46 +78,11 @@
   font-size: 20px;
 }
 
-.auth{
-  display: grid;
-  justify-items: right;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  margin-right: 25px;
-}
-
-.auth-box{
-  display: grid;
-  background-color: whitesmoke;
-  width: 20%;
-  padding:20px;
-}
-
-.auth .heading{
-  font-size: 40px;
-}
-
-.auth .lead{
-  font-size: 30px;
-}
-
 .form-group{
   padding: 10px;
   padding-bottom: 20px;
   display: grid;
   grid-template-columns: 1fr;
-}
-
-.auth .form .form-group input{
-  width: 250px;
-  height: 40px;
-  border-radius: 25px;
-}
-
-.auth .form .form-group select{
-  width:250px;
-  height:40px;
-  border-radius: 25px;
 }
 
 .plain-page .form .form-group input{
@@ -141,6 +120,49 @@
 }
 
 
+/* Auth Components */
+.auth{
+  display: grid;
+  justify-items: right;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-right: 1%;
+}
+
+.auth-box{
+  display: grid;
+  background-color: whitesmoke;
+  width: 20%;
+  padding:20px;
+  padding-left:40px;
+  padding-right: 40px;
+}
+
+.auth .heading{
+  font-size: 40px;
+}
+
+.auth .lead{
+  font-size: 30px;
+}
+
+.auth .form .form-group input{
+  width: 250px;
+  height: 40px;
+  border-radius: 25px;
+}
+
+.auth .form .form-group select{
+  width:250px;
+  height:40px;
+  border-radius: 25px;
+}
+
+/* Profile  */
+.all-profiles{
+  display: grid;
+  grid-template-rows: 80px auto
+}
 .profiles{
   overflow: scroll;
 }
@@ -232,17 +254,80 @@
   row-gap: 1px;
 }
 
-
 .skills li{
   display: inline;
   padding:5px;
 }
 
+/* Posts */
+.posts-page{
+  display: grid;
+  grid-template-rows: 80px 25px 225px auto; 
+}
+
+.posts-page .heading{
+  font-size: 40px;
+  justify-self: center;
+}
+
+.posts-page p{
+  font-size: 20px;
+  justify-self: center;
+}
+
+.post-form{
+  display: grid;
+  justify-self: center;
+  grid-template-columns: 1fr;
+}
+
+.posts{
+  display: grid;
+  justify-self: center;
+  width: 80%;
+}
+
+.post{
+  margin:25px;
+  display: grid;
+  grid-template-columns: 1fr 6fr; 
+}
+
+.post-user{
+  display: grid;
+  grid-template-rows: 50px 20px;
+}
+
+.post-data{
+  background-color: white;
+  padding: 15px;
+  display: grid;
+  grid-template-rows: auto 25px 50px;
+}
+
+.post-user{
+  background-color: firebrick;
+}
+
+.post-user .heading{
+  font-size: 20px;
+  color:whitesmoke;
+}
+
+.post .post-text{
+  font-size:25px;
+  justify-self: left;
+}
+
+.post .post-date{
+  color: grey;
+  font-size:15px;
+  justify-self: right;
+}
 
 /* General Stuff */
 .page{
   background: url('./img/crce.jpeg');
-  margin-top: 100px;
   min-height: 768px;
   background-size: cover;
   background-repeat: no-repeat;
@@ -262,9 +347,6 @@
   font-family: 'Cochin';
 }
 
-/* Grid */
-
-
 
 /* Links */
 a{
@@ -283,8 +365,14 @@ a:visited{
 /* Buttons */
 .btn{
   border-radius: 10px;
-  width: 10%;
+  width: 15%;
   height: 40px;
+  font-size: 20px;
+  margin: 5px;
+}
+
+.btn:hover{
+  cursor: pointer;
 }
 
 .btn a{
@@ -308,4 +396,9 @@ a:visited{
 .btn-light{
   background-color: lightgray;
   color: firebrick  ;
+}
+
+.btn-danger{
+  background-color: red;
+  color:white;
 }

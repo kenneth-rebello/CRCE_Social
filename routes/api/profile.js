@@ -25,10 +25,7 @@ router.get('/me', auth, async function(req,res){
 //@route    GET api/profile/me
 //@desc     Create/Update a user profile
 //@access   Private
-router.post('/', [auth, [
-    check('skills','Skills required').not().isEmpty()
-]], 
-async function(req, res){
+router.post('/', [auth], async function(req, res){
     const errors = validationResult(req);
     if(!errors.isEmpty()){
         return res.status(400).json({errors: errors.array()});     
@@ -39,7 +36,6 @@ async function(req, res){
         dateOfBirth,
         contact,
         location,
-        skills,
         achievements,
         position,
         bio,
@@ -60,9 +56,6 @@ async function(req, res){
     if(position) ProfileFields.position = position;
     if(bio) ProfileFields.bio = bio;
     if(githubusername) ProfileFields.dept = githubusername;
-    if(skills){
-        ProfileFields.skills = skills.split(',').map(skill => skill.trim());
-    }
     ProfileFields.social = {}
     if(linkedin) ProfileFields.social.linkedin = linkedin;
     if(twitter) ProfileFields.social.twitter = twitter;

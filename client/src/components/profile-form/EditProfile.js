@@ -32,14 +32,13 @@ const EditProfile = ({profile: {profile, loading}, createProfile, getCurrentProf
             contact: loading || !profile.contact ? '' : profile.contact,
             location: loading || !profile.location ? '' : profile.location,
             position: loading || !profile.position? '' : profile.position,
-            skills: loading || !profile.skills? '' : profile.skills,
             dateOfBirth: loading || !profile.dateOfBirth? '' : profile.dateOfBirth,
             bio: loading || !profile.bio ? '' : profile.bio,
             githubusername: loading || !profile.githubusername ? '' : profile.githubusername
         });
     }, [loading]);
 
-    let { contact, dateOfBirth, location, skills, achievements, position, 
+    let { contact, dateOfBirth, location, achievements, position, 
         githubusername, bio,twitter,facebook,youtube,instagram, linkedin} = formData;
 
     const Changer = e =>{
@@ -54,13 +53,9 @@ const EditProfile = ({profile: {profile, loading}, createProfile, getCurrentProf
     
     return (
         <Fragment>
-            <div className="plain-page">
             <h1 className="heading">
-            Create Your Profile
+            Edit Your Profile
             </h1>
-            <p className="lead">
-                Let's get some information to make your profile stand out
-            </p>
             <small>* = required field</small>
             <form className="form" onSubmit={(e)=>Submitter(e)}>
                 <div className="form-group">
@@ -87,11 +82,6 @@ const EditProfile = ({profile: {profile, loading}, createProfile, getCurrentProf
                 <div className="form-group">
                 <input type="text" placeholder="Location" name="location" value={location} onChange={(e)=>Changer(e)}></input>
                 <small className="form-text">City & State suggested (eg. Boston, MA)</small>
-                </div>
-                <div className="form-group">
-                <input type="text" placeholder="* Skills" name="skills" value={skills} onChange={(e)=>Changer(e)}></input>
-                <small className="form-text">Please use comma separated values (eg.
-                    HTML,CSS,JavaScript,PHP)</small>
                 </div>
                 <div className="form-group">
                 <input
@@ -142,7 +132,6 @@ const EditProfile = ({profile: {profile, loading}, createProfile, getCurrentProf
                 <input type="submit" value="Done" className="btn btn-dark"></input>
                 <button type="button" className="btn btn-light"><Link to="/dashboard">Go Back</Link></button>
             </form>
-            </div>
         </Fragment>
     )
 }

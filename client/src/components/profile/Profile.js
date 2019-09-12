@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import Spinner from '../layouts/Spinner';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
-import { getProfileById } from '../../actions/profile';
+import { getProfileById, delAccount } from '../../actions/profile';
 
 const Profile = ({ getProfileById, profile, auth, match }) => {
     
@@ -15,19 +15,21 @@ const Profile = ({ getProfileById, profile, auth, match }) => {
     
     return (
         <Fragment>
-            <div className="plain-page">
             {profile.profile === null || profile.loading ? <Spinner/> : <Fragment>
                 <div className="profile-grid">
                     <ProfileTop profile={profile.profile}/>
                     <div className="profile-buttons">
                         <button className="btn btn-light"><Link to="/profiles">Go Back</Link></button>
                         {auth.isAuthenticated && auth.loading === false && auth.user._id === profile.profile.user._id && 
-                        (<button className="btn btn-dark"><Link to="/edit_profile">Edit Profile</Link></button>)}
+                        (<Fragment>
+                            <button className="btn btn-dark"><Link to="/edit_profile">Edit Profile</Link></button>
+                            <button className="btn btn-danger" onClick={() => delAccount()}>Delete Account</button>
+                        </Fragment>)}
+                        
                     </div>
                     <ProfileAbout profile={profile.profile}/>
                 </div>
             </Fragment>}
-            </div>
         </Fragment>
     )
 }

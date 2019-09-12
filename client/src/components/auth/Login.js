@@ -34,18 +34,18 @@ const Login = (props) => {
                         <h1 className="heading">Login</h1>
                         <form className="form" onSubmit={e => Submitter(e)}>
                             <div className='form-group'>
-                            <input type="email" placeholder="Email Address" name="email" value={email} onChange={e => Changer(e)} required/>
+                                <input type="email" placeholder="Email Address" name="email" value={email} onChange={e => Changer(e)} required/>
                             </div>
                             <div className="form-group">
-                            <input
-                                type="password"
-                                placeholder="Password"
-                                name="password"
-                                minLength="6"
-                                value={password} 
-                                onChange={e => Changer(e)} 
-                                required
-                            />
+                                <input
+                                    type="password"
+                                    placeholder="Password"
+                                    name="password"
+                                    minLength="6"
+                                    value={password} 
+                                    onChange={e => Changer(e)} 
+                                    required
+                                />
                             </div>
                             <div className="form-group">
                                 <input type="submit" className="btn btn-dark" value="Login" />
