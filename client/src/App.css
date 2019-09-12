@@ -325,10 +325,28 @@
   justify-self: right;
 }
 
+/* Dashboard */
+
+.dashboard{
+  display: grid;
+  grid-template-columns:4fr 1fr;
+}
+
+.dashboard .posts{
+  display: grid;
+  width: 100%;
+}
+
+.dashboard .user .heading{
+  font-size: 20px;
+}
+
+
 /* General Stuff */
 .page{
   background: url('./img/crce.jpeg');
   min-height: 768px;
+  width:100%;
   background-size: cover;
   background-repeat: no-repeat;
   display: grid;
@@ -337,6 +355,7 @@
 .plain-page{
   background-color: whitesmoke;
   margin-top: 100px;
+  width:100%;
   min-height:550px;
   background-size: cover;
   display: grid;

@@ -9,7 +9,7 @@ const Navbar = (props) => {
 
     const authLinks = (
         <ul>
-            <li><Link to="/dashboard">Dashboard</Link></li>
+            <li><Link to="/dashboard">Home</Link></li>
             <li><Link to="/profiles">Profiles</Link></li>
             <li><Link to="/posts">Posts</Link></li>
             <li><Link onClick={props.logout} to="#!">Logout</Link></li>
