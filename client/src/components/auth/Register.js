@@ -95,7 +95,7 @@ const Register = (props) => {
                             </select>
                         </div>
                         <div className="form-group">
-                            <input type="submit" className="btn btn-primary" value="Register" />
+                            <input type="submit" className="btn btn-dark" value="Register" />
                         </div>
                     </form>
                     <p>Already have an account? <Link to="/login">Login</Link></p>

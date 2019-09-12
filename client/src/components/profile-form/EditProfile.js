@@ -29,20 +29,17 @@ const EditProfile = ({profile: {profile, loading}, createProfile, getCurrentProf
         getCurrentProfile();
 
         setFormData({
-            company: loading || !profile.company ? '' : profile.company,
             contact: loading || !profile.contact ? '' : profile.contact,
             location: loading || !profile.location ? '' : profile.location,
             position: loading || !profile.position? '' : profile.position,
             skills: loading || !profile.skills? '' : profile.skills,
             dateOfBirth: loading || !profile.dateOfBirth? '' : profile.dateOfBirth,
-            dept: loading || !profile.dept ? '' : profile.dept,
-            batch: loading || !profile.batch ? '' : profile.batch,
             bio: loading || !profile.bio ? '' : profile.bio,
             githubusername: loading || !profile.githubusername ? '' : profile.githubusername
         });
-    }, [loading, getCurrentProfile, profile]);
+    }, [loading]);
 
-    let { dept, batch, contact, dateOfBirth, location, skills, achievements, position, 
+    let { contact, dateOfBirth, location, skills, achievements, position, 
         githubusername, bio,twitter,facebook,youtube,instagram, linkedin} = formData;
 
     const Changer = e =>{
@@ -57,7 +54,8 @@ const EditProfile = ({profile: {profile, loading}, createProfile, getCurrentProf
     
     return (
         <Fragment>
-            <h1 className="large text-primary">
+            <div className="plain-page">
+            <h1 className="heading">
             Create Your Profile
             </h1>
             <p className="lead">
@@ -91,12 +89,6 @@ const EditProfile = ({profile: {profile, loading}, createProfile, getCurrentProf
                 <small className="form-text">City & State suggested (eg. Boston, MA)</small>
                 </div>
                 <div className="form-group">
-                <input type="text" placeholder="Department" name="dept" value={dept} onChange={(e)=>Changer(e)}></input>
-                </div>
-                <div className="form-group">
-                <input type="text" placeholder="Batch" name="batch" value={batch} onChange={(e)=>Changer(e)}></input>
-                </div>
-                <div className="form-group">
                 <input type="text" placeholder="* Skills" name="skills" value={skills} onChange={(e)=>Changer(e)}></input>
                 <small className="form-text">Please use comma separated values (eg.
                     HTML,CSS,JavaScript,PHP)</small>
@@ -110,47 +102,47 @@ const EditProfile = ({profile: {profile, loading}, createProfile, getCurrentProf
                 ></input>
                 <small className="form-text"
                     >If you want your latest repos and a Github link, include your
-                    username</small
-                >
+                    username</small>
                 </div>
                 <div className="form-group">
                 <textarea placeholder="A short bio of yourself" name="bio" value={bio} onChange={(e)=>Changer(e)}></textarea>
                 <small className="form-text">Tell us a little about yourself</small>
                 </div>
 
-                <div className="my-2">
-                <button onClick={() => toggleSocialInputs(!displaySocialInputs)}type="button" className="btn btn-light">
-                    Add Social Network Links
+                <div className="form-group">
+                <button onClick={() => toggleSocialInputs(!displaySocialInputs)} type="button" className="btn btn-light">
+                    Edit Social Network Links
                 </button>
-                <span>Optional</span>
+                <span style={{display:"block"}}>Optional</span>
                 </div>
 
                 {displaySocialInputs && <Fragment>
-                    <div className="form-group social-input">
+                    <div className="form-group">
                     <input type="text" placeholder="Twitter URL" name="twitter" value={twitter} onChange={(e)=>Changer(e)}></input>
                     </div>
 
-                    <div className="form-group social-input">
+                    <div className="form-group">
                     <input type="text" placeholder="Facebook URL" name="facebook" value={facebook} onChange={(e)=>Changer(e)}></input>
                     </div>
 
-                    <div className="form-group social-input">
+                    <div className="form-group">
                     <input type="text" placeholder="YouTube URL" name="youtube" value={youtube} onChange={(e)=>Changer(e)}></input>
                     </div>
 
-                    <div className="form-group social-input">
+                    <div className="form-group">
                     <input type="text" placeholder="Linkedin URL" name="linkedin" value={linkedin} onChange={(e)=>Changer(e)}></input>
                     </div>
 
-                    <div className="form-group social-input">
+                    <div className="form-group">
                     <input type="text" placeholder="Instagram URL" name="instagram" value={instagram} onChange={(e)=>Changer(e)}></input>
                     </div>
                 </Fragment>}
                 
 
-                <input type="submit" className="btn btn-primary my-1" />
-                <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
+                <input type="submit" value="Done" className="btn btn-dark"></input>
+                <button type="button" className="btn btn-light"><Link to="/dashboard">Go Back</Link></button>
             </form>
+            </div>
         </Fragment>
     )
 }

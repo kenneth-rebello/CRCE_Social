@@ -10,7 +10,7 @@ const ProfileItem = ({profile}) => {
     return (
         <Fragment>
             <div className="profile">
-                <div className="profile-picture">
+                <div className="round">
                     <img src={avatar} alt=""/>
                 </div>              
                 <div className="profile-details">

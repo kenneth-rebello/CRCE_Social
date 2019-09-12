@@ -47,7 +47,9 @@ const Login = (props) => {
                                 required
                             />
                             </div>
-                            <input type="submit" className="btn btn-primary" value="Login" />
+                            <div className="form-group">
+                                <input type="submit" className="btn btn-dark" value="Login" />
+                            </div>
                         </form>
                         <p>Don't have an account? <Link to="/register">Sign Up</Link></p>
                     </div>

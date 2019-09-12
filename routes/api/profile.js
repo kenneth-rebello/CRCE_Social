@@ -11,7 +11,7 @@ const Post = require('../../models/Post');
 //@access   Private
 router.get('/me', auth, async function(req,res){
     try{
-        const profile = await Profile.findOne({user: req.user.id}).populate('user', ['name']);
+        const profile = await Profile.findOne({user: req.user.id}).populate('user', ['name','avatar','year','branch']);
         if(!profile){
             return res.status(400).json({msg: 'There is no existing profile'});
         }
@@ -37,8 +37,6 @@ async function(req, res){
     const {
         user,
         dateOfBirth,
-        dept,
-        batch, 
         contact,
         location,
         skills,
@@ -57,8 +55,6 @@ async function(req, res){
     const ProfileFields = {};
     ProfileFields.user = req.user.id;
     if(dateOfBirth) ProfileFields.dateOfBirth = dateOfBirth;
-    if(dept) ProfileFields.dept = dept;
-    if(batch) ProfileFields.batch = batch;
     if(contact) ProfileFields.contact = contact;
     if(location) ProfileFields.location = location;
     if(position) ProfileFields.position = position;
@@ -103,7 +99,7 @@ async function(req, res){
 router.get('/', async function(req, res){
     try{
 
-        const profiles = await Profile.find().populate('user',['name','avatar']);
+        const profiles = await Profile.find().populate('user',['name','avatar','year','branch']);
         res.json(profiles);
 
     }catch(err){
@@ -120,7 +116,7 @@ router.get('/', async function(req, res){
 router.get('/user/:user_id', async function(req, res){
     try{
 
-        const profile = await Profile.findOne({user: req.params.user_id}).populate('user',['name','avatar']);
+        const profile = await Profile.findOne({user: req.params.user_id}).populate('user',['name','avatar','year','branch']);
         
         if(!profile){
             return res.status(400).json({msg: 'There is no profile for this user'});
@@ -186,7 +182,7 @@ async function(req, res){
 
     try {
 
-        const profile = await Profile.findOne({user: req.user.id});
+        const profile = await Profile.findOne({user: req.user.id}).populate('user', ['name','avatar','year','branch']);
 
         profile.education.unshift(newEdu);
 
@@ -208,7 +204,7 @@ async function(req, res){
 
 router.delete('/education/:exp_id', auth, async function(req, res){
     try {
-        const profile = await Profile.findOne({user: req.user.id});
+        const profile = await Profile.findOne({user: req.user.id}).populate('user', ['name','avatar','year','branch']);
 
         const toRemove = profile.education.map(item => item.id).indexOf(req.params.exp_id);
 

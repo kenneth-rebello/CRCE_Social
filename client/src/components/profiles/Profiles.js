@@ -18,11 +18,13 @@ const Profiles = ({getAllProfiles, profile}) => {
                     <h1 className="heading">All Users</h1>
 
                     <div className="profiles">
-                        {profile.profiles.length>0 ? (
+                        {profile.profiles.length<=0 || !profile ? 
+                        (<h4 style={{fontSize:"60px"}}>No Profiles To Show</h4>) :
+                        (
                             profile.profiles.map(profile => (
                                 <ProfileItem key={profile._id} profile={profile}/>
                             ))
-                        ) : <h4 style="fontSize:60px">No Profiles To Show</h4>}
+                        )}
                     </div>
                 </div>
             </Fragment>)}
