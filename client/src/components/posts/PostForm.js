@@ -14,11 +14,11 @@ const PostForm = ({addPost}) => {
     }
 
     return (
-        <div class="post-form">
-            <div class="bg-primary p">
+        <div className="post-form">
+            <div className="bg-primary p">
                 <h1>Say Something</h1>
             </div>
-            <form class="form" onSubmit={e => Submitter(e)}>
+            <form className="form" onSubmit={e => Submitter(e)}>
                 <textarea
                 name="text" 
                 cols="90"
@@ -27,7 +27,7 @@ const PostForm = ({addPost}) => {
                 value={text}
                 onChange={e => setText(e.target.value)}
                 required></textarea><br/>
-                <input type="submit" class="btn btn-dark" value="Submit" />
+                <input type="submit" className="btn btn-dark" value="Submit" />
             </form>
         </div>
     )

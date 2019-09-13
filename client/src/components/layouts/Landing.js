@@ -23,7 +23,7 @@ const Landing = ({isAuth}) => {
 }
 
 Landing.propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired
+    isAuth: PropTypes.bool.isRequired
 }
 const mapStateToProps = state => ({
     isAuth: state.auth.isAuthenticated

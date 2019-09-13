@@ -4,8 +4,9 @@ import {Link} from 'react-router-dom';
 import Moment from 'react-moment';
 import {connect} from 'react-redux';
 import Spinner from '../layouts/Spinner';
+import {addLike, removeLike} from '../../actions/post';
 
-const PostItem = ({auth, post}) => {
+const PostItem = ({auth, post, addLike, removeLike}) => {
 
     let { _id, text, name, avatar, user, likes, comments, date } = post;
 
@@ -27,13 +28,16 @@ const PostItem = ({auth, post}) => {
                         Posted on <Moment format='DD/MM/YYYY'>{date}</Moment>
                     </p>
                     <div>
-                        <button type="button" className="btn btn-green">
-                        <span>Like</span>{` `}
-                        <span>{likes.length}</span>
-                        </button>
-                        <button type="button" className="btn btn-red">
-                        <span>Unlike</span>
-                        </button>
+                        { likes.filter(like => like.user === auth.user._id).length>0 ? (
+                            <button type="button" className="btn btn-red" onClick={() => removeLike(_id)}>
+                            <span>Unlike</span>{` `}
+                            </button>
+                        ):(
+                            <button type="button" className="btn btn-green" onClick={() => addLike(_id)}>
+                            <span>Like</span>{ ` `}
+                            </button>)
+                        }
+                        <span className="likes">{likes.length} Likes</span>
                         <Link to={`/post/${_id}`}className="btn btn-primary">
                         Discussion <span className='comment-count'>{comments.length}</span>
                         </Link>
@@ -56,10 +60,12 @@ const PostItem = ({auth, post}) => {
 PostItem.propTypes = {
     post:PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
+    addLike: PropTypes.func.isRequired,
+    removeLike: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, {})(PostItem)
+export default connect(mapStateToProps, {addLike, removeLike})(PostItem)

@@ -146,7 +146,6 @@ router.put('/like/:id', auth, async function(req, res){
 router.put('/unlike/:id', auth, async function(req, res){
     try {
         const post = await Post.findById(req.params.id);
-
         //Check if already liked
         if(post.likes.filter(like => like.user.toString() === req.user.id).length == 0){
             return res.status(400).json({msg: 'Not liked'});
