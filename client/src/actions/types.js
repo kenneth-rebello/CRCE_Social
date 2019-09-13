@@ -20,3 +20,6 @@ export const UPDATE_LIKES = "UPDATE_LIKES";
 export const CLEAR_POSTS = "CLEAR_POSTS";
 export const ADD_FRIEND = "ADD_FRIEND";
 export const FOLLOW_ERROR = "FOLLOW_ERROR";
+export const GET_PENDING_POSTS = "GET_PENDING_POSTS";
+export const GET_PENDING_USERS = "GET_PENDING_USERS";
+export const PENDING_ERROR = "PENDING_ERROR";

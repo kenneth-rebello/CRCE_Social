@@ -81,6 +81,7 @@ const Register = (props) => {
                                 <option value="PROD">PROD</option>
                                 <option value="MECH">MECH</option>
                                 <option value="CSE">CSE</option>
+                                <option value="N/A">N/A</option>
                             </select>
                         </div>
                         <div className="form-group">

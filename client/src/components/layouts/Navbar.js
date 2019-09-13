@@ -35,6 +35,7 @@ const Navbar = (props) => {
                     { props.isAuth ? authLinks : guestLinks}
                 </div>
             </nav>
+            <div className="nav-line"></div>
              {props.alert.length>0 && (<div className="alerts">
                 <Alert/>
             </div>)} 

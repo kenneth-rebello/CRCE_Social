@@ -39,7 +39,7 @@
 }
 
 .navbar-links a:hover{
-  color:yellow; 
+  color:goldenrod; 
 }
 
 .navbar .btn{
@@ -56,6 +56,10 @@
   padding: 50px;
 }
 
+.nav-line{
+  background-color: goldenrod;
+  height:10px;
+}
 
 .landing-box{
   display: grid;
@@ -358,7 +362,17 @@
   grid-template-columns:4fr 1fr;
 }
 
+.admindash{
+  display: grid;
+  grid-template-columns:4fr 1fr;
+}
+
 .dashboard .posts{
+  display: grid;
+  width: 100%;
+}
+
+.admindash .posts{
   display: grid;
   width: 100%;
 }
@@ -368,8 +382,32 @@
   margin: 15px;
   margin-top: 60px;
   display: grid;
-  grid-template-rows: 30px 20px auto;
-  max-height: 500px;
+  grid-template-rows: 30px 50px auto;
+  max-height: 356px;
+}
+
+.admindash .user-admin{
+  background-color: whitesmoke;
+  margin: 15px;
+  margin-top: 60px;
+  display: grid;
+  grid-template-rows: 30px 50px 30px 256px 50px 50px;
+  max-height: 480px;
+}
+
+.admindash .user-admin .admin-buttons{
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+.admin-buttons .btn{
+  width:90%;
+}
+
+.dashboard .user .user-switch{
+  display:grid;
+  grid-template-rows: auto 256px;
 }
 
 .dashboard .user h1{
@@ -377,9 +415,41 @@
   justify-self: center;
 }
 
+.admindash .user-admin h1{
+  font-size: 20px;
+  justify-self: center;
+}
+
+.dashboard .user .heading{
+  color: goldenrod;
+  font-size: 25px;
+}
+
 .dash-link{
   font-size: 20px;
   justify-self: center;
+}
+
+.main-form{
+  display:grid;
+  grid-template-columns: 4fr 1fr;
+}
+
+.edit-profile{
+  background-color: white;
+  margin: 10px;
+}
+
+.edit-profile-actions{
+  background-color: lightblue;
+  margin:10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 60px 60px 60px;
+}
+
+.edit-profile-actions .btn{
+  width:80%;
 }
 
 
@@ -395,7 +465,7 @@
 
 .plain-page{
   background-color: lightblue;
-  margin-top: 92px;
+  margin-top: 100px;
   width:100%;
   min-height:550px;
   background-size: cover;

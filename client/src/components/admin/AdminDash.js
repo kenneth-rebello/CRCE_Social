@@ -1,39 +1,42 @@
-import React ,{Fragment,useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react'
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {Link, Redirect} from 'react-router-dom';
 import {getCurrentProfile} from '../../actions/profile';
 import {getPosts} from '../../actions/post';
 import Spinner from '../layouts/Spinner';
 import PostItem from '../posts/PostItem';
 import PostForm from '../posts/PostForm';
 
-
-const Dashboard = ({getCurrentProfile, getPosts, auth, profile, post}) => {
+const AdminDash = ({getCurrentProfile, getPosts, auth, profile, post}) => {
 
     useEffect(() => {
         getCurrentProfile();
         getPosts();
     }, [getCurrentProfile, getPosts]);
 
-    if(auth.user){
-        if(auth.isAuthenticated && auth.user.admin){
-            return <Redirect to="/admindash"/>
-    }}
+    const [displayPendingPosts, togglePendingPosts] = useState(false);
+    const [displayPendingUsers, togglePendingUsers] = useState(false);
     
     return (
-        profile.loading && profile.profile === null ? <Spinner /> : 
-        
+        profile.loading && profile.profile === null ? <Spinner /> :
+
         <Fragment>
-            <div className="dashboard">
-                {post.loading? (<Spinner/>):
-                <div className="posts">
-                    <PostForm />
-                    {post.posts.map(post => (
-                        <PostItem key={post._id} post={post}/>
-                    ))}
-                </div>}
-                <div className="user">
+            <div className="admindash">
+                <div className="admindash-half">
+
+                    {displayPendingPosts && <h1>Pending Posts</h1>}
+                    {displayPendingUsers && <h1>Pending Posts</h1>}
+
+                    {post.loading? (<Spinner/>):
+                    <div className="posts">
+                        <PostForm />
+                        {post.posts.map(post => (
+                            <PostItem key={post._id} post={post}/>
+                        ))}
+                    </div>}
+                </div>
+                <div className="user-admin">
                     <h1>Welcome</h1>
                     <h1 className="heading">{auth.user && auth.user.name }</h1>
                     {profile.profile !== null?
@@ -46,13 +49,17 @@ const Dashboard = ({getCurrentProfile, getPosts, auth, profile, post}) => {
                             <Link to="/create_profile" className="dash-link">Create Profile</Link>
                         </Fragment>)
                     }
+                    {auth.user && auth.user.admin && <div className="admin-buttons">
+                        <button className="btn btn-light" onClick={() => togglePendingPosts(!displayPendingPosts)}>Show Pending Posts</button>
+                        <button className="btn btn-light" onClick={() => togglePendingUsers(!displayPendingUsers)}>Show Pending Users</button>
+                    </div>}         
                 </div>
             </div>
         </Fragment>
-    );
+    )
 }
 
-Dashboard.propTypes = {
+AdminDash.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
     getPosts: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
@@ -65,5 +72,5 @@ const mapStateToProps = state => ({
     profile: state.profile,
     post: state.post
 });
-       
-export default connect(mapStateToProps, {getPosts, getCurrentProfile})(Dashboard);
+
+export default connect(mapStateToProps, {getPosts, getCurrentProfile})(AdminDash)

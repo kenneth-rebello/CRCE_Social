@@ -10,7 +10,7 @@ import { getProfileById, delAccount } from '../../actions/profile';
 import { getUserPosts } from '../../actions/post';
 
 
-const Profile = ({ getProfileById, getUserPosts, profile, auth, match }) => {
+const Profile = ({ getProfileById, getUserPosts, delAccount, profile, auth, match }) => {
     
     useEffect(() => {
         getUserPosts(match.params.id);
@@ -45,6 +45,7 @@ const Profile = ({ getProfileById, getUserPosts, profile, auth, match }) => {
 Profile.propTypes = {
     getProfileById: PropTypes.func.isRequired,
     getUserPosts: PropTypes.func.isRequired,
+    delAccount: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
 }
@@ -54,4 +55,4 @@ const mapStateToProps = state => ({
     auth: state.auth,
 });
 
-export default connect (mapStateToProps, { getUserPosts, getProfileById })(Profile)
+export default connect (mapStateToProps, { getUserPosts, getProfileById, delAccount })(Profile)
