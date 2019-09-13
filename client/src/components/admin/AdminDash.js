@@ -3,29 +3,37 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getCurrentProfile} from '../../actions/profile';
-import {getPosts} from '../../actions/post';
+import {getPosts, getPendingPosts} from '../../actions/post';
 import Spinner from '../layouts/Spinner';
 import PostItem from '../posts/PostItem';
 import PostForm from '../posts/PostForm';
 
-const AdminDash = ({getCurrentProfile, getPosts, auth, profile, post}) => {
+const AdminDash = ({getCurrentProfile, getPendingPosts, getPosts, auth, profile, pending, post}) => {
 
     useEffect(() => {
         getCurrentProfile();
         getPosts();
-    }, [getCurrentProfile, getPosts]);
+        getPendingPosts();
+    }, [getCurrentProfile, getPendingPosts, getPosts]);
 
     const [displayPendingPosts, togglePendingPosts] = useState(false);
     const [displayPendingUsers, togglePendingUsers] = useState(false);
     
     return (
-        profile.loading && profile.profile === null ? <Spinner /> :
+        (profile.loading || auth.loading || pending.loading || post.loading) && profile.profile === null ? <Spinner /> :
 
         <Fragment>
             <div className="admindash">
                 <div className="admindash-half">
 
-                    {displayPendingPosts && <h1>Pending Posts</h1>}
+                    {displayPendingPosts && (<Fragment>
+                        <h1 className="heading">Posts pending for approval</h1>
+                        <div className="posts">
+                            {pending.posts.map(post => (
+                                <PostItem key={post._id} post={post}/>
+                            ))}
+                        </div>
+                    </Fragment>)}
                     {displayPendingUsers && <h1>Pending Posts</h1>}
 
                     {post.loading? (<Spinner/>):
@@ -62,6 +70,7 @@ const AdminDash = ({getCurrentProfile, getPosts, auth, profile, post}) => {
 AdminDash.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
     getPosts: PropTypes.func.isRequired,
+    getPendingPosts: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     profile: PropTypes.object.isRequired,
     post: PropTypes.object.isRequired,
@@ -70,7 +79,8 @@ AdminDash.propTypes = {
 const mapStateToProps = state => ({
     auth: state.auth,
     profile: state.profile,
-    post: state.post
+    post: state.post,
+    pending: state.pending
 });
 
-export default connect(mapStateToProps, {getPosts, getCurrentProfile})(AdminDash)
+export default connect(mapStateToProps, {getPosts, getCurrentProfile, getPendingPosts})(AdminDash)

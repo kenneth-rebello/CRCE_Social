@@ -47,7 +47,7 @@ async function(req,res){
 router.get('/', auth, async function (req, res){
     try {
 
-        const posts = await Post.find().sort({ date: -1});
+        const posts = await Post.find({approved:true}).sort({ date: -1});
         return res.json(posts);
 
     } catch (err) {

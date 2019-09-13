@@ -5,10 +5,11 @@ import Moment from 'react-moment';
 import {connect} from 'react-redux';
 import Spinner from '../layouts/Spinner';
 import {addLike, removeLike} from '../../actions/post';
+import {approvePost} from '../../actions/admin';
 
-const PostItem = ({auth, post, addLike, removeLike}) => {
+const PostItem = ({auth, post, addLike, removeLike, approvePost}) => {
 
-    let { _id, text, name, avatar, user, likes, comments, date } = post;
+    let { _id, text, approved, name, avatar, user, likes, comments, date } = post;
 
     return (
         <Fragment>
@@ -28,23 +29,28 @@ const PostItem = ({auth, post, addLike, removeLike}) => {
                         Posted on <Moment format='DD/MM/YYYY'>{date}</Moment>
                     </p>
                     <div>
-                        { likes.filter(like => like.user === auth.user._id).length>0 ? (
-                            <button type="button" className="btn btn-red" onClick={() => removeLike(_id)}>
-                            <span>Unlike</span>{` `}
-                            </button>
-                        ):(
-                            <button type="button" className="btn btn-green" onClick={() => addLike(_id)}>
-                            <span>Like</span>{ ` `}
-                            </button>)
-                        }
-                        <span className="likes">{likes.length} Likes</span>
-                        <Link to={`/post/${_id}`}className="btn btn-primary">
-                        Discussion <span className='comment-count'>{comments.length}</span>
-                        </Link>
-                        {!auth.loading && user === auth.user._id &&
+                        { approved && auth.user && (<Fragment>
+                            { likes.filter(like => like.user === auth.user._id).length>0 ? (
+                                <button type="button" className="btn btn-red" onClick={() => removeLike(_id)}>
+                                <span>Unlike</span>{` `}
+                                </button>
+                            ):(
+                                <button type="button" className="btn btn-green" onClick={() => addLike(_id)}>
+                                <span>Like</span>{ ` `}
+                                </button>)
+                            }
+                            <span className="likes">{likes.length} Likes</span>
+                            <Link to={`/post/${_id}`}className="btn btn-primary">
+                            Discussion <span className='comment-count'>{comments.length}</span>
+                            </Link>
+                        </Fragment>)}
+                        {!auth.loading && (user === auth.user._id || ( auth.user && auth.user.admin)) &&
                             <button type="button" className="btn btn-red" style={{float:'right'}}>
                             Delete
                             </button>
+                        }
+                        {auth.user.admin && !approved &&
+                            <button onClick={() => approvePost(_id)} className="btn btn-green">Approve</button>
                         }
                     </div>
                 </div>
@@ -62,10 +68,11 @@ PostItem.propTypes = {
     auth: PropTypes.object.isRequired,
     addLike: PropTypes.func.isRequired,
     removeLike: PropTypes.func.isRequired,
+    approvePost: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, {addLike, removeLike})(PostItem)
+export default connect(mapStateToProps, {addLike, removeLike, approvePost})(PostItem)

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {setAlert} from './alert';
-import {GET_POSTS, POST_ERROR, ADD_POST, CLEAR_POSTS, UPDATE_LIKES} from './types';
+import {GET_POSTS, POST_ERROR, ADD_POST, CLEAR_POSTS, UPDATE_LIKES, GET_PENDING_POSTS, GET_PENDING_USERS, PENDING_ERROR} from './types';
 
 export const getPosts = () => async dispatch => {
     try {
@@ -20,12 +20,10 @@ export const getPosts = () => async dispatch => {
 }
 
 export const getUserPosts = user_id => async dispatch => {
-    
-    
+     
     try {
         const res = await axios.get(`/api/posts/user/${user_id}`);
-        console.log('in post action')
-        console.log(user_id)
+        
         dispatch({type:CLEAR_POSTS});
         dispatch({
             type:GET_POSTS,
@@ -95,6 +93,24 @@ export const removeLike = (postId) => async dispatch => {
     } catch (err) {
         dispatch({
             type: POST_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status}
+        });
+    }
+}
+
+export const getPendingPosts = () => async dispatch => {
+    try {
+        
+        const res = await axios.get('/api/admin/posts');
+
+        dispatch({
+            type: GET_PENDING_POSTS,
+            payload: res.data
+        })
+
+    } catch (err) {
+        dispatch({
+            type: PENDING_ERROR,
             payload: {msg: err.response.statusText, status: err.response.status}
         });
     }
