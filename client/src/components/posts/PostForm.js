@@ -16,12 +16,12 @@ const PostForm = ({addPost}) => {
     return (
         <div class="post-form">
             <div class="bg-primary p">
-                <h3>Say Something</h3>
+                <h1>Say Something</h1>
             </div>
             <form class="form" onSubmit={e => Submitter(e)}>
                 <textarea
                 name="text" 
-                cols="100"
+                cols="90"
                 rows="8"
                 placeholder="Create a post"
                 value={text}

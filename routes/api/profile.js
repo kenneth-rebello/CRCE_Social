@@ -36,6 +36,7 @@ router.post('/', [auth], async function(req, res){
         dateOfBirth,
         contact,
         location,
+        skills,
         achievements,
         position,
         bio,
@@ -55,6 +56,9 @@ router.post('/', [auth], async function(req, res){
     if(location) ProfileFields.location = location;
     if(position) ProfileFields.position = position;
     if(bio) ProfileFields.bio = bio;
+    if(skills){
+        ProfileFields.skills = skills.split(',').map(skill => skill.trim());
+    }
     if(githubusername) ProfileFields.dept = githubusername;
     ProfileFields.social = {}
     if(linkedin) ProfileFields.social.linkedin = linkedin;

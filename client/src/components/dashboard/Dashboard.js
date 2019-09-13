@@ -19,31 +19,32 @@ const Dashboard = ({getCurrentProfile, getPosts, auth, profile, post}) => {
 
     
     return (
-        profile.loading && profile.profile === null ? <Spinner /> : <Fragment>
-            {profile.profile !== null
-            ?
-            <Fragment>
-                <div className="dashboard">
-                    {post.loading? (<Spinner/>):
-                        <div className="posts">
-                            <PostForm />
-                            {post.posts.map(post => (
-                                <PostItem key={post._id} post={post}/>
-                            ))}
-                        </div>
+        profile.loading && profile.profile === null ? <Spinner /> : 
+        
+        <Fragment>
+            <div className="dashboard">
+                {post.loading? (<Spinner/>):
+                <div className="posts">
+                    <PostForm />
+                    {post.posts.map(post => (
+                        <PostItem key={post._id} post={post}/>
+                    ))}
+                </div>}
+                <div className="user">
+                    <h1>Welcome</h1>
+                    <h1 className="heading">{auth.user && auth.user.name }</h1>
+                    {profile.profile !== null?
+                        (<Fragment>
+                            <img src={profile.profile.photo} alt=""/>
+                            {auth.user && <Link to={`/profile/${auth.user._id}`} className="dash-link">View Profile</Link>}
+                        </Fragment>) :
+                        (<Fragment>
+                            <p>You have not yet set up a profile, please add some information about yourself</p>
+                            <Link to="/create_profile" className="btn btn-primary">Create Profile</Link>
+                        </Fragment>)
                     }
-                    <div className="user">
-                        <h2>Welcome</h2>
-                        <h1 className="heading">{auth.user && auth.user.name }</h1>
-                        <img src={profile.profile.photo} alt=""/>
-                    </div>
                 </div>
-            </Fragment>
-            : 
-            <Fragment>
-                <p>You have not yet set up a profile, please add some information about yourself</p>
-                <Link to="/create_profile" className="btn btn-primary">Create Profile</Link>
-            </Fragment>}
+            </div>
         </Fragment>
     );
 }

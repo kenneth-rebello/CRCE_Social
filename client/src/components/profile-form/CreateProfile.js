@@ -25,7 +25,7 @@ const CreateProfile = props => {
         instagram:''
     })
 
-    let { dept, batch, contact, dateOfBirth, location, skills, achievements, position, 
+    let { contact, dateOfBirth, location, skills, achievements, position, 
         githubusername, bio,twitter,facebook,youtube,instagram, linkedin} = formData;
 
     const Changer = e =>{
@@ -34,7 +34,6 @@ const CreateProfile = props => {
 
     const Submitter = e =>{
         e.preventDefault();
-        console.log(formData);
         props.createProfile(formData, props.history);
     }
     
@@ -53,13 +52,10 @@ const CreateProfile = props => {
                 <select name="position" value={position} onChange={(e)=>Changer(e)}>
                     <option value="">* Select Position</option>
                     <option value="Student">Student</option>
-                    <option value="Assistant Teacher">Assistant Teacher</option>
-                    <option value="Teacher">Teacher</option>
-                    <option value="HeadOfDepartment">Head Of Department</option>
+                    <option value="Faculty">Faculty</option>
+                    <option value="Other Staff">Other Staff</option>
                     <option value="Placement Officer">Placement Officer</option>
-                    <option value="Lab Asistant">Lab Asistant</option>
-                    <option value="Trainee">Trainee</option>
-                    <option value="Other">Other</option>
+                    <option value="Recruiter">Recruiter</option>
                 </select>
                 </div>
                 <div className="form-group">

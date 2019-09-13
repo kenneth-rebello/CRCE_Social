@@ -1,4 +1,4 @@
-import {GET_POSTS, POST_ERROR, ADD_POST } from '../actions/types';
+import {GET_POSTS, POST_ERROR, ADD_POST, CLEAR_POSTS } from '../actions/types';
 
 const initialState = {
     posts:[],
@@ -29,6 +29,12 @@ export default function(state = initialState, action){
                 ...state,
                 error: payload,
                 loading:false
+            };
+        case CLEAR_POSTS:
+            return{
+                ...state,
+                posts:[],
+                loading:true
             };
         default:
             return state;

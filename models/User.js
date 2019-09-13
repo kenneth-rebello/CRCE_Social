@@ -5,6 +5,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    approved:{
+        type: Boolean,
+        default: false
+    },
+    admin:{
+        type: Boolean,
+        default: false
+    },
     email: {
         type:  String,
         required: true,
@@ -26,7 +34,13 @@ const userSchema = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
-    }
+    },
+    following: [{
+        user:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'users'
+        }
+    }]
 });
 
 module.exports = User = mongoose.model('user',userSchema);

@@ -1,8 +1,9 @@
 import React ,{Fragment}from 'react'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
-const ProfileItem = ({profile}) => {
+const ProfileItem = ({profile, isAuth}) => {
 
     const {user, position, location, contact, skills, dateOfBirth, dept, batch, bio} = profile;
     const {_id, name, avatar} = user;
@@ -18,7 +19,7 @@ const ProfileItem = ({profile}) => {
                     <p>{position}</p>
                     <p className="my-1">{location && <span>{location}</span>}</p>
                     <p>{batch} {dept}</p>
-                    <Link to={`/profile/${_id}`} className="btn btn-brick">View Profile</Link>
+                    {isAuth && <Link to={`/profile/${_id}`} className="btn btn-brick">View Profile</Link>}
                 </div>
             </div>
         </Fragment>
@@ -27,6 +28,11 @@ const ProfileItem = ({profile}) => {
 
 ProfileItem.propTypes = {
     profile: PropTypes.object.isRequired,
+    isAuth: PropTypes.bool.isRequired,
 }
 
-export default ProfileItem
+const mapStateToProps = state => ({
+    isAuth: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps,{})(ProfileItem)

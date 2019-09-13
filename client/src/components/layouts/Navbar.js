@@ -8,17 +8,17 @@ import Alert from './Alert'
 const Navbar = (props) => {
 
     const authLinks = (
-        <ul>
+        <ul className="navbar-links">
             <li><Link to="/dashboard">Home</Link></li>
             <li><Link to="/profiles">Profiles</Link></li>
             <li><Link to="/posts">Posts</Link></li>
-            <li><Link onClick={props.logout} to="#!">Logout</Link></li>
+            <li><Link to="#!" onClick={ e => props.logout(e)}>Logout</Link></li>
         </ul>
 
     );
 
     const guestLinks = (
-        <ul>
+        <ul className="navbar-links">
             <li><Link to="/profiles">Profiles</Link></li>
             <li><Link to="/login">Login</Link></li>
             <li><Link to="/register">Register</Link></li>
@@ -35,7 +35,6 @@ const Navbar = (props) => {
                     { props.isAuth ? authLinks : guestLinks}
                 </div>
             </nav>
-            <div className="underline"></div>
              {props.alert.length>0 && (<div className="alerts">
                 <Alert/>
             </div>)} 
@@ -47,7 +46,7 @@ Navbar.propTypes = {
     logout: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     isAuth: PropTypes.bool.isRequired,
-    alert: PropTypes.object,
+    alert: PropTypes.array,
 }
 
 const mapStateToProps = state => ({

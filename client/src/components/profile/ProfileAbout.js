@@ -13,7 +13,7 @@ const ProfileAbout = ({ profile }) => {
                 <p>{bio}</p>
                 {/* <div className="line"></div> */}
             </div>)}
-            <h2 className="heading">Skill Set</h2>
+            <h2 className="heading">{name.trim().split(' ')[0]}s Skill Set</h2>
             <ul className="skills">
                 {skills.map((skill, index) => (
                     (<li key={index}>

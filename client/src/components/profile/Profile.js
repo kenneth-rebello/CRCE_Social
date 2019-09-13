@@ -5,13 +5,17 @@ import {connect} from 'react-redux';
 import Spinner from '../layouts/Spinner';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
+import UserPosts from './UserPosts';
 import { getProfileById, delAccount } from '../../actions/profile';
+import { getUserPosts } from '../../actions/post';
 
-const Profile = ({ getProfileById, profile, auth, match }) => {
+
+const Profile = ({ getProfileById, getUserPosts, profile, auth, match }) => {
     
     useEffect(() => {
+        getUserPosts(match.params.id);
         getProfileById(match.params.id);
-    })
+    },[])
     
     return (
         <Fragment>
@@ -23,11 +27,15 @@ const Profile = ({ getProfileById, profile, auth, match }) => {
                         {auth.isAuthenticated && auth.loading === false && auth.user._id === profile.profile.user._id && 
                         (<Fragment>
                             <button className="btn btn-dark"><Link to="/edit_profile">Edit Profile</Link></button>
-                            <button className="btn btn-danger" onClick={() => delAccount()}>Delete Account</button>
+                            <button className="btn btn-red" onClick={() => delAccount()}>Delete Account</button>
                         </Fragment>)}
-                        
+                        {auth.isAuthenticated && auth.loading === false && auth.user._id !== profile.profile.user._id &&
+                        (<Fragment>
+                            <button className="btn btn-gold">Follow</button>
+                        </Fragment>)}
                     </div>
                     <ProfileAbout profile={profile.profile}/>
+                    <UserPosts/>
                 </div>
             </Fragment>}
         </Fragment>
@@ -36,13 +44,14 @@ const Profile = ({ getProfileById, profile, auth, match }) => {
 
 Profile.propTypes = {
     getProfileById: PropTypes.func.isRequired,
+    getUserPosts: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
     profile: state.profile,
-    auth: state.auth
+    auth: state.auth,
 });
 
-export default connect (mapStateToProps, { getProfileById })(Profile)
+export default connect (mapStateToProps, { getUserPosts, getProfileById })(Profile)
