@@ -21,8 +21,8 @@ export default function(state = initialState, action){
         case GET_PENDING_USERS:
             return{
                 ...state,
-                users:payload,
-                loading: true
+                users: payload,
+                loading: false
             }
         case PENDING_ERROR:
             return{

@@ -72,7 +72,7 @@
 
 .landing-box .title{
   font-size: 60px;
-  font-family: cursive;
+  font-family: 'Cinzel', serif;
   font-weight: bold;
 }
 
@@ -82,8 +82,15 @@
 }
 
 .landing-box a{
-  font-size: 20px;
+  color: goldenrod;
+  font-size: 25px;
 }
+
+.landing-box a:hover{
+  color: red;
+  font-size: 27px;
+}
+
 
 .form-group{
   padding: 10px;

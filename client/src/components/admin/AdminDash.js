@@ -4,17 +4,20 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getCurrentProfile} from '../../actions/profile';
 import {getPosts, getPendingPosts} from '../../actions/post';
+import { getPendingUsers } from '../../actions/admin';
 import Spinner from '../layouts/Spinner';
 import PostItem from '../posts/PostItem';
 import PostForm from '../posts/PostForm';
+import UserItem from '../profiles/UserItem';
 
-const AdminDash = ({getCurrentProfile, getPendingPosts, getPosts, auth, profile, pending, post}) => {
+const AdminDash = ({getCurrentProfile, getPendingPosts, getPendingUsers, getPosts, auth, profile, pending, post}) => {
 
     useEffect(() => {
         getCurrentProfile();
         getPosts();
         getPendingPosts();
-    }, [getCurrentProfile, getPendingPosts, getPosts]);
+        getPendingUsers()
+    }, [getCurrentProfile, getPendingPosts, getPosts, getPendingUsers]);
 
     const [displayPendingPosts, togglePendingPosts] = useState(false);
     const [displayPendingUsers, togglePendingUsers] = useState(false);
@@ -34,7 +37,15 @@ const AdminDash = ({getCurrentProfile, getPendingPosts, getPosts, auth, profile,
                             ))}
                         </div>
                     </Fragment>)}
-                    {displayPendingUsers && <h1>Pending Posts</h1>}
+                    {displayPendingUsers && (<Fragment>
+                        <h1 className="heading">Users awaiting approval</h1>
+                        <div className="users">  
+                            {pending.users.map(user => (
+                                <UserItem key={user._id} user={user}/>
+                            ))}
+                        </div>
+                    </Fragment>)
+                    }
 
                     {post.loading? (<Spinner/>):
                     <div className="posts">
@@ -71,6 +82,7 @@ AdminDash.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
     getPosts: PropTypes.func.isRequired,
     getPendingPosts: PropTypes.func.isRequired,
+    getPendingUsers: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     profile: PropTypes.object.isRequired,
     post: PropTypes.object.isRequired,
@@ -83,4 +95,4 @@ const mapStateToProps = state => ({
     pending: state.pending
 });
 
-export default connect(mapStateToProps, {getPosts, getCurrentProfile, getPendingPosts})(AdminDash)
+export default connect(mapStateToProps, {getPosts, getCurrentProfile, getPendingPosts, getPendingUsers})(AdminDash)

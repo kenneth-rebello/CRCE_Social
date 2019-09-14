@@ -5,8 +5,8 @@ import {connect} from 'react-redux';
 
 const ProfileItem = ({profile, isAuth}) => {
 
-    const {user, position, location, contact, skills, dateOfBirth, dept, batch, bio} = profile;
-    const {_id, name, avatar} = user;
+    const {user, position, location} = profile;
+    const {_id, name, avatar, branch, year} = user;
 
     return (
         <Fragment>
@@ -17,8 +17,8 @@ const ProfileItem = ({profile, isAuth}) => {
                 <div className="profile-details">
                     <h2>{name}</h2>
                     <p>{position}</p>
+                    <p>{year} - {branch}</p>
                     <p className="my-1">{location && <span>{location}</span>}</p>
-                    <p>{batch} {dept}</p>
                     {isAuth && <Link to={`/profile/${_id}`} className="btn btn-brick">View Profile</Link>}
                 </div>
             </div>

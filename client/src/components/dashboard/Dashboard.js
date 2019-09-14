@@ -4,12 +4,13 @@ import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
 import {getCurrentProfile} from '../../actions/profile';
 import {getPosts} from '../../actions/post';
+import {setAlert} from '../../actions/alert'
 import Spinner from '../layouts/Spinner';
 import PostItem from '../posts/PostItem';
 import PostForm from '../posts/PostForm';
 
 
-const Dashboard = ({getCurrentProfile, getPosts, auth, profile, post}) => {
+const Dashboard = ({setAlert, getCurrentProfile, getPosts, auth, profile, post}) => {
 
     useEffect(() => {
         getCurrentProfile();
@@ -26,13 +27,18 @@ const Dashboard = ({getCurrentProfile, getPosts, auth, profile, post}) => {
         
         <Fragment>
             <div className="dashboard">
-                {post.loading? (<Spinner/>):
-                <div className="posts">
-                    <PostForm />
-                    {post.posts.map(post => (
-                        <PostItem key={post._id} post={post}/>
-                    ))}
-                </div>}
+                {auth.user && auth.user.approved ? (<Fragment>
+                    {post.loading? (<Spinner/>):
+                    <div className="posts">
+                        <PostForm />
+                        {post.posts.map(post => (
+                            <PostItem key={post._id} post={post}/>
+                        ))}
+                    </div>}
+                </Fragment>) : (<Fragment>
+                    <h1 className="heading">You are not yet approved by admin, please wait while your account is reviewed</h1>
+                </Fragment>)}
+                    
                 <div className="user">
                     <h1>Welcome</h1>
                     <h1 className="heading">{auth.user && auth.user.name }</h1>
@@ -41,7 +47,7 @@ const Dashboard = ({getCurrentProfile, getPosts, auth, profile, post}) => {
                             {auth.user && <Link to={`/profile/${auth.user._id}`} className="dash-link">View Profile</Link>}
                             <img src={profile.profile.photo} alt=""/>
                         </Fragment>) :
-                        (<Fragment className="user-switch">
+                        auth.user && auth.user.approved && (<Fragment className="user-switch">
                             <p>You have not yet set up a profile, please add some information about yourself</p>
                             <Link to="/create_profile" className="dash-link">Create Profile</Link>
                         </Fragment>)
@@ -55,6 +61,7 @@ const Dashboard = ({getCurrentProfile, getPosts, auth, profile, post}) => {
 Dashboard.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
     getPosts: PropTypes.func.isRequired,
+    setAlert: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     profile: PropTypes.object.isRequired,
     post: PropTypes.object.isRequired,
@@ -66,4 +73,4 @@ const mapStateToProps = state => ({
     post: state.post
 });
        
-export default connect(mapStateToProps, {getPosts, getCurrentProfile})(Dashboard);
+export default connect(mapStateToProps, {setAlert, getPosts, getCurrentProfile})(Dashboard);

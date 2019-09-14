@@ -112,10 +112,12 @@ Register.propTypes = {
     setAlert: PropTypes.func.isRequired,
     register: PropTypes.func.isRequired,
     isAuth: PropTypes.bool,
+    user: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
-    isAuth: state.auth.isAuthenticated
+    isAuth: state.auth.isAuthenticated,
+    user: state.auth.user
 });
 
 export default connect(mapStateToProps, { setAlert, register })(Register)
