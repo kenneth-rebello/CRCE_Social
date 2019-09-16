@@ -108,7 +108,7 @@ export const addEducation = (formData, history) => async dispatch => {
             payload: res.data
         });
 
-        dispatch(setAlert('Experience Added','dark'));
+        dispatch(setAlert('Educational Qualification Added','dark'));
 
         
         history.push('/dashboard');
@@ -144,6 +144,35 @@ export const delEducation = id => async dispatch => {
     }
 }
 
+export const addSkill = (formData) => async dispatch => {
+    try {
+        let config = {
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const res = await axios.put('/api/profile/skill', formData, config);
+
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        });
+
+        dispatch(setAlert('Skill Added','dark'));
+
+    } catch (err) {
+        const errors = err.response.data.errors;
+
+        if(errors){
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status}
+        });
+    }
+}
 
 export const delAccount = () => async dispatch => {
 

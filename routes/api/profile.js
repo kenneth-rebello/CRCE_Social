@@ -96,7 +96,9 @@ router.post('/', [auth], async function(req, res){
 router.get('/', async function(req, res){
     try{
 
-        const profiles = await Profile.find().populate('user',['name','avatar','year','branch']);
+        const users = await User.find({approved:true});
+
+        const profiles = await Profile.find({user: {$in:users}}).populate('user',['name','avatar','year','branch']);
         res.json(profiles);
 
     }catch(err){
@@ -216,5 +218,36 @@ router.delete('/education/:exp_id', auth, async function(req, res){
 
     }
 });
+
+
+//@route    PUT api/profile/experience
+//@desc     Add Profile Education
+//@access   Private
+
+router.put('/skill', [auth, [
+    check('skill','Skill is required').not().isEmpty(),
+]],
+async function(req, res){
+
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(400).json({errors: errors.array()});
+    }
+
+    const {skill} = req.body;
+    try {
+        const profile = await Profile.findOne({user: req.user.id}).populate('user', ['name','avatar','year','branch']);
+
+        console.log(profile.skills);
+        profile.skills.unshift(skill);
+        await profile.save();
+
+        res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
 
 module.exports = router;

@@ -6,6 +6,7 @@ import Spinner from '../layouts/Spinner';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import UserPosts from './UserPosts';
+import Education from './Education';
 import { getProfileById, delAccount } from '../../actions/profile';
 import { getUserPosts } from '../../actions/post';
 
@@ -35,6 +36,7 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, profile, auth, matc
                         </Fragment>)}
                     </div>
                     <ProfileAbout profile={profile.profile}/>
+                    <Education education = {profile.profile.education}/>
                     <UserPosts/>
                 </div>
             </Fragment>}

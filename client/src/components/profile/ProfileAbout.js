@@ -17,7 +17,7 @@ const ProfileAbout = ({ profile }) => {
             <ul className="skills">
                 {skills.map((skill, index) => (
                     (<li key={index}>
-                        {skill}
+                        {skill}{` | `}
                     </li>)    
                 ))}
             </ul>

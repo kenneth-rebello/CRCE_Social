@@ -14,27 +14,30 @@ const Education = ({ education, delEducation }) => {
                 <Moment format='YYYY'>{edu.from}</Moment>
                 - <Moment format='YYYY'>{edu.to}</Moment>
             </td>
-            <td className="btn btn-danger" onClick={() => delEducation(edu._id)}>
-                Delete
+            <td>
+                <button className="btn btn-red" onClick={() => delEducation(edu._id)}>Delete</button>
             </td>
         </tr>
     ));
 
     return (
         <Fragment>
-            <h2>Educational</h2>
-            <table cellSpacing="10" cellPadding="10">
-                <thead>
-                    <tr>
-                        <th>Institute</th>
-                        <th>Course</th>
-                        <th>Years</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {educations}
-                </tbody>
-            </table>
+            <div className="education">
+                <h2 className="heading">Educational Qualifications</h2>
+                <table cellSpacing="10" cellPadding="10">
+                    <thead>
+                        <tr>
+                            <th>Institute</th>
+                            <th>Course</th>
+                            <th>Years</th>
+                            <th>{`    `}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {educations}
+                    </tbody>
+                </table>
+            </div>
         </Fragment>
     )
 }

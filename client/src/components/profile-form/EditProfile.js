@@ -54,7 +54,7 @@ const EditProfile = ({profile: {profile, loading}, createProfile, getCurrentProf
     return (
         <Fragment>
         <div className="main-form">
-            <div className="edit-profile">
+            <div className="profile-forms">
                 <h1 className="heading">
                 Edit Your Profile
                 </h1>

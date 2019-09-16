@@ -91,7 +91,6 @@
   font-size: 27px;
 }
 
-
 .form-group{
   padding: 10px;
   padding-bottom: 20px;
@@ -247,6 +246,25 @@
   display: inline;
   
 }
+
+.education{
+  display: grid;
+  justify-items:center;
+  width:100%;
+}
+
+.education table{
+  display:grid;
+  font-size: 30px;
+  justify-content: center;
+  background-color: white;
+  width:100%;
+}
+
+.education .btn{
+  width: 100%;
+}
+
 
 .profile-about{
   background-color: white;
@@ -443,9 +461,13 @@
   grid-template-columns: 4fr 1fr;
 }
 
-.edit-profile{
+.profile-forms{
   background-color: white;
   margin: 10px;
+}
+
+.profile-forms p{
+  font-size: 25px;
 }
 
 .edit-profile-actions{
