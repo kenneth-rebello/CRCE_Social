@@ -36,33 +36,20 @@ const AddEducation = ({addEducation, history}) => {
                 <small>* = required field</small>
                 <form className="form" onSubmit={e => Submitter(e)}>
                     <div className="form-group">
-                    <input
-                        type="text"
-                        placeholder="* School or College"
-                        name="institute"
-                        value={institute}
-                        onChange = {e => Changer(e)}
-                        required
-                    ></input>
+                        <input type="text" placeholder="* School or College" name="institute" value={institute} onChange = {e => Changer(e)} required></input>
                     </div>
                     <div className="form-group">
-                    <input
-                        type="text"
-                        placeholder="* Degree or Course"
-                        name="course"
-                        value={course}
-                        onChange = {e => Changer(e)}
-                        required
-                    ></input>
+                        <input type="text" placeholder="* Degree or Course" name="course" value={course} onChange = {e => Changer(e)} required></input>
                     </div>
                     <div className="form-group">
-                    <h4>From Date</h4>
-                    <input type="date" name="from" value={from} onChange = {e => Changer(e)}></input>
+                        <h4>From Date</h4>
+                        <input type="date" name="from" value={from} onChange = {e => Changer(e)}></input>
                     </div>
                     <div className="form-group">
-                    <h4>To Date</h4>
-                    <input type="date" name="to" value={to} onChange = {e => Changer(e)}></input>
+                        <h4>To Date</h4>
+                        <input type="date" name="to" value={to} onChange = {e => Changer(e)}></input>
                     </div>
+
                     <input type="submit" className="btn btn-dark"></input>
                 
                     <button className="btn btn-light"><Link to="/dashboard">Go Back</Link></button>

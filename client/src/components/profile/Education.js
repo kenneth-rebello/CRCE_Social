@@ -8,9 +8,10 @@ const Education = ({ education, delEducation }) => {
 
     const educations = education.map(edu =>(
         <tr key={edu._id}>
-            <td>{edu.institute}</td>
-            <td>{edu.course}</td>
+            <td><strong>Institute:</strong>{edu.institute}</td>
+            <td><strong>Course:</strong>{edu.course}</td>
             <td>
+            <strong>Years:</strong>
                 <Moment format='YYYY'>{edu.from}</Moment>
                 - <Moment format='YYYY'>{edu.to}</Moment>
             </td>
@@ -23,16 +24,7 @@ const Education = ({ education, delEducation }) => {
     return (
         <Fragment>
             <div className="education">
-                <h2 className="heading">Educational Qualifications</h2>
                 <table cellSpacing="10" cellPadding="10">
-                    <thead>
-                        <tr>
-                            <th>Institute</th>
-                            <th>Course</th>
-                            <th>Years</th>
-                            <th>{`    `}</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         {educations}
                     </tbody>

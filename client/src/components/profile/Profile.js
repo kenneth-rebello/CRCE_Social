@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -7,12 +7,16 @@ import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
 import UserPosts from './UserPosts';
 import Education from './Education';
+import Status from './Status';
 import { getProfileById, delAccount } from '../../actions/profile';
 import { getUserPosts } from '../../actions/post';
 
 
 const Profile = ({ getProfileById, getUserPosts, delAccount, profile, auth, match }) => {
     
+    const [displayEducation, toggleEducation] = useState(false);
+    const [displayStatus, toggleStatus] = useState(false);
+
     useEffect(() => {
         getUserPosts(match.params.id);
         getProfileById(match.params.id);
@@ -25,7 +29,7 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, profile, auth, matc
                     <ProfileTop profile={profile.profile}/>
                     <div className="profile-buttons">
                         <button className="btn btn-light"><Link to="/profiles">Go Back</Link></button>
-                        {auth.isAuthenticated && auth.loading === false && auth.user._id === profile.profile.user._id && 
+                        {auth.isAuthenticated && auth.loading === false && (auth.user._id === profile.profile.user._id || auth.user.admin)  && 
                         (<Fragment>
                             <button className="btn btn-dark"><Link to="/edit_profile">Edit Profile</Link></button>
                             <button className="btn btn-red" onClick={() => delAccount()}>Delete Account</button>
@@ -36,7 +40,12 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, profile, auth, matc
                         </Fragment>)}
                     </div>
                     <ProfileAbout profile={profile.profile}/>
-                    <Education education = {profile.profile.education}/>
+                    <h2 className="heading">Educational Qualifications<button className="btn btn-light btn-icon" onClick={() => toggleEducation(!displayEducation)} style={{display:'inline'}}>V</button></h2>
+                    
+                    {displayEducation && <Education education = {profile.profile.education}/>}
+                    <h2 className="heading">Academic Status<button className="btn btn-light btn-icon" onClick={() => toggleStatus(!displayStatus)} style={{display:'inline'}}>V</button></h2>
+
+                    {displayStatus && <Status status = {profile.profile.status}/>}
                     <UserPosts/>
                 </div>
             </Fragment>}

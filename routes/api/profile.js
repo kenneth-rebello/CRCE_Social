@@ -151,6 +151,7 @@ router.delete('/', auth, async function(req, res){
     }
 });
 
+
 //@route    PUT api/profile/experience
 //@desc     Add Profile Education
 //@access   Private
@@ -167,12 +168,7 @@ async function(req, res){
         return res.status(400).json({errors: errors.array()});
     }
 
-    const {
-        institute,
-        course,
-        to,
-        from
-    } = req.body;
+    const { institute, course, to, from } = req.body;
 
     const newEdu = {
         institute, course, from, to
@@ -197,15 +193,17 @@ async function(req, res){
     }
 });
 
+
+
 //@route    DELETE api/profile/education
 //@desc     Delete Profile Education
 //@access   Private
 
-router.delete('/education/:exp_id', auth, async function(req, res){
+router.delete('/education/:edu_id', auth, async function(req, res){
     try {
         const profile = await Profile.findOne({user: req.user.id}).populate('user', ['name','avatar','year','branch']);
 
-        const toRemove = profile.education.map(item => item.id).indexOf(req.params.exp_id);
+        const toRemove = profile.education.map(item => item.id).indexOf(req.params.edu_id);
 
         profile.education.splice(toRemove, 1);
 
@@ -220,8 +218,78 @@ router.delete('/education/:exp_id', auth, async function(req, res){
 });
 
 
-//@route    PUT api/profile/experience
-//@desc     Add Profile Education
+
+//@route    PUT api/profile/status
+//@desc     Add Academic Status
+//@access   Private
+
+router.put('/status', [auth, [
+    check('semester','Semester is required').not().isEmpty(),
+    check('sgpa','SGPA is required').not().isEmpty()
+]],
+async function(req, res){
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()){
+        return res.status(400).json({errors: errors.array()});
+    }
+
+    const profile = await Profile.findOne({user: req.user.id}).populate('user', ['name','avatar','year','branch']);
+    const { semester, sgpa } = req.body;
+    let cgpa = parseFloat(sgpa);
+    profile.status.forEach((stat)=>{
+        cgpa = cgpa + parseFloat(stat.sgpa)
+    })
+    
+    profile.status.length>0 && (cgpa = parseFloat(cgpa/(profile.status.length+1)))
+    
+
+    const newStatus = {
+        semester, sgpa, cgpa
+    }
+
+    try {
+
+        profile.status.unshift(newStatus);
+
+        await profile.save();
+
+        res.json(profile);
+        
+    } catch (err) {
+
+        console.error(err.message);
+        res.status(500).send('Server error');
+
+    }
+});
+
+
+//@route    DELETE api/profile/marks
+//@desc     Delete Profile Marks
+//@access   Private
+
+router.delete('/status/:status_id', auth, async function(req, res){
+    try {
+        const profile = await Profile.findOne({user: req.user.id}).populate('user', ['name','avatar','year','branch']);
+
+        const toRemove = profile.status.map(item => item.id).indexOf(req.params.status_id);
+
+        profile.status.splice(toRemove, 1);
+
+        await profile.save();
+        return res.json(profile);        
+    } catch (err) {
+
+        console.error(err.message);
+        res.status(500).send('Server error');
+
+    }
+});
+
+
+//@route    PUT api/skill
+//@desc     Add Skill
 //@access   Private
 
 router.put('/skill', [auth, [

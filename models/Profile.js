@@ -42,6 +42,23 @@ const ProfileSchema = new mongoose.Schema({
         },
         to:{
             type: Date,
+        },
+        marksObt:{
+            type: Number,
+        },
+        marksOutOf:{
+            type: Number
+        }        
+    }],
+    status:[{
+        semester:{
+            type: String
+        },
+        sgpa:{
+            type: Number
+        },
+        cgpa:{
+            type: Number
         }
     }],
     social:{

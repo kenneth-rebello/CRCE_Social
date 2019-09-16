@@ -76,8 +76,6 @@ export const createProfile = (formData, history, edit=false) => async dispatch =
         dispatch(setAlert(edit?'Profile Updated':'Profile Created','success'));
 
         if(!edit){
-            console.log('HISTORY OBJECT - profile.js : 40')
-            console.log(history);
             history.push('/dashboard');
         }
     } catch (err) {
@@ -111,7 +109,7 @@ export const addEducation = (formData, history) => async dispatch => {
         dispatch(setAlert('Educational Qualification Added','dark'));
 
         
-        history.push('/dashboard');
+        history.push('/profile/me');
 
     } catch (err) {
         const errors = err.response.data.errors;
@@ -143,6 +141,61 @@ export const delEducation = id => async dispatch => {
         });
     }
 }
+
+
+export const addStatus = (formData, history) => async dispatch => {
+    try {
+        let config = {
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const res = await axios.put('/api/profile/status', formData, config);
+
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        });
+
+        dispatch(setAlert('Academic Status Added','dark'));
+
+        
+        history.push('/profile/me');
+
+    } catch (err) {
+        const errors = err.response.data.errors;
+
+        if(errors){
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status}
+        });
+    }
+}
+
+
+export const delStatus = id => async dispatch => {
+    try {
+        const res = await axios.delete(`/api/profile/status/${id}`);
+
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        });
+
+    } catch (err) {
+        
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: {msg: err.response.statusText, status: err.response.status }
+        });
+    }
+}
+
+
 
 export const addSkill = (formData) => async dispatch => {
     try {
