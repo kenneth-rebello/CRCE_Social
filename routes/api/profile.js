@@ -2,9 +2,17 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const {check, validationResult} = require('express-validator/check');
+const multer = require('multer');
+const fileUpload = require('express-fileupload')
+const path = require('path');
+const fs = require('fs');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 const Post = require('../../models/Post');
+
+router.use(fileUpload());
+
+
 
 //@route    GET api/profile/me
 //@desc     Open a users profile
@@ -110,7 +118,7 @@ router.get('/', async function(req, res){
 });
 
 //@route    GET api/profile/user/user_id
-//@desc     Get all profiles
+//@desc     Get profile by id
 //@access   Public
 router.get('/user/:user_id', async function(req, res){
     try{
@@ -150,6 +158,31 @@ router.delete('/', auth, async function(req, res){
 
     }
 });
+
+router.post('/picture', auth, async (req, res) => {
+
+    if(req.files === null){
+        return res.status(400).json({msg : 'No file uploaded'});
+    }
+
+
+    const file = req.files.file;
+    console.log(file);
+    const fileName = `crceSocial${Date.now()}${file.name}`
+
+    file.mv(`./client/public/profile-pictures/${fileName}`,async err => {
+        if(err){
+            console.error(err);
+            return res.status(500).send(err);
+        }
+
+        const profile = await Profile.find({user: req.user.id});
+
+        const updated = await Profile.findOneAndUpdate({user: req.user.id}, { $set:{picture: fileName}}, {new:true});
+        res.json(updated);
+    });
+    
+})
 
 
 //@route    PUT api/profile/experience

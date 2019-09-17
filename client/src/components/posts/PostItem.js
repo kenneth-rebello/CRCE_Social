@@ -9,7 +9,7 @@ import {approvePost} from '../../actions/admin';
 
 const PostItem = ({auth, post, addLike, removeLike, approvePost}) => {
 
-    let { _id, text, approved, name, avatar, user, likes, comments, date } = post;
+    let { _id, text, approved, name, picture, user, likes, comments, date } = post;
 
     return (
         <Fragment>
@@ -18,7 +18,9 @@ const PostItem = ({auth, post, addLike, removeLike, approvePost}) => {
             <div className="post">
                 <div className="post-user">
                     <Link to={`/profile/{user._id}`}>
-                    <div><img className="round-img" src={avatar} alt=""/></div>
+                    <div>
+                        {picture && <img className="item-img" src={require(`../../../public/profile-pictures/${picture}`)} alt=""/>}
+                    </div>
                     <h1 className="heading">{name}</h1>
                     </Link>
                 </div>
@@ -29,7 +31,7 @@ const PostItem = ({auth, post, addLike, removeLike, approvePost}) => {
                         Posted on <Moment format='DD/MM/YYYY'>{date}</Moment>
                     </p>
                     <div>
-                        { approved && auth.user && (<Fragment>
+                        { approved && auth && auth.user && (<Fragment>
                             { likes.filter(like => like.user === auth.user._id).length>0 ? (
                                 <button type="button" className="btn btn-red" onClick={() => removeLike(_id)}>
                                 <span>Unlike</span>{` `}
@@ -44,7 +46,7 @@ const PostItem = ({auth, post, addLike, removeLike, approvePost}) => {
                             Discussion <span className='comment-count'>{comments.length}</span>
                             </Link>
                         </Fragment>)}
-                        {!auth.loading && (user === auth.user._id || ( auth.user && auth.user.admin)) &&
+                        {auth && auth.user && !auth.loading && (user === auth.user._id || ( auth.user && auth.user.admin)) &&
                             <button type="button" className="btn btn-red" style={{float:'right'}}>
                             Delete
                             </button>

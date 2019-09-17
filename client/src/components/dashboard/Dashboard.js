@@ -43,13 +43,13 @@ const Dashboard = ({setAlert, getCurrentProfile, getPosts, auth, profile, post})
                     <h1>Welcome</h1>
                     <h1 className="heading">{auth.user && auth.user.name }</h1>
                     {profile.profile !== null?
-                        (<Fragment className="user-switch">
+                        (<Fragment>
                             {auth.user && <Link to={`/profile/${auth.user._id}`} className="dash-link">View Profile</Link>}
-                            <img src={profile.profile.photo} alt=""/>
+                            <img src={`./public/profile-pictures/${profile.profile.picture}`} alt=""/>
                         </Fragment>) :
                         auth.user && auth.user.approved && (<Fragment className="user-switch">
-                            <p>You have not yet set up a profile, please add some information about yourself</p>
                             <Link to="/create_profile" className="dash-link">Create Profile</Link>
+                            <p style={{padding:'5px'}}>You have not yet set up a profile, please add some information about yourself</p>
                         </Fragment>)
                     }
                 </div>

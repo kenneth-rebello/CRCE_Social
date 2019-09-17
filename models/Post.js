@@ -10,6 +10,9 @@ const PostSchema = new Schema({
         type: Boolean,
         default: false
     },
+    picture:{
+        type: String
+    },
     text:{
         type: String,
         required: true

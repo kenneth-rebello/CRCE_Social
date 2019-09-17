@@ -136,7 +136,7 @@ const EditProfile = ({profile: {profile, loading}, createProfile, getCurrentProf
                 </form>
             </div>
             <div className="edit-profile-actions">
-                <button className="btn btn-light"><Link to="/profile_picture">Edit Profile Picture</Link></button>
+                <button className="btn btn-light"><Link to="/edit_picture">Edit Profile Picture</Link></button>
                 { position=="Student" && <button className="btn btn-light"><Link to="/add_skill">Add Skill</Link></button>}
                 { position=="Student" && <button className="btn btn-light"><Link to="/add_education">Add Education</Link></button>}
                 { position=="Student" && <button className="btn btn-light"><Link to="/add_status">Add Sem Marks</Link></button>}

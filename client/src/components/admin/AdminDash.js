@@ -47,7 +47,7 @@ const AdminDash = ({getCurrentProfile, getPendingPosts, getPendingUsers, getPost
                     </Fragment>)
                     }
 
-                    {post.loading? (<Spinner/>):
+                    {post.loading || auth.loading? (<Spinner/>):
                     <div className="posts">
                         <PostForm />
                         {post.posts.map(post => (
@@ -57,18 +57,18 @@ const AdminDash = ({getCurrentProfile, getPendingPosts, getPendingUsers, getPost
                 </div>
                 <div className="user-admin">
                     <h1>Welcome</h1>
-                    <h1 className="heading">{auth.user && auth.user.name }</h1>
+                    <h1 className="heading">{auth && auth.user && auth.user.name }</h1>
                     {profile.profile !== null?
                         (<Fragment className="user-switch">
                             {auth.user && <Link to={`/profile/${auth.user._id}`} className="dash-link">View Profile</Link>}
-                            <img src={profile.profile.photo} alt=""/>
+                            {profile.profile.picture && <img src={require(`../../../public/profile-pictures/${profile.profile.picture}`)} alt={`${profile.profile.picture}`}/>}
                         </Fragment>) :
                         (<Fragment className="user-switch">
-                            <p>You have not yet set up a profile, please add some information about yourself</p>
                             <Link to="/create_profile" className="dash-link">Create Profile</Link>
+                            <p>You have not yet set up a profile, please add some information about yourself</p>
                         </Fragment>)
                     }
-                    {auth.user && auth.user.admin && <div className="admin-buttons">
+                    {auth && auth.user && auth.user.admin && <div className="admin-buttons">
                         <button className="btn btn-light" onClick={() => togglePendingPosts(!displayPendingPosts)}>Show Pending Posts</button>
                         <button className="btn btn-light" onClick={() => togglePendingUsers(!displayPendingUsers)}>Show Pending Users</button>
                     </div>}         
@@ -86,6 +86,7 @@ AdminDash.propTypes = {
     auth: PropTypes.object.isRequired,
     profile: PropTypes.object.isRequired,
     post: PropTypes.object.isRequired,
+    pending: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({

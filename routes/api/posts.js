@@ -22,16 +22,19 @@ async function(req,res){
     try {
 
         const user = await User.findById(req.user.id).select('-password');
+        const profile = await Profile.find({user:req.user.id})
+
 
         const newPost = new Post({
             text: req.body.text,
             name: user.name,
-            avatar: user.avatar,
+            picture: profile.picture,
             user: req.user.id
         })       
 
         const post = await newPost.save();
 
+        console.log(post);
         res.json(post);
 
     } catch (err) {

@@ -129,9 +129,9 @@
 }
 
 .plain-page .heading{
-  font-size: 40px;
+  font-size: 30px;
   justify-self: center;
-  color: teal;
+  color: goldenrod;
   font-weight: bold;
 }
 
@@ -228,7 +228,7 @@
   display: grid;
   align-items: center;
   justify-items: center;
-  grid-template-rows: 200px 75px 50px 50px 
+  grid-template-rows: 280px 75px 50px 50px 
 }
 
 .profile-top .heading{
@@ -420,6 +420,11 @@
   max-height: 480px;
 }
 
+.admindash .user-admin img{
+  height: 256px;
+  width: 256px;
+}
+
 .admindash .user-admin .admin-buttons{
   display: grid;
   grid-template-columns: 1fr;
@@ -502,11 +507,15 @@
 }
 
 .heading{
+  color: goldenrod;
   font-weight: bolder;
   font-family: 'Merriweather' , sans-serif;
 }
 
-
+.item-img{
+  height:250px;
+  width:250px;
+}
 /* Buttons */
 .btn{
   border-radius: 10px;
@@ -561,4 +570,9 @@ a{
 
 textarea{
   font-size: 20px;
+}
+
+.round-img{
+  width: 256px;
+  height: 256px;
 }

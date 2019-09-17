@@ -91,6 +91,30 @@ export const createProfile = (formData, history, edit=false) => async dispatch =
     }
 }
 
+export const editPicture  = (formData, history) => async dispatch => {
+    try {
+        let config = {
+            headers:{
+                'Content-Type': 'multipart/form-data'
+            }
+        }
+
+        const res = await axios.post('/api/profile/picture', formData, config);
+
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        });
+
+        dispatch(setAlert('Profile Picture Uploaded','dark'));
+
+        history.push('/profile/me');
+
+    } catch (err) {
+        
+    }
+}
+
 export const addEducation = (formData, history) => async dispatch => {
     try {
         let config = {

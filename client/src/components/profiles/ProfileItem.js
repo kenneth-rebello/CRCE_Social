@@ -5,14 +5,14 @@ import {connect} from 'react-redux';
 
 const ProfileItem = ({profile, isAuth}) => {
 
-    const {user, position, location} = profile;
+    const {user, position, location, picture} = profile;
     const {_id, name, avatar, branch, year} = user;
 
     return (
         <Fragment>
             <div className="profile">
-                <div className="round">
-                    <img src={avatar} alt=""/>
+                <div>
+                    {picture && <img className="item-img" src={require(`../../../public/profile-pictures/${picture}`)} alt=""/>}
                 </div>              
                 <div className="profile-details">
                     <h2>{name}</h2>

@@ -15,10 +15,12 @@
     "bcryptjs": "^2.4.3",
     "config": "^3.2.2",
     "express": "^4.17.1",
+    "express-fileupload": "^1.1.6-alpha.4",
     "express-validator": "^6.1.1",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.9",
+    "multer": "^1.4.2",
     "react": "^16.9.0",
     "react-modal": "^3.10.1",
     "request": "^2.88.0"

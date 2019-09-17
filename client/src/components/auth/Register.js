@@ -87,7 +87,7 @@ const Register = (props) => {
                         <div className="form-group">
                             <select name="year" value={year} onChange={e => Changer(e)} >
                                 <option value="">Select your current year</option>
-                                <option value="">N/A</option>
+                                <option value="N/A">N/A</option>
                                 <option value="FE">FE</option>
                                 <option value="SE">SE</option>
                                 <option vlaue="TE">TE</option>
