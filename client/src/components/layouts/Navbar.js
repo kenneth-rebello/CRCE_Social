@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -6,6 +6,8 @@ import { logout } from '../../actions/auth';
 import Alert from './Alert'
 
 const Navbar = (props) => {
+
+    const [displayNav, toggleDisplayNav] = useState(false)
 
     const authLinks = (
         <ul className="navbar-links">
@@ -32,9 +34,14 @@ const Navbar = (props) => {
                     <h1><Link to="/" className="title">CRCE Social</Link></h1>
                 </div>
                 <div>
-                    { props.isAuth ? authLinks : guestLinks}
+                    <button className="btn btn-dark btn-icon" onClick={() => toggleDisplayNav(!displayNav)} style={{display:'inline'}}>
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </button>
                 </div>
             </nav>
+            {displayNav && <div className="nav-hidden">
+                { props.isAuth ? authLinks : guestLinks}
+            </div>}
             <div className="nav-line"></div>
              {props.alert.length>0 && (<div className="alerts">
                 <Alert/>

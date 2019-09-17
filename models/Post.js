@@ -13,6 +13,9 @@ const PostSchema = new Schema({
     picture:{
         type: String
     },
+    upload:{
+        type: String
+    },
     text:{
         type: String,
         required: true

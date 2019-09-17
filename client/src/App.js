@@ -22,6 +22,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
+import EligibilityForm from './components/po/EligibilityForm';
 
 if(localStorage.token){
   setAuthToken(localStorage.token);
@@ -54,6 +55,7 @@ const App = () => {
               <PrivateRoute exact path="/add_skill" component={AddSkill}/>
               <PrivateRoute exact path="/add_status" component={AddStatus}/>
               <PrivateRoute exact path="/edit_picture" component={EditPicture}/>
+              <PrivateRoute exact path="/po_form" component={EligibilityForm}/>
             </Switch>
           </section>
         </Fragment>

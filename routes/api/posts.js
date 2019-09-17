@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const {check, validationResult} = require('express-validator/check');
+const fileUpload = require('express-fileupload')
 const auth = require('../../middleware/auth');
 const Post = require('../../models/Post');
 const User = require('../../models/User');
 const Profile = require('../../models/Profile');
+
+router.use(fileUpload());
 
 //@route    POST api/posts
 //@desc     Create a Post
@@ -19,28 +22,57 @@ async function(req,res){
         return res.status(400).json({msg: errors.array()});
     }
 
-    try {
+    const user = await User.findById(req.user.id).select('-password');
+    if(req.files){
+        
+        const file = req.files.file;
+        const fileName = `crceSocialpost${Date.now()}${file.name}`
 
-        const user = await User.findById(req.user.id).select('-password');
-        const profile = await Profile.find({user:req.user.id})
-
-
-        const newPost = new Post({
-            text: req.body.text,
-            name: user.name,
-            picture: profile.picture,
-            user: req.user.id
-        })       
-
-        const post = await newPost.save();
-
-        console.log(post);
-        res.json(post);
-
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
+        file.mv(`./client/public/posts/${fileName}`,async err => {
+            if(err){
+                console.error(err);
+                return res.status(500).send(err);
+            }
+            try {
+                const profile = await Profile.findOne({user:req.user.id})
+        
+                const newPost = new Post({
+                    text: req.body.text,
+                    name: user.name,
+                    picture: profile.picture,
+                    upload: fileName,
+                    user: req.user.id
+                })      
+                const post = await newPost.save();
+        
+                return res.json(post);
+        
+            } catch (err) {
+                console.error(err.message);
+                return res.status(500).send('Server Error');
+            }
+        });
+    }else{
+        try {
+            const profile = await Profile.findOne({user:req.user.id})
+    
+            const newPost = new Post({
+                text: req.body.text,
+                name: user.name,
+                picture: profile.picture,
+                user: req.user.id
+            })      
+            const post = await newPost.save();
+    
+            return res.json(post);
+    
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
     }
+
+    
 
 });
 

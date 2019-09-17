@@ -40,13 +40,17 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, profile, auth, matc
                         </Fragment>)}
                     </div>
                     <ProfileAbout profile={profile.profile}/>
-                    <h2 className="heading">Educational Qualifications<button className="btn btn-light btn-icon" onClick={() => toggleEducation(!displayEducation)} style={{display:'inline'}}>V</button></h2>
+                    <h2 className="heading">Educational Qualifications<button className="btn btn-light btn-icon" onClick={() => toggleEducation(!displayEducation)} style={{display:'inline'}}>
+                    <i class="fas fa-angle-down"></i>
+                        </button></h2>
                     
                     {displayEducation && <Education education = {profile.profile.education}/>}
-                    <h2 className="heading">Academic Status<button className="btn btn-light btn-icon" onClick={() => toggleStatus(!displayStatus)} style={{display:'inline'}}>V</button></h2>
+                    <h2 className="heading">Academic Status<button className="btn btn-light btn-icon" onClick={() => toggleStatus(!displayStatus)} style={{display:'inline'}}>
+                    <i class="fas fa-angle-down"></i>
+                        </button></h2>
 
                     {displayStatus && <Status status = {profile.profile.status}/>}
-                    <UserPosts/>
+                    {auth.user && <UserPosts/>}
                 </div>
             </Fragment>}
         </Fragment>

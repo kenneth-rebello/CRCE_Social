@@ -17,10 +17,9 @@ const Dashboard = ({setAlert, getCurrentProfile, getPosts, auth, profile, post})
         getPosts();
     }, [getCurrentProfile, getPosts]);
 
-    if(auth.user){
-        if(auth.isAuthenticated && auth.user.admin){
+    if(auth.user && auth.user.admin){
             return <Redirect to="/admindash"/>
-    }}
+    }
     
     return (
         profile.loading && profile.profile === null ? <Spinner /> : 
@@ -42,10 +41,11 @@ const Dashboard = ({setAlert, getCurrentProfile, getPosts, auth, profile, post})
                 <div className="user">
                     <h1>Welcome</h1>
                     <h1 className="heading">{auth.user && auth.user.name }</h1>
-                    {profile.profile !== null?
+                    {!profile.loading && profile.profile !== null?
                         (<Fragment>
                             {auth.user && <Link to={`/profile/${auth.user._id}`} className="dash-link">View Profile</Link>}
                             <img src={`./public/profile-pictures/${profile.profile.picture}`} alt=""/>
+                            {profile.profile.position === 'Placement Officer' && <button className="btn btn-light"><Link to="po_form">Create Eligibility List</Link></button>}
                         </Fragment>) :
                         auth.user && auth.user.approved && (<Fragment className="user-switch">
                             <Link to="/create_profile" className="dash-link">Create Profile</Link>

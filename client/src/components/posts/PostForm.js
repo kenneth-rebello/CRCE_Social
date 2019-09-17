@@ -5,11 +5,21 @@ import {addPost} from '../../actions/post';
 
 const PostForm = ({addPost}) => {
 
-    const [text, setText] = useState('')
+    const [text, setText] = useState('');
+    const [fileData, setFileData] = useState('');
+    const [fileName, setFileName] = useState('');
+
+    const Changer = e => {
+        setFileData(e.target.files[0]);
+        setFileName(e.target.files[0].name);
+    }
 
     const Submitter = e => {
         e.preventDefault();
-        addPost({text});
+        const formData = new FormData();
+        formData.append("file",fileData);
+        formData.append("text",text);
+        addPost(formData);
         setText('');
     }
 
@@ -20,13 +30,15 @@ const PostForm = ({addPost}) => {
             </div>
             <form className="form" onSubmit={e => Submitter(e)}>
                 <textarea
-                name="text" 
+                name="text"
+                type="text" 
                 cols="90"
                 rows="8"
                 placeholder="Create a post"
                 value={text}
                 onChange={e => setText(e.target.value)}
                 required></textarea><br/>
+                <input name="upload" type="file" className="btn btn-light" onChange ={e =>Changer(e)}/>
                 <input type="submit" className="btn btn-dark" value="Submit" />
             </form>
         </div>

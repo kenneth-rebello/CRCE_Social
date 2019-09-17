@@ -1,4 +1,4 @@
 {
-    "mongoURI": "mongodb://localhost/crcehub",
+    "mongoURI": "mongodb://localhost/crceSocial",
     "jwtSecret": "mysecrettoken"
 }

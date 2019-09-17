@@ -108,7 +108,7 @@ export const editPicture  = (formData, history) => async dispatch => {
 
         dispatch(setAlert('Profile Picture Uploaded','dark'));
 
-        history.push('/profile/me');
+        history.push('/dashboard');
 
     } catch (err) {
         

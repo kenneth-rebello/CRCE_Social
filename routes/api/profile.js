@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const {check, validationResult} = require('express-validator/check');
-const multer = require('multer');
 const fileUpload = require('express-fileupload')
 const path = require('path');
 const fs = require('fs');
@@ -165,18 +164,25 @@ router.post('/picture', auth, async (req, res) => {
         return res.status(400).json({msg : 'No file uploaded'});
     }
 
-
+    const profile = await Profile.findOne({user: req.user.id}).populate('user',['name']);
     const file = req.files.file;
-    console.log(file);
-    const fileName = `crceSocial${Date.now()}${file.name}`
+    const fileName = `crceSocial${profile.user.name}${Date.now()}${file.name}`
+
+    if(profile.picture){
+        fs.unlink(`./client/public/profile-pictures/${profile.picture}`, err => {});
+    }
+
+    const posts = await Post.find({user:req.user.id});
+    posts.map(async(post) => {
+        console.log(post)
+        await Post.findOneAndUpdate({_id:post._id}, {$set:{picture: fileName}})
+    });
 
     file.mv(`./client/public/profile-pictures/${fileName}`,async err => {
         if(err){
             console.error(err);
             return res.status(500).send(err);
         }
-
-        const profile = await Profile.find({user: req.user.id});
 
         const updated = await Profile.findOneAndUpdate({user: req.user.id}, { $set:{picture: fileName}}, {new:true});
         res.json(updated);

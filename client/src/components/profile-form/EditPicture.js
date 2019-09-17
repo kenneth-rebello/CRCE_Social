@@ -18,8 +18,6 @@ const EditPicture = ({editPicture, history}) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("file",fileData)
-        console.log(fileData);
-        console.log(formData);
         editPicture(formData,history);
     }
 

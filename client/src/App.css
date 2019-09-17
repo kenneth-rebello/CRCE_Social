@@ -24,9 +24,21 @@
   align-items: center;
   min-height: 50px;
 }
+.navbar .btn{
+  width:20%;
+  margin:20px;
+}
+.nav-hidden{
+  background-color: teal;
+  color: whitesmoke;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  min-height: 25px;
+}
 
-.navbar li{
-  display: inline;
+.nav-hidden li{
+  display: block;
   font-size:25px;
   padding: 10px;
 }
@@ -335,13 +347,17 @@
 
 .post-user{
   display: grid;
-  grid-template-rows: 50px 20px;
-  background-color: white;
+  grid-template-rows: 3fr 1fr;
+  background-color: teal;
 }
 
+.post .item-img{
+  height:140px;
+  width:140px
+}
 .post-user .heading{
   font-size: 15px;
-  color:teal;
+  color:whitesmoke;
   justify-self: center;
   align-self: center;
   font-family: 'Merriweather', sans-serif;
@@ -351,7 +367,12 @@
   background-color: white;
   padding: 15px;
   display: grid;
-  grid-template-rows: auto 25px 50px;
+  grid-template-rows: auto auto 25px 50px;
+}
+
+.post-img{
+  height: auto;
+  width: 80%;
 }
 
 .post .post-text{
@@ -409,6 +430,10 @@
   display: grid;
   grid-template-rows: 30px 50px auto;
   max-height: 356px;
+}
+
+.dashboard .user .btn{
+  width:95%
 }
 
 .admindash .user-admin{

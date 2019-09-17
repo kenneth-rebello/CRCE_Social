@@ -6,18 +6,20 @@ import {connect} from 'react-redux';
 import Spinner from '../layouts/Spinner';
 import {addLike, removeLike} from '../../actions/post';
 import {approvePost} from '../../actions/admin';
+import PostImage from './PostImage'
+
 
 const PostItem = ({auth, post, addLike, removeLike, approvePost}) => {
 
-    let { _id, text, approved, name, picture, user, likes, comments, date } = post;
+    let { _id, text, upload, approved, name, picture, user, likes, comments, date } = post;
 
     return (
         <Fragment>
-        {post? 
+        {auth && post? 
         (<Fragment>
             <div className="post">
-                <div className="post-user">
-                    <Link to={`/profile/{user._id}`}>
+                <div>
+                    <Link to={`/profile/{user._id}`} className="post-user">
                     <div>
                         {picture && <img className="item-img" src={require(`../../../public/profile-pictures/${picture}`)} alt=""/>}
                     </div>
@@ -27,6 +29,7 @@ const PostItem = ({auth, post, addLike, removeLike, approvePost}) => {
         
                 <div className="post-data">
                     <p className="post-text">{text}</p>
+                    {upload && <PostImage upload={upload}/>}
                     <p className="post-date">
                         Posted on <Moment format='DD/MM/YYYY'>{date}</Moment>
                     </p>
@@ -34,11 +37,11 @@ const PostItem = ({auth, post, addLike, removeLike, approvePost}) => {
                         { approved && auth && auth.user && (<Fragment>
                             { likes.filter(like => like.user === auth.user._id).length>0 ? (
                                 <button type="button" className="btn btn-red" onClick={() => removeLike(_id)}>
-                                <span>Unlike</span>{` `}
+                                <span><i class="far fa-thumbs-down"></i></span>{` `}
                                 </button>
                             ):(
                                 <button type="button" className="btn btn-green" onClick={() => addLike(_id)}>
-                                <span>Like</span>{ ` `}
+                                <span><i class="far fa-thumbs-up"></i></span>{ ` `}
                                 </button>)
                             }
                             <span className="likes">{likes.length} Likes</span>

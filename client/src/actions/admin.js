@@ -50,3 +50,7 @@ export const getPendingUsers = () => async dispatch => {
         });
     }
 }
+
+export const generateList = (formData, history) => async dispatch =>{
+    
+}
