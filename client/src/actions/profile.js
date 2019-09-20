@@ -43,9 +43,6 @@ export const getProfileById = (userID) => async dispatch => {
     try {
         const res = await axios.get(`/api/profile/user/${userID}`);
 
-        console.log('in profileaction')
-        console.log(userID)
-
         dispatch({
             type: GET_PROFILE,
             payload: res.data
@@ -133,7 +130,7 @@ export const addEducation = (formData, history) => async dispatch => {
         dispatch(setAlert('Educational Qualification Added','dark'));
 
         
-        history.push('/profile/me');
+        history.push(`/profile/${res.data._id}`);
 
     } catch (err) {
         const errors = err.response.data.errors;
@@ -184,8 +181,7 @@ export const addStatus = (formData, history) => async dispatch => {
 
         dispatch(setAlert('Academic Status Added','dark'));
 
-        
-        history.push('/profile/me');
+        history.push(`/profile/${res.data._id}`);
 
     } catch (err) {
         const errors = err.response.data.errors;

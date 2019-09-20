@@ -117,7 +117,7 @@ router.get('/', async function(req, res){
 });
 
 //@route    GET api/profile/user/user_id
-//@desc     Get profile by id
+//@desc     Get profile by user id
 //@access   Public
 router.get('/user/:user_id', async function(req, res){
     try{
@@ -274,7 +274,7 @@ async function(req, res){
     }
 
     const profile = await Profile.findOne({user: req.user.id}).populate('user', ['name','avatar','year','branch']);
-    const { semester, sgpa } = req.body;
+    const { semester, sgpa, backlogs } = req.body;
     let cgpa = parseFloat(sgpa);
     profile.status.forEach((stat)=>{
         cgpa = cgpa + parseFloat(stat.sgpa)
@@ -282,9 +282,10 @@ async function(req, res){
     
     profile.status.length>0 && (cgpa = parseFloat(cgpa/(profile.status.length+1)))
     
+    cgpa = parseFloat(cgpa.toFixed(2))
 
     const newStatus = {
-        semester, sgpa, cgpa
+        semester, sgpa, cgpa, backlogs
     }
 
     try {

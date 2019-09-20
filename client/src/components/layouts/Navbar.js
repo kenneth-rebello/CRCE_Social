@@ -7,46 +7,63 @@ import Alert from './Alert'
 
 const Navbar = (props) => {
 
-    const [displayNav, toggleDisplayNav] = useState(false)
-
     const authLinks = (
-        <ul className="navbar-links">
+        <Fragment>
+        <nav className="navbar">
+            <div className="nav-wrapper">
+                <Link to="/" className="title brand-logo">CRCE Social</Link>
+                <Link to="" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></Link>
+                <ul className="right hide-on-med-and-down nav-links">
+                <li><Link to="/dashboard">Home</Link></li>
+                <li><Link to="/profiles">Profiles</Link></li>
+                <li><Link to="/posts">Posts</Link></li>
+                <li><Link to="#!" onClick={ e => props.logout()}>Logout</Link></li>
+                </ul>
+            </div>
+            <div className="nav-goldline"></div>
+            {props.alert.length>0 && (<div className="alerts">
+                <Alert/>
+            </div>)} 
+        </nav>
+
+        <ul className="sidenav sidenavbar-own" id="mobile-demo">
             <li><Link to="/dashboard">Home</Link></li>
             <li><Link to="/profiles">Profiles</Link></li>
             <li><Link to="/posts">Posts</Link></li>
-            <li><Link to="#!" onClick={ e => props.logout(e)}>Logout</Link></li>
+            <li><Link to="#!" onClick={ e => props.logout()}>Logout</Link></li>
         </ul>
-
+        </Fragment>
     );
 
     const guestLinks = (
-        <ul className="navbar-links">
-            <li><Link to="/profiles">Profiles</Link></li>
+        <Fragment>
+        <nav className="navbar">
+            <div className="nav-wrapper">
+                <Link to="/" className="title brand-logo">CRCE Social</Link>
+                <Link to="" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></Link>
+                <ul className="right hide-on-med-and-down nav-links">
+                    <li><Link to="/login">Login</Link></li>
+                    <li><Link to="/register">Register</Link></li>
+                </ul>
+            </div>
+            <div className="nav-goldline"></div>
+            {props.alert.length>0 && (<div className="alerts">
+                <Alert/>
+            </div>)}     
+        </nav>
+
+        <ul className="sidenavbar-own sidenav" id="mobile-demo">
             <li><Link to="/login">Login</Link></li>
             <li><Link to="/register">Register</Link></li>
         </ul>
+        </Fragment>
     );
 
     return (
-        <div className="nav">
-            <nav className="navbar">
-                <div>
-                    <h1><Link to="/" className="title">CRCE Social</Link></h1>
-                </div>
-                <div>
-                    <button className="btn btn-dark btn-icon" onClick={() => toggleDisplayNav(!displayNav)} style={{display:'inline'}}>
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </nav>
-            {displayNav && <div className="nav-hidden">
-                { props.isAuth ? authLinks : guestLinks}
-            </div>}
-            <div className="nav-line"></div>
-             {props.alert.length>0 && (<div className="alerts">
-                <Alert/>
-            </div>)} 
-        </div>
+        <Fragment>
+            { props.isAuth ? authLinks : guestLinks}
+            <button id="goToTop"><i className="fa fa-arrow-up"></i></button>
+        </Fragment>
     )
 }
 

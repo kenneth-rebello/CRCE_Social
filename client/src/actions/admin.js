@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_PENDING_USERS, PENDING_ERROR } from './types';
+import { GET_PENDING_USERS, PENDING_ERROR, GET_ELIGIBLE_USERS } from './types';
 import { getPendingPosts, getPosts} from './post';
 
 export const approvePost = (postId) => async dispatch =>{
@@ -52,5 +52,23 @@ export const getPendingUsers = () => async dispatch => {
 }
 
 export const generateList = (formData, history) => async dispatch =>{
-    
+    try{
+
+        const config = {
+            headers: {
+                'Content-Type':'application/json'
+            }
+        }
+        const res = await axios.post('/api/admin/po/eligible', formData, config);
+        res.data.unshift({"company": formData.companyName})
+        dispatch({
+            type: GET_ELIGIBLE_USERS,
+            payload: res.data
+        })
+
+        history.push('/eligible_students')
+
+    } catch(err) {
+        console.log(err);
+    }
 }

@@ -42,11 +42,11 @@ const AddEducation = ({addEducation, history}) => {
                         <input type="text" placeholder="* Degree or Course" name="course" value={course} onChange = {e => Changer(e)} required></input>
                     </div>
                     <div className="form-group">
-                        <h4>From Date</h4>
+                        <label>From Date</label>
                         <input type="date" name="from" value={from} onChange = {e => Changer(e)}></input>
                     </div>
                     <div className="form-group">
-                        <h4>To Date</h4>
+                        <label>To Date</label>
                         <input type="date" name="to" value={to} onChange = {e => Changer(e)}></input>
                     </div>
 

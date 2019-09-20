@@ -43,4 +43,18 @@ router.get('/approve/user/:id', auth, async (req, res) => {
     res.json(user);
 });
 
+router.post('/po/eligible', auth, async (req, res) => {
+
+    const {dept, pointer, backlogs, companyName} = req.body;
+    let users = []
+    
+    if(dept!=""){
+        users = await User.find({branch:dept});
+    }else{
+        users = await User.find();
+    }
+    
+    const eligibile = await Profile.find({ user: {$in: users}, "status.0.cgpa": {$gte: pointer}, "status.0.backlogs":{$lte: backlogs}}).populate('user',['name','branch','year','_id']);
+    res.json(eligibile);
+})
 module.exports = router;

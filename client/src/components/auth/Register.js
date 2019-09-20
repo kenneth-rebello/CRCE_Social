@@ -73,7 +73,7 @@ const Register = (props) => {
                             />
                         </div>
                         <div className="form-group">
-                            <select name="branch" value={branch} onChange={e => Changer(e)}>
+                            <select name="branch" value={branch} className="browser-default own-default" onChange={e => Changer(e)}>
                                 <option value="">Select you branch</option>
                                 <option value="IT">IT</option>
                                 <option value="COMPS">COMPS</option>
@@ -85,7 +85,7 @@ const Register = (props) => {
                             </select>
                         </div>
                         <div className="form-group">
-                            <select name="year" value={year} onChange={e => Changer(e)} >
+                            <select name="year" value={year} className="browser-default own-default" onChange={e => Changer(e)} >
                                 <option value="">Select your current year</option>
                                 <option value="N/A">N/A</option>
                                 <option value="FE">FE</option>

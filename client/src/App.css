@@ -1,74 +1,53 @@
-.nav{
+.navbar{
+  background-color: teal;
+  color: whitesmoke;
+  align-items: center;
+  min-height: 100px;
   position: fixed;
   top: 0;
-  overflow: hidden;
   width: 100%;
 }
 
-
-.nav .alerts{
+.navbar .alerts{
   width:100%;
-  height:40px;
+  min-height:40px;
   background-color: gold;
   color:black;
   grid-template-columns: 1fr;
   align-items: center;
-  font-size:30px;
-}
-
-.navbar{
-  background-color: teal;
-  color: whitesmoke;
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  align-items: center;
-  min-height: 50px;
-}
-.navbar .btn{
-  width:20%;
-  margin:20px;
-}
-.nav-hidden{
-  background-color: teal;
-  color: whitesmoke;
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: center;
-  min-height: 25px;
-}
-
-.nav-hidden li{
-  display: block;
+  justify-content: center;
   font-size:25px;
-  padding: 10px;
+  padding:1px;
+}
+
+.sidenavbar-own{
+  height:100%;
 }
 
 
-.navbar-links a{
+.navbar a{
+  display: grid;
+  font-family: 'Cinzel' serif;
+  align-items: center;
   color: whitesmoke; 
   text-decoration: none;
-  padding: 2px;
+  padding: 15px;
+  font-size: 25px;
 }
 
-.navbar-links a:hover{
+.navbar a:hover{
   color:goldenrod; 
-}
-
-.navbar .btn{
-  background-color: black;
-  color:whitesmoke;
 }
 
 
 .navbar .title{
   color: whitesmoke;
-  font-size: 40px;
+  font-size: 35px;
   font-family: 'Cinzel', serif;
   font-weight: bold;
-  padding: 50px;
 }
 
-.nav-line{
+.nav-goldline{
   background-color: goldenrod;
   height:10px;
 }
@@ -110,11 +89,6 @@
   grid-template-columns: 1fr;
 }
 
-.plain-page .form .form-group input{
-  width: 75%;
-  height: 40px;
-  border-radius: 25px;
-}
 
 .plain-page .form .form-group select{
   width:75%;
@@ -160,7 +134,7 @@
 .auth-box{
   display: grid;
   background-color: whitesmoke;
-  width: 20%;
+  width: 30%;
   padding:20px;
   padding-left:40px;
   padding-right: 40px;
@@ -343,11 +317,11 @@
   display: grid;
   grid-template-columns: 1fr 6fr;
   border-radius: 10px;
+  border: solid 3px teal;
 }
 
 .post-user{
   display: grid;
-  grid-template-rows: 3fr 1fr;
   background-color: teal;
 }
 
@@ -364,7 +338,6 @@
 }
 
 .post-data{
-  background-color: white;
   padding: 15px;
   display: grid;
   grid-template-rows: auto auto 25px 50px;
@@ -376,6 +349,8 @@
 }
 
 .post .post-text{
+  background-color: honeydew;
+  width: 100%;
   font-size:20px;
   justify-self: left;
   font-family: 'Roboto Slab', serif;
@@ -424,12 +399,14 @@
 }
 
 .dashboard .user{
-  background-color: whitesmoke;
+  background-color: mintcream;
   margin: 15px;
   margin-top: 60px;
   display: grid;
-  grid-template-rows: 30px 50px auto;
+  grid-template-rows: 40px 100px auto;
   max-height: 356px;
+  position: relative;
+  overflow:hidden
 }
 
 .dashboard .user .btn{
@@ -437,12 +414,22 @@
 }
 
 .admindash .user-admin{
-  background-color: whitesmoke;
+  background-color: mintcream;
   margin: 15px;
   margin-top: 60px;
   display: grid;
-  grid-template-rows: 30px 50px 30px 256px 50px 50px;
-  max-height: 480px;
+  grid-template-rows: 30px 70px 30px auto 60px 60px;
+  max-height: 500px;
+  position: sticky;
+  height:100vh;
+  top: 130px;
+}
+
+.admindash .user-admin a{
+  color:teal;
+}
+.admindash .user-admin a:hover{
+  color:lightseagreen;
 }
 
 .admindash .user-admin img{
@@ -523,8 +510,8 @@
 }
 
 .plain-page{
-  background-color: lightblue;
   margin-top: 100px;
+  background-color: whitesmoke;
   width:100%;
   min-height:550px;
   background-size: cover;
@@ -544,10 +531,11 @@
 /* Buttons */
 .btn{
   border-radius: 10px;
-  width: 15%;
-  height: 40px;
-  font-size: 20px;
-  margin: 5px;
+  margin: 10px;
+}
+
+.btn a{
+  color:inherit;
 }
 
 .btn-icon{
@@ -555,17 +543,15 @@
   float: right;
 }
 
-.btn a{
-  color:inherit;
-}
-
-.btn:hover{
-  cursor: pointer;
-}
-
 .btn-dark{
   background-color: teal;
   color: white;
+}
+.btn-dark:hover{
+  background-color: lightseagreen;
+}
+.btn-dark:focus{
+  background-color: teal;
 }
 
 
@@ -573,13 +559,32 @@
   background-color: lightgray;
   color: teal  ;
 }
+.btn-light:hover{
+  background-color: lightsteelblue;
+}
+.btn-light:focus{
+  background-color: lightgray;
+}
 
 .btn-gold{
   background-color: goldenrod;
   color:white;
 }
+.btn-gold:hover{
+  background-color: gold;
+}
+.btn-gold:focus{
+  background-color: goldenrod;
+}
 
 .btn-green{
+  background-color: green;
+  color:white;
+}
+.btn-green:hover{
+  background-color: lightgreen;
+}
+.btn-green:focus{
   background-color: green;
   color:white;
 }
@@ -587,6 +592,14 @@
 .btn-red{
   background-color: red;
   color:white;
+}
+.btn-red:focus{
+  background-color: red;
+  color:white;
+}
+.btn-red:hover{
+  background-color: lightcoral;
+  color:red;
 }
 
 a{
@@ -600,4 +613,33 @@ textarea{
 .round-img{
   width: 256px;
   height: 256px;
+}
+
+input::placeholder{
+  color:teal;
+}
+
+input:focus::placeholder{
+  color:lightsteelblue;
+}
+
+.own-default{
+  border-style: groove;
+  border-radius: 25px;
+  background: transparent;
+  color: teal;
+}
+
+#goToTop{
+  display:none;
+  transition: 0.5s;
+  border-radius:100px;
+  left:50px;
+  bottom:50px;
+  height:50px;
+  width:50px;
+  position:fixed;
+  z-index:100;
+  background-color: lightseagreen;
+  border-style: outset;
 }

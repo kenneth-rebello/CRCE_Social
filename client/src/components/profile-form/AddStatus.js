@@ -9,10 +9,10 @@ const AddStatus = ({addStatus, history}) => {
     const [formData, setFormData] = useState({
         semester:'',
         sgpa: 0.0,
-        cgpa: 0.0
+        backlogs: 0
     });
 
-    const {semester, sgpa, cgpa} = formData;
+    const {semester, sgpa, backlogs} = formData;
 
 
     const Changer = e => {
@@ -35,11 +35,15 @@ const AddStatus = ({addStatus, history}) => {
                 <small>* = required field</small>
                 <form className="form" onSubmit={e => Submitter(e)}>
                     <div className="form-group">
-                        <input type="text" placeholder="Semester (eg: First, Second..)" name="semester" value={semester} onChange = {e => Changer(e)} required></input>
+                        <input type="text" placeholder="* Semester (eg: First, Second..)" name="semester" value={semester} onChange = {e => Changer(e)} required></input>
                     </div>
                     <div className="form-group">
-                        <p>SGPA</p>
+                        <p>* SGPA</p>
                         <input type="number" placeholder="SGPA (Current Semester)" name="sgpa" value={sgpa} onChange = {e => Changer(e)} required></input>
+                    </div>
+                    <div className="form-group">
+                        <p>* Number of backlogs from this semester</p><small>(if any)</small>
+                        <input type="number" placeholder="Number of backlogs" name="backlogs" value={backlogs} onChange = {e => Changer(e)} required></input>
                     </div>
 
                     <input type="submit" className="btn btn-dark"></input>

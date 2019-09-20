@@ -17,12 +17,15 @@ import Profiles from './components/profiles/Profiles'
 import Profile from './components/profile/Profile'
 import Posts from './components/posts/Posts'
 import AdminDash from './components/admin/AdminDash';
+import EligibilityForm from './components/po/EligibilityForm';
+import Eligible from './components/po/Eligible';
 //Redux
 import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
-import EligibilityForm from './components/po/EligibilityForm';
+
+
 
 if(localStorage.token){
   setAuthToken(localStorage.token);
@@ -56,6 +59,7 @@ const App = () => {
               <PrivateRoute exact path="/add_status" component={AddStatus}/>
               <PrivateRoute exact path="/edit_picture" component={EditPicture}/>
               <PrivateRoute exact path="/po_form" component={EligibilityForm}/>
+              <PrivateRoute exact path="/eligible_students" component={Eligible}/>
             </Switch>
           </section>
         </Fragment>

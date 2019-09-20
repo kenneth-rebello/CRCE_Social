@@ -62,6 +62,9 @@ const ProfileSchema = new mongoose.Schema({
         },
         cgpa:{
             type: Number
+        },
+        backlogs:{
+            type: Number
         }
     }],
     social:{

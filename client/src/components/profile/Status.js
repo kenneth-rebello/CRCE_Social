@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {delStatus} from '../../actions/profile'
 
-const Education = ({ status, delStatus }) => {
+const Education = ({ auth, user, status, delStatus }) => {
 
     const statuses = status.map(stat =>(
         <tr key={stat._id}>
@@ -11,7 +11,7 @@ const Education = ({ status, delStatus }) => {
             <td><strong>SGPA:</strong>{stat.sgpa}</td>
             <td><strong>CGPA:</strong>{stat.cgpa}</td>
             <td>
-                <button className="btn btn-red" onClick={() => delStatus(stat._id)}>Delete</button>
+                {!auth.loading && auth && user._id===auth.user._id && stat._id===status[0]._id && <button className="btn btn-red" onClick={() => delStatus(stat._id)}>Delete</button>}
             </td>
         </tr>
     ));
@@ -30,8 +30,14 @@ const Education = ({ status, delStatus }) => {
 }
 
 Education.propTypes = {
+    auth: PropTypes.object.isRequired,
+    profile: PropTypes.object.isRequired,
     status: PropTypes.array.isRequired,
     delStatus: PropTypes.func.isRequired,
 }
 
-export default connect(null, {delStatus})(Education)
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps, {delStatus})(Education)

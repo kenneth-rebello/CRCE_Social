@@ -49,7 +49,7 @@ const CreateProfile = props => {
             <small>* = required field</small>
             <form className="form" onSubmit={(e)=>Submitter(e)}>
                 <div className="form-group">
-                <select name="position" value={position} onChange={(e)=>Changer(e)}>
+                <select name="position" className=" browser-default own-default" value={position} onChange={(e)=>Changer(e)}>
                     <option value="">* Select Position</option>
                     <option value="Student">Student</option>
                     <option value="Faculty">Faculty</option>

@@ -19,7 +19,7 @@ const PostItem = ({auth, post, addLike, removeLike, approvePost}) => {
         (<Fragment>
             <div className="post">
                 <div>
-                    <Link to={`/profile/{user._id}`} className="post-user">
+                    <Link to={`/profile/${user}`} className="post-user">
                     <div>
                         {picture && <img className="item-img" src={require(`../../../public/profile-pictures/${picture}`)} alt=""/>}
                     </div>
@@ -37,11 +37,11 @@ const PostItem = ({auth, post, addLike, removeLike, approvePost}) => {
                         { approved && auth && auth.user && (<Fragment>
                             { likes.filter(like => like.user === auth.user._id).length>0 ? (
                                 <button type="button" className="btn btn-red" onClick={() => removeLike(_id)}>
-                                <span><i class="far fa-thumbs-down"></i></span>{` `}
+                                <span><i class="fa fa-thumbs-down"></i></span>{` `}
                                 </button>
                             ):(
                                 <button type="button" className="btn btn-green" onClick={() => addLike(_id)}>
-                                <span><i class="far fa-thumbs-up"></i></span>{ ` `}
+                                <span><i class="fa fa-thumbs-up"></i></span>{ ` `}
                                 </button>)
                             }
                             <span className="likes">{likes.length} Likes</span>

@@ -2,8 +2,9 @@ import React, {useState, Fragment} from 'react';
 import {generateList} from '../../actions/admin';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
-const EligibilityForm = ({history}) => {
+const EligibilityForm = ({generateList, history}) => {
 
     const [formData, setFormData] = useState({
         companyName:'',
@@ -35,8 +36,9 @@ const EligibilityForm = ({history}) => {
                         <input type="text" placeholder="Name Of Recruiting Company" name="companyName" value={companyName} onChange = {e => Changer(e)} required></input>
                     </div>
                     <div className="form-group">
-                        <select name="dept" value={dept} onChange={e => Changer(e)}>
+                        <select name="dept" className="browser-default own-default" value={dept} onChange={e => Changer(e)}>
                             <option value="" disabled>Select the branch</option>
+                            <option value="">ALL</option>
                             <option value="IT">IT</option>
                             <option value="COMPS">COMPS</option>
                             <option vlaue="ELEX">ELEX</option>
@@ -52,7 +54,7 @@ const EligibilityForm = ({history}) => {
                         <input type="text" placeholder="Number of permitted backlogs" name="backlogs" value={backlogs} onChange = {e => Changer(e)} required></input>
                     </div>
 
-                    <input type="submit" className="btn btn-dark" value="Done"></input>
+                    <input type="submit" className="btn btn-dark" value="Done"/>
                 
                     <button className="btn btn-light"><Link to="/dashboard">Go Back</Link></button>
                 </form>
@@ -62,7 +64,7 @@ const EligibilityForm = ({history}) => {
 }
 
 EligibilityForm.propTypes = {
-
+    generateList: PropTypes.func.isRequired,
 }
 
-export default EligibilityForm
+export default connect(null, {generateList})(EligibilityForm)

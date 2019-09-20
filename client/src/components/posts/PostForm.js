@@ -25,15 +25,15 @@ const PostForm = ({addPost}) => {
 
     return (
         <div className="post-form">
-            <div className="bg-primary p">
-                <h1>Say Something</h1>
+            <div>
+                <h1 className="heading">Say Something</h1>
             </div>
             <form className="form" onSubmit={e => Submitter(e)}>
                 <textarea
                 name="text"
                 type="text" 
                 cols="90"
-                rows="8"
+                rows="10"
                 placeholder="Create a post"
                 value={text}
                 onChange={e => setText(e.target.value)}
