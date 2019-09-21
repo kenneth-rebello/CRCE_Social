@@ -105,7 +105,7 @@ router.get('/', async function(req, res){
 
         const users = await User.find({approved:true});
 
-        const profiles = await Profile.find({user: {$in:users}}).populate('user',['name','avatar','year','branch']);
+        const profiles = await Profile.find({user: {$in:users}}).populate('user',['name','email','year','branch','approved']);
         res.json(profiles);
 
     }catch(err){

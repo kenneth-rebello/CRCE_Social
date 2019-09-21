@@ -38,7 +38,7 @@ const Dashboard = ({setAlert, getCurrentProfile, getPosts, auth, profile, post})
                     <h1 className="heading">You are not yet approved by admin, please wait while your account is reviewed</h1>
                 </Fragment>)}
                     
-                <div className="user">
+                {!auth.loading && !profile.loading && <div className="user">
                     <h1>Welcome</h1>
                     <h1 className="heading">{auth.user && auth.user.name }</h1>
                     {auth && !profile.loading && profile.profile !== null?
@@ -47,12 +47,12 @@ const Dashboard = ({setAlert, getCurrentProfile, getPosts, auth, profile, post})
                             <img src={`./public/profile-pictures/${profile.profile.picture}`} alt=""/>
                             {!profile.loading && profile.profile.position === 'Placement Officer' && <button className="btn btn-light"><Link to="po_form">Create Eligibility List</Link></button>}
                         </Fragment>) :
-                        auth.user && auth.user.approved && (<Fragment className="user-switch">
+                        (<Fragment className="user-switch">
                             <Link to="/create_profile" className="dash-link">Create Profile</Link>
                             <p style={{padding:'5px'}}>You have not yet set up a profile, please add some information about yourself</p>
                         </Fragment>)
                     }
-                </div>
+                </div>}
             </div>
         </Fragment>
     );

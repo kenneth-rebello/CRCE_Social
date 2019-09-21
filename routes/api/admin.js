@@ -16,8 +16,8 @@ router.get('/posts', auth, async (req, res) => {
 router.get('/users', auth, async (req,res) => {
 
     const users = await User.find({approved:false}).sort({date: 1});
-    
-    res.json(users);
+    const profiles = await Profile.find({user: {$in: users}}).populate('user',['name','branch','year','email']);
+    res.json(profiles);
 
 });
 
@@ -41,6 +41,17 @@ router.get('/approve/user/:id', auth, async (req, res) => {
     await user.save();
 
     res.json(user);
+});
+
+router.get('/reject/user/:id', auth, async (req, res) => {
+
+    const profile = await Profile.findOne({_id: req.params.id});
+
+    await Profile.findOneAndRemove({_id: profile._id})
+    await User.findOneAndRemove({_id: profile.user._id})
+    console.log(profile);
+
+    res.json(profile);
 });
 
 router.delete('/user/:id', auth, async (req, res) => {

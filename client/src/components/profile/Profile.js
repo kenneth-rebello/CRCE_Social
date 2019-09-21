@@ -12,7 +12,7 @@ import { getProfileById, delAccount } from '../../actions/profile';
 import { getUserPosts } from '../../actions/post';
 import { delUser } from '../../actions/admin'; 
 
-const Profile = ({ getProfileById, getUserPosts, delAccount, delUser, profile, auth, match, history }) => {
+const Profile = ({ getProfileById, getUserPosts, delAccount, delUser, profile, auth, match }) => {
     
     const [displayEducation, toggleEducation] = useState(false);
     const [displayStatus, toggleStatus] = useState(false);
@@ -39,8 +39,8 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, delUser, profile, a
                             </button>
                         </Fragment>)}
                         {!auth.loading && auth.user.admin && !profile.loading && profile.profile.user &&
-                            <button className="btn btn-red" onClick={()=> delUser(profile.profile._id, history)}>
-                                Delete User
+                            <button className="btn btn-red" onClick={()=> delUser(profile.profile._id)}>
+                                <Link to="/admindash">Delete User</Link>
                             </button>}
                         {auth.isAuthenticated && !auth.loading && auth.user._id !== profile.profile.user._id &&
                         (<Fragment>
