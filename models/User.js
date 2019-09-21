@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
     following: [{
         user:{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'users'
+            ref: 'user'
         }
     }]
 });

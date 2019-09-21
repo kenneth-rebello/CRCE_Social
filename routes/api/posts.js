@@ -72,8 +72,6 @@ async function(req,res){
         }
     }
 
-    
-
 });
 
 //@route    GET api/posts

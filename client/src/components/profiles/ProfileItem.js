@@ -20,8 +20,8 @@ const ProfileItem = ({auth, profile, isAuth, approveUser, rejectUser}) => {
                     <p>{position}</p>
                     <p>{year} - {branch}</p>
                     <p className="my-1">{location && <span>{location}</span>}</p>
-                    {isAuth && <Link to={`/profile/${_id}`} className="btn btn-brick">View Profile</Link>}
-                    {auth && auth.user.admin && !approved &&
+                    {isAuth && auth.user && auth.user.approved &&<Link to={`/profile/${_id}`} className="btn btn-brick">View Profile</Link>}
+                    {auth && auth.user && auth.user.admin && !approved &&
                         <Fragment>
                             <button className="btn btn-green" onClick={() => approveUser(_id)}>
                                 Approve

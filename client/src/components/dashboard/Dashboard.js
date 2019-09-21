@@ -45,7 +45,8 @@ const Dashboard = ({setAlert, getCurrentProfile, getPosts, auth, profile, post})
                         (<Fragment>
                             {auth.user && <Link to={`/profile/${auth.user._id}`} className="dash-link">View Profile</Link>}
                             <img src={`./public/profile-pictures/${profile.profile.picture}`} alt=""/>
-                            {!profile.loading && profile.profile.position === 'Placement Officer' && <button className="btn btn-light"><Link to="po_form">Create Eligibility List</Link></button>}
+                            {!profile.loading && profile.profile.position === 'Placement Officer' && <button className="btn btn-light"><Link to="/po_form">Create Eligibility List</Link></button>}
+                            {!profile.loading && profile.profile.position === 'Faculty' && <button className="btn btn-light"><Link to="/add_event">Add Event</Link></button>}
                         </Fragment>) :
                         (<Fragment className="user-switch">
                             <Link to="/create_profile" className="dash-link">Create Profile</Link>

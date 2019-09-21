@@ -17,6 +17,7 @@ const Navbar = (props) => {
                 <li><Link to="/dashboard">Home</Link></li>
                 <li><Link to="/profiles">Profiles</Link></li>
                 <li><Link to="/posts">Posts</Link></li>
+                <li><Link to="/events">Events</Link></li>
                 <li><Link to="#!" onClick={ e => props.logout()}>Logout</Link></li>
                 </ul>
             </div>
@@ -30,6 +31,7 @@ const Navbar = (props) => {
             <li><Link to="/dashboard">Home</Link></li>
             <li><Link to="/profiles">Profiles</Link></li>
             <li><Link to="/posts">Posts</Link></li>
+            <li><Link to="/events">Events</Link></li>
             <li><Link to="#!" onClick={ e => props.logout()}>Logout</Link></li>
         </ul>
         </Fragment>

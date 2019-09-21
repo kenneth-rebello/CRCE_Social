@@ -21,6 +21,9 @@ import AdminDash from './components/admin/AdminDash';
 import EligibilityForm from './components/po/EligibilityForm';
 import Eligible from './components/po/Eligible';
 import PrintPDF from './components/po/PrintPDF';
+import AddEvent from './components/faculty/AddEvent';
+import Events from './components/faculty/Events';
+import MyEvents from './components/faculty/MyEvents';
 //Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -64,6 +67,9 @@ const App = () => {
               <PrivateRoute exact path="/po_form" component={EligibilityForm}/>
               <PrivateRoute exact path="/eligible_students" component={Eligible}/>
               <PrivateRoute exact path="/print_list" component={PrintPDF}/>
+              <PrivateRoute exact path="/add_event" component={AddEvent}/>
+              <PrivateRoute exact path="/events" component={Events}/>
+              <PrivateRoute exact path="/my_events" component={MyEvents}/>
             </Switch>
           </section>
         </Fragment>

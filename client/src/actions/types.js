@@ -31,3 +31,6 @@ export const GET_PENDING_USERS = "GET_PENDING_USERS";
 export const PENDING_ERROR = "PENDING_ERROR";
 export const REMOVE_PENDING = "REMOVE_PENDING";
 export const GET_ELIGIBLE_USERS = "GET_ELIGIBLE_USERS";
+export const ADD_EVENT = "ADD_EVENT";
+export const GET_EVENTS = "GET_EVENTS";
+export const EVENT_ERROR = "EVENT_ERROR";

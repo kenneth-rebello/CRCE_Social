@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const PostSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'user'
     },
     approved: {
         type: Boolean,
@@ -27,7 +27,7 @@ const PostSchema = new Schema({
         {
             user:{
                 type: Schema.Types.ObjectId,
-                ref: 'users'
+                ref: 'user'
             }
         }
     ],
@@ -35,7 +35,7 @@ const PostSchema = new Schema({
         {
             user:{
                 type: Schema.Types.ObjectId,
-                ref: 'users'
+                ref: 'user'
             },
             text:{
                 type: String,

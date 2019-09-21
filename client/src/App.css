@@ -439,6 +439,46 @@
   margin: 5%;
 }
 
+.events{
+  display: grid;
+  background-color: #f8f8f8;
+  margin: 5px;
+  margin-top: 15px;
+  width: 90%;
+  justify-self: center;
+  padding:10px;
+  grid-template-columns: 1fr 1fr;  
+  border: 2px solid teal;
+}
+
+.event-details{
+  display: grid;
+  grid-template-rows: 30px, auto, 10px 10px;
+  justify-content: left;
+}
+
+.events .desc{
+  font-size: 25px;
+}
+
+.events .event-date{
+  text-decoration: underline;
+  color: teal;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.events .event-by{
+  color: teal;
+  padding:10px;
+}
+
+.events-btn-bar{
+  background-color: lightgray;
+  width:100%;
+  padding:5px;
+}
+
 /* Dashboard */
 
 .dashboard{
