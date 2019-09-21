@@ -38,8 +38,8 @@ const PostForm = ({addPost}) => {
                 value={text}
                 onChange={e => setText(e.target.value)}
                 required></textarea><br/>
-                <input name="upload" type="file" className="btn btn-light" onChange ={e =>Changer(e)}/>
-                <input type="submit" className="btn btn-dark" value="Submit" />
+                <i className="fa fa-file-image-o"></i><input name="upload" type="file" className="btn btn-light" onChange ={e =>Changer(e)} accept=".jpg, .jpeg, .bmp, .png, .gif"/>
+                <input type="submit" className="btn btn-dark" value="Post" />
             </form>
         </div>
     )

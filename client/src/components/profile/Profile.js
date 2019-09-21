@@ -10,9 +10,9 @@ import Education from './Education';
 import Status from './Status';
 import { getProfileById, delAccount } from '../../actions/profile';
 import { getUserPosts } from '../../actions/post';
+import { delUser } from '../../actions/admin'; 
 
-
-const Profile = ({ getProfileById, getUserPosts, delAccount, profile, auth, match }) => {
+const Profile = ({ getProfileById, getUserPosts, delAccount, delUser, profile, auth, match, history }) => {
     
     const [displayEducation, toggleEducation] = useState(false);
     const [displayStatus, toggleStatus] = useState(false);
@@ -20,7 +20,7 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, profile, auth, matc
     useEffect(() => {
         getUserPosts(match.params.id);
         getProfileById(match.params.id);
-    },[])
+    },[getUserPosts, getProfileById])
     
     return (
         <Fragment>
@@ -29,11 +29,19 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, profile, auth, matc
                     <ProfileTop profile={profile.profile}/>
                     <div className="profile-buttons">
                         <button className="btn btn-light"><Link to="/profiles">Go Back</Link></button>
-                        {auth.isAuthenticated && !auth.loading && (auth.user._id === profile.profile.user._id || auth.user.admin)  && 
+                        {auth.isAuthenticated && !auth.loading && auth.user._id === profile.profile.user._id && 
                         (<Fragment>
-                            <button className="btn btn-dark"><Link to="/edit_profile">Edit Profile</Link></button>
-                            <button className="btn btn-red" onClick={() => delAccount()}>Delete Account</button>
+                            <button className="btn btn-dark"><Link to="/edit_profile">
+                                {` `}<i className="fa fa-pencil"></i>Edit Profile
+                            </Link></button>
+                            <button className="btn btn-red" onClick={() => delAccount()}>
+                                <i className="fa fa-warning"></i>{`  `}Delete Account
+                            </button>
                         </Fragment>)}
+                        {!auth.loading && auth.user.admin && !profile.loading && profile.profile.user &&
+                            <button className="btn btn-red" onClick={()=> delUser(profile.profile._id, history)}>
+                                Delete User
+                            </button>}
                         {auth.isAuthenticated && !auth.loading && auth.user._id !== profile.profile.user._id &&
                         (<Fragment>
                             <button className="btn btn-gold">Follow</button>
@@ -42,8 +50,8 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, profile, auth, matc
                     <ProfileAbout profile={profile.profile}/>
 
 
-                    <h2 className="heading">Educational Qualifications
-                    {auth.user._id === profile.profile.user._id && <button className="btn btn-light btn-icon" style={{display:'inline'}}><Link to="/add_education">
+                    <h2 className="heading">Educational Qualifications{`  `}<i className="fa fa-university"></i>
+                    {auth && auth.user._id === profile.profile.user._id && <button className="btn btn-light btn-icon" style={{display:'inline'}}><Link to="/add_education">
                         <i className="fa fa-plus"></i>
                     </Link></button>}
                     <button className="btn btn-light btn-icon" onClick={() => toggleEducation(!displayEducation)} style={{display:'inline'}}>
@@ -53,7 +61,7 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, profile, auth, matc
                     {displayEducation && <Education education = {profile.profile.education}/>}
 
 
-                    <h2 className="heading">Academic Status
+                    <h2 className="heading">Academic Status{`  `}<i className="fa fa-graduation-cap"></i>
                     {auth.user._id === profile.profile.user._id && <button className="btn btn-light btn-icon" style={{display:'inline'}}><Link to="/add_status">
                         <i className="fa fa-plus"></i>
                     </Link></button>}
@@ -75,6 +83,7 @@ Profile.propTypes = {
     getProfileById: PropTypes.func.isRequired,
     getUserPosts: PropTypes.func.isRequired,
     delAccount: PropTypes.func.isRequired,
+    delUser: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
 }
@@ -84,4 +93,4 @@ const mapStateToProps = state => ({
     auth: state.auth,
 });
 
-export default connect (mapStateToProps, { getUserPosts, getProfileById, delAccount })(Profile)
+export default connect (mapStateToProps, { getUserPosts, getProfileById, delAccount, delUser })(Profile)

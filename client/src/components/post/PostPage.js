@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import Spinner from '../layouts/Spinner';
 import {deletePost, addLike, removeLike} from '../../actions/post';
 import {approvePost} from '../../actions/admin';
-import PostImage from './PostImage'
+import PostImage from '../posts/PostImage'
 
 
 const PostItem = ({auth, post, addLike, removeLike, approvePost, deletePost}) => {
@@ -15,7 +15,7 @@ const PostItem = ({auth, post, addLike, removeLike, approvePost, deletePost}) =>
 
     return (
         <Fragment>
-        {auth && post? 
+        {auth && !auth.loading && !post.loading && post? 
         (<Fragment>
             <div className="post">
                 <div>
@@ -45,9 +45,6 @@ const PostItem = ({auth, post, addLike, removeLike, approvePost, deletePost}) =>
                                 </button>)
                             }
                             <span className="likes">{likes.length} Likes</span>
-                            <Link to={`/post/${_id}`}className="btn btn-gold">
-                                <i className="fa fa-comments"></i>{`  `}<span className='comment-count'>{comments.length}</span>
-                            </Link>
                         </Fragment>)}
                         {auth && auth.user && !auth.loading && (user === auth.user._id || ( auth.user && auth.user.admin)) &&
                             <button type="button" className="btn btn-red" style={{float:'right'}} onClick={e => deletePost(_id)}>

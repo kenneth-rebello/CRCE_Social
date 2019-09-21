@@ -40,7 +40,7 @@ const CreateProfile = props => {
     return (
         <Fragment>
             
-            <h1 className="large text-primary">
+            <h1 className="heading">
             Create Your Profile
             </h1>
             <p className="lead">

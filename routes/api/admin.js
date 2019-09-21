@@ -43,6 +43,18 @@ router.get('/approve/user/:id', auth, async (req, res) => {
     res.json(user);
 });
 
+router.delete('/user/:id', auth, async (req, res) => {
+
+    const profile = await Profile.findOne({_id: req.params.id})
+
+    if(profile){
+        await Profile.findOneAndRemove({_id: profile._id})
+    }
+
+    await User.findOneAndRemove({_id: profile.user});
+
+})
+
 router.post('/po/eligible', auth, async (req, res) => {
 
     const {dept, pointer, backlogs, companyName} = req.body;
@@ -54,7 +66,7 @@ router.post('/po/eligible', auth, async (req, res) => {
         users = await User.find();
     }
     
-    const eligibile = await Profile.find({ user: {$in: users}, "status.0.cgpa": {$gte: pointer}, "status.0.backlogs":{$lte: backlogs}}).populate('user',['name','branch','year','_id']);
+    const eligibile = await Profile.find({ user: {$in: users}, "status.0.cgpa": {$gte: pointer}, "status.0.backlogs":{$lte: backlogs}}).populate('user',['name','branch','year','email']);
     res.json(eligibile);
 })
 module.exports = router;

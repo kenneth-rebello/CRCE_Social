@@ -1,6 +1,8 @@
 import axios from 'axios';
-import { GET_PENDING_USERS, PENDING_ERROR, GET_ELIGIBLE_USERS } from './types';
+import { GET_PENDING_USERS, PENDING_ERROR, GET_ELIGIBLE_USERS, REMOVE_USER, REMOVE_PROFILE } from './types';
 import { getPendingPosts, getPosts} from './post';
+import {setAlert} from './alert';
+import { getAllProfiles } from './profile';
 
 export const approvePost = (postId) => async dispatch =>{
     try {
@@ -48,6 +50,24 @@ export const getPendingUsers = () => async dispatch => {
             type: PENDING_ERROR,
             payload: {msg: err.response.statusText, status: err.response.status}
         });
+    }
+}
+
+export const delUser = (id, history) => async dispatch => {
+    try {
+        
+        const res = await axios.delete(`/api/admin/user/${id}`);
+
+        dispatch({
+            type: REMOVE_PROFILE,
+            payload: id
+        })
+
+        dispatch(getAllProfiles());
+        history.push('/dashboard')
+        dispatch(setAlert('User Deleted'));
+    } catch (err) {
+        
     }
 }
 

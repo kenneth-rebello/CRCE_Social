@@ -133,6 +133,7 @@ router.get('/:id', auth, async function (req, res){
 router.delete('/:id', auth, async function (req, res){
     try {
 
+        const  current = await User.findOne({_id: req.user.id});
         const post = await Post.findById(req.params.id);
 
         if(!post){
@@ -140,12 +141,12 @@ router.delete('/:id', auth, async function (req, res){
         };
 
         //Check user
-        if(post.user.toString() !== req.user.id ){
-            return res.status(401).json({msg: 'User not authorized'});
+        if(post.user.toString() === req.user.id || current.admin){
+            await post.remove();
+            return res.send('Post removed');                
         }
 
-        await post.remove();
-        return res.send('Post removed');
+        return res.status(401).json({msg: 'User not authorized'});
 
     } catch (err) {
         console.error(err.message);
@@ -213,12 +214,13 @@ async function(req,res){
     try {
 
         const user = await User.findById(req.user.id).select('-password');
+        const profile  = await Profile.find({user:user._id})
         const post = await Post.findById(req.params.id);
 
         const newComment ={
             text: req.body.text,
             name: user.name,
-            avatar: user.avatar,
+            picture: profile.picture,
             user: req.user.id
         };
 

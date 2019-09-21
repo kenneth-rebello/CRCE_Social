@@ -69,8 +69,12 @@ const AdminDash = ({getCurrentProfile, getPendingPosts, getPendingUsers, getPost
                         </Fragment>)
                     }
                     {auth && auth.user && auth.user.admin && <div className="admin-buttons">
-                        <button className="btn btn-light" onClick={() => togglePendingPosts(!displayPendingPosts)}>Show Pending Posts</button>
-                        <button className="btn btn-light" onClick={() => togglePendingUsers(!displayPendingUsers)}>Show Pending Users</button>
+                        <button className="btn btn-light" onClick={() => togglePendingPosts(!displayPendingPosts)}>
+                            Show Pending Post{`  `}<i className="fa fa-pencil-square-o"></i>
+                        </button>
+                        <button className="btn btn-light" onClick={() => togglePendingUsers(!displayPendingUsers)}>
+                            Show Pending Users{`  `}<i className="fa fa-users"></i>
+                        </button>
                     </div>}         
                 </div>
             </div>
