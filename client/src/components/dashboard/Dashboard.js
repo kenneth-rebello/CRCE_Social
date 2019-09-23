@@ -39,12 +39,13 @@ const Dashboard = ({setAlert, getCurrentProfile, getPosts, auth, profile, post})
                 </Fragment>)}
                     
                 {!auth.loading && !profile.loading && <div className="user">
-                    <h1>Welcome</h1>
                     <h1 className="heading">{auth.user && auth.user.name }</h1>
                     {auth && !profile.loading && profile.profile !== null?
                         (<Fragment>
                             {auth.user && <Link to={`/profile/${auth.user._id}`} className="dash-link">View Profile</Link>}
-                            <img src={`./public/profile-pictures/${profile.profile.picture}`} alt=""/>
+                            <div className="dash-img">
+                                {profile.profile.picture && <img src={`./public/profile-pictures/${profile.profile.picture}`} alt=""/>}
+                            </div>
                             {!profile.loading && profile.profile.position === 'Placement Officer' && <button className="btn btn-light"><Link to="/po_form">Create Eligibility List</Link></button>}
                             {!profile.loading && profile.profile.position === 'Faculty' && <button className="btn btn-light"><Link to="/add_event">Add Event</Link></button>}
                         </Fragment>) :

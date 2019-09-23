@@ -8,6 +8,7 @@ const PostForm = ({addPost}) => {
     const [text, setText] = useState('');
     const [fileData, setFileData] = useState('');
     const [fileName, setFileName] = useState('');
+    const [displayAddImage, toggleAddImage] = useState(false)
 
     const Changer = e => {
         setFileData(e.target.files[0]);
@@ -38,7 +39,9 @@ const PostForm = ({addPost}) => {
                 value={text}
                 onChange={e => setText(e.target.value)}
                 required></textarea><br/>
-                <i className="fa fa-file-image-o"></i><input name="upload" type="file" className="btn btn-light" onChange ={e =>Changer(e)} accept=".jpg, .jpeg, .bmp, .png, .gif"/>
+                {!displayAddImage && <button className="btn btn-light" onClick={() => toggleAddImage(!displayAddImage)}>Add Image</button>}
+                {displayAddImage && <button className="btn btn-light" onClick={() => toggleAddImage(!displayAddImage)}><i className="fa fa-window-close"></i></button>}
+                {displayAddImage && <i className="fa fa-file-image-o"></i> && <input name="upload" type="file" className="btn btn-light" onChange ={e =>Changer(e)} accept=".jpg, .jpeg, .bmp, .png, .gif"/>}
                 <input type="submit" className="btn btn-dark" value="Post" />
             </form>
         </div>

@@ -16,11 +16,13 @@ const ProfileItem = ({auth, profile, isAuth, approveUser, rejectUser}) => {
                     {picture && <img className="item-img" src={require(`../../../public/profile-pictures/${picture}`)} alt=""/>}
                 </div>              
                 <div className="profile-details">
-                    <h2>{name}</h2>
-                    <p>{position}</p>
-                    <p>{year} - {branch}</p>
-                    <p className="my-1">{location && <span>{location}</span>}</p>
-                    {isAuth && auth.user && auth.user.approved &&<Link to={`/profile/${_id}`} className="btn btn-brick">View Profile</Link>}
+                    <h1>{name}</h1>
+                    <div className="line">
+                        <p>{position}</p>
+                        <p>{year} - {branch}</p>
+                        <p className="my-1">{location && <span>{location}</span>}</p>
+                    </div>
+                    {isAuth && auth.user && auth.user.approved &&<Link to={`/profile/${_id}`} >View Profile</Link>}
                     {auth && auth.user && auth.user.admin && !approved &&
                         <Fragment>
                             <button className="btn btn-green" onClick={() => approveUser(_id)}>

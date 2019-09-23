@@ -1,7 +1,8 @@
-import {ADD_EVENT, EVENT_ERROR, GET_EVENTS} from '../actions/types';
+import {ADD_EVENT, EVENT_ERROR, GET_EVENTS, GET_EVENT, UPDATE_INTERESTS} from '../actions/types';
 
 const initialState = {
     events: [],
+    event: null,
     loading: true,
     error: {}
 }
@@ -23,11 +24,23 @@ export default function(state = initialState, action){
                 events: payload,
                 loading: false
             }
+        case GET_EVENT:
+            return{
+                ...state,
+                event: payload,
+                loading: false
+            }
         case EVENT_ERROR:
             return{
                 ...state,
                 error: payload,
                 loading: false
+            }
+        case UPDATE_INTERESTS:
+            return{
+                ...state,
+                events: state.events.map(event => event._id === payload.id ? {...event, interested:payload.interested} : event),
+                loading:false
             }
         default:
             return state;

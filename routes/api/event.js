@@ -27,9 +27,7 @@ router.get('/me', auth, async(req,res) => {
     res.json(events);
 })
 
-//@route    POST api/event
-//@desc     Create a Event
-//@access   Private
+
 router.post('/', [auth, [
     check('desc', 'Description is required').not().isEmpty()
 ]],
@@ -98,5 +96,62 @@ async function(req,res){
     }
 });
 
+
+router.get('/:id', auth, async function (req, res){
+    try {
+
+        const event = await Event.findById(req.params.id).populate('interested.user',['name','branch','year']);
+
+        if(!event){
+            return res.status(404).json({msg: 'Event not found'});
+        }
+
+        return res.json(event);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error'); 
+    }
+});
+
+
+router.put('/interested/:id', auth, async function(req, res){
+    try {
+        const event = await Event.findById(req.params.id);
+
+        //Check if already recorded interest
+        if(event.interested.filter(like => like.user.toString() === req.user.id).length > 0){
+            return res.status(400).json({msg: 'Already recorded'});
+        }
+
+        event.interested.unshift({user: req.user.id});
+        await event.save();
+
+        res.json(event.interested);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error'); 
+    }
+});
+
+
+router.put('/notinterested/:id', auth, async function(req, res){
+    try {
+        const event = await Event.findById(req.params.id);
+        
+        if(event.interested.filter(like => like.user.toString() === req.user.id).length == 0){
+            return res.status(400).json({msg: 'Not liked'});
+        }
+
+        const toRemove = event.interested.map(like => like.user.toString()).indexOf(req.user.id);
+        event.interested.splice(toRemove, 1);
+        await event.save();
+
+        res.json(event.interested);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error'); 
+    }
+});
 
 module.exports = router;

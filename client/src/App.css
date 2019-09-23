@@ -166,7 +166,7 @@
   grid-template-rows: 80px auto
 }
 .profiles{
-  overflow: scroll;
+  display:grid;
 }
 
 .profile{
@@ -176,38 +176,46 @@
   color: whitesmoke;
   border-radius: 10px;
   padding:5px;
-  margin:10px;
+  margin:5px;
+  width:90%;
+  justify-self: center;
+  max-height: 300px;
 }
 
-.profile .profile-details h2{
-  font-size: 30px;
+.profile img{
+  height: 200px;
+  width: 200px;
+  border: solid whitesmoke;
+}
+.profile .profile-details{
+  display: grid;
+  grid-template-rows: 10px, 10px, 10px;
+}
+
+.profile .profile-details .line{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-left: 5%;
+}
+
+.profile .profile-details h1{
+  font-size: 20px;
   font-weight: bold ;
   padding-left:5%;
   font-family: 'Merriweather', sans-serif
 }
 
 .profile .profile-details p{
-  font-size: 20px;
+  font-size: 15px;
   padding-left: 5%;
 }
 
 .profile .profile-details a{
-  font-size: 20px;
+  font-size: 15px;
   padding-left: 5%;
   color: whitesmoke;
 }
 
-.profile .profile-details a:hover{
-  color:yellow;
-}
-
-.profile .profile-details a:visited{
-  color: whitesmoke;
-}
-
-.profile .profile-details a:visited:hover{
-  color: yellow;
-}
 
 .profile-top{
   background-color: teal;
@@ -316,7 +324,9 @@
 .post{
   margin:15px 25px;
   display: grid;
+  width: 90%;
   grid-template-columns: 1fr 6fr;
+  justify-self: center;
   border-radius: 10px;
   border: solid 3px teal;
 }
@@ -329,7 +339,8 @@
 
 .post .item-img{
   height:140px;
-  width:140px
+  width:140px;
+  border-radius: 40px;
 }
 .post-user .heading{
   font-size: 15px;
@@ -352,14 +363,14 @@
 
 .post .post-text{
   width: 100%;
-  font-size:30px;
+  font-size:20px;
   justify-self: left;
   font-family: 'Roboto Slab', serif;
 }
 
 .post .post-date{
   color: grey;
-  font-size:15px;
+  font-size:12px;
   justify-self: right;
 }
 
@@ -446,19 +457,28 @@
   margin-top: 15px;
   width: 90%;
   justify-self: center;
-  padding:10px;
+  padding:5px;
   grid-template-columns: 1fr 1fr;  
   border: 2px solid teal;
+  border-radius: 15px;
 }
 
+.events .heading{
+  justify-self: left;
+}
 .event-details{
   display: grid;
-  grid-template-rows: 30px, auto, 10px 10px;
+  grid-template-rows: 20px, auto, 10px 10px;
   justify-content: left;
 }
 
 .events .desc{
   font-size: 25px;
+}
+
+.events .footer{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .events .event-date{
@@ -473,12 +493,30 @@
   padding:10px;
 }
 
+
 .events-btn-bar{
   background-color: lightgray;
   width:100%;
   padding:5px;
 }
 
+.single-event{
+  display: grid;
+}
+
+.single-event .events{
+  display: grid;
+  background-color: #f8f8f8;
+  margin: 5px;
+  margin-top: 15px;
+  width: 90%;
+  justify-self: center;
+  padding:5px;
+  grid-template-columns: 1fr 1fr;  
+  border: 2px solid teal;
+  border-radius: 15px;
+  max-height: 300px;
+}
 /* Dashboard */
 
 .dashboard{
@@ -502,11 +540,10 @@
 }
 
 .dashboard .user{
-  background-color: mintcream;
   margin: 15px;
   margin-top: 60px;
   display: grid;
-  grid-template-rows: 40px 100px auto;
+  grid-template-rows: 60px 30px auto 60px 60px;
   max-height: 356px;
   position: sticky;
   height:100vh;
@@ -518,11 +555,10 @@
 }
 
 .admindash .user-admin{
-  background-color: mintcream;
   margin: 15px;
   margin-top: 60px;
   display: grid;
-  grid-template-rows: 30px 70px 30px auto 60px 60px;
+  grid-template-rows: 60px 30px auto 60px 60px;
   max-height: 500px;
   position: sticky;
   height:100vh;
@@ -539,7 +575,19 @@
 .admindash .user-admin img{
   height: 256px;
   width: 256px;
+  border-radius: 150px;
+  border: solid 3px goldenrod;
+  border-style: inset;
 }
+
+.dashboard .user img{
+  height: 256px;
+  width: 256px;
+  border-radius: 150px;
+  border: solid 3px goldenrod;
+  border-style: inset;
+}
+
 
 .admindash .user-admin .admin-buttons{
   display: grid;

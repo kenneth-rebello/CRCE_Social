@@ -42,10 +42,11 @@ const AddEvent = ({addEvent, history}) => {
                 type="text" 
                 cols="90"
                 rows="10"
-                placeholder="Create a post"
+                placeholder="Event description"
                 value={desc}
                 onChange={e => Changer(e)}
                 required></textarea><br/>
+                <span>Enter event date</span>
                 <input type="date" name="date" value={date} onChange={e => Changer(e)}/>
                 <select name="target" onChange={e => Changer(e)} value={target} className="browser-default own-default">
                     <option value="" disabled>Select a target audience</option>
