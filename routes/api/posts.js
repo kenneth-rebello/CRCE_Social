@@ -80,7 +80,7 @@ async function(req,res){
 router.get('/', auth, async function (req, res){
     try {
 
-        const posts = await Post.find({approved:true}).sort({ date: -1});
+        const posts = await Post.find({approved:true}).sort({ date: -1}).populate('likes.user',['name'])    ;
         return res.json(posts);
 
     } catch (err) {
@@ -95,7 +95,7 @@ router.get('/', auth, async function (req, res){
 router.get('/user/:id', async function(req,res){
     try {
 
-        const posts = await Post.find({user:req.params.id}).sort({date: -1});
+        const posts = await Post.find({user:req.params.id}).sort({date: -1}).populate('likes.user',['name']);
         return res.json(posts)
         
 
@@ -111,7 +111,7 @@ router.get('/user/:id', async function(req,res){
 router.get('/:id', auth, async function (req, res){
     try {
 
-        const post = await Post.findById(req.params.id);
+        const post = await Post.findById(req.params.id).populate('likes.user',['name']);
 
         if(!post){
             return res.status(404).json({msg: 'Post not found'});
@@ -157,15 +157,17 @@ router.delete('/:id', auth, async function (req, res){
 //@access   Private
 router.put('/like/:id', auth, async function(req, res){
     try {
-        const post = await Post.findById(req.params.id);
+        let post = await Post.findById(req.params.id).populate('likes.user',['name']);
 
         //Check if already liked
-        if(post.likes.filter(like => like.user.toString() === req.user.id).length > 0){
+        if(post.likes.filter(like => like.user._id.toString() === req.user.id).length > 0){
             return res.status(400).json({msg: 'Already liked'});
         }
 
         post.likes.unshift({user: req.user.id});
         await post.save();
+
+        post = await Post.findById(req.params.id).populate('likes.user',['name']);
 
         res.json(post.likes);
     } catch (err) {
@@ -179,16 +181,17 @@ router.put('/like/:id', auth, async function(req, res){
 //@access   Private
 router.put('/unlike/:id', auth, async function(req, res){
     try {
-        const post = await Post.findById(req.params.id);
+        let post = await Post.findById(req.params.id).populate('likes.user',['name']);
         //Check if already liked
-        if(post.likes.filter(like => like.user.toString() === req.user.id).length == 0){
+        if(post.likes.filter(like => like.user._id.toString() === req.user.id).length == 0){
             return res.status(400).json({msg: 'Not liked'});
         }
 
-        const toRemove = post.likes.map(like => like.user.toString()).indexOf(req.user.id);
+        const toRemove = post.likes.map(like => like.user._id.toString()).indexOf(req.user.id);
         post.likes.splice(toRemove, 1);
         await post.save();
 
+        post = await Post.findById(req.params.id).populate('likes.user',['name']);
         res.json(post.likes);
     } catch (err) {
         console.error(err.message);

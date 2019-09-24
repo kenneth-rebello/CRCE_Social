@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Moment from 'react-moment'
 import {Link} from 'react-router-dom'
-import {getEvent} from '../../actions/event'
+import {getEvent, sendReminder} from '../../actions/event'
 import Spinner from '../layouts/Spinner'
 
-const Event = ({getEvent, event:{event, loading}, match}) => {
+const Event = ({getEvent, sendReminder, event:{event, loading}, match}) => {
 
     useEffect(() => {
         getEvent(match.params.id)
@@ -33,23 +33,25 @@ const Event = ({getEvent, event:{event, loading}, match}) => {
                 </div>
                 <h1 className="heading">Users interested in this event</h1>
                 <div className="interested">
-                        <table>
-                            <tr>
-                                <th>Name</th>
-                                <th>Branch</th>
-                                <th>Year</th>
-                            </tr>
-                            {event.interested.map(each => {
-                                return (<Fragment>
-                                    <tr>
-                                        <td>{each.user.name}</td>
-                                        <td>{each.user.branch}</td>
-                                        <td>{each.user.year}</td>
-                                    </tr>
-                                </Fragment>)
-                            })}
-                        </table>
-                    </div>
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Branch</th>
+                            <th>Year</th>
+                        </tr>
+                        {event.interested.map(each => {
+                            return (<Fragment>
+                                <tr>
+                                    <td>{each.user.name}</td>
+                                    <td>{each.user.branch}</td>
+                                    <td>{each.user.year}</td>
+                                </tr>
+                            </Fragment>)
+                        })}
+                    </table>
+                </div>
+                <button className='btn btn-gold' onClick={() => sendReminder(event._id)}>Send Reminder</button>
+                <span>Send a reminder email to all students about this event</span>
             </Fragment>)}
         </div>                    
     )
@@ -57,10 +59,11 @@ const Event = ({getEvent, event:{event, loading}, match}) => {
 
 Event.propTypes = {
     event: PropTypes.object.isRequired,
+    sendReminder: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
     event: state.event
 })
 
-export default connect(mapStateToProps, {getEvent})(Event)
+export default connect(mapStateToProps, {getEvent, sendReminder})(Event)

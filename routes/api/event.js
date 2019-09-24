@@ -6,6 +6,7 @@ const auth = require('../../middleware/auth');
 const Event = require('../../models/Event');
 const User = require('../../models/User');
 const Profile = require('../../models/Profile');
+const nodemailer = require('nodemailer');
 
 router.use(fileUpload());
 
@@ -23,6 +24,16 @@ router.get('/me', auth, async(req,res) => {
     const user = await User.findOne({_id: req.user.id});
 
     const events = await Event.find({"target.0": user.branch, "target.0": user.year}).populate('user',['name','branch','year','email']).sort({date: 1});
+
+    res.json(events);
+})
+
+
+router.get('/faculty', auth, async(req,res) => {
+
+    const user = await User.findOne({_id: req.user.id});
+
+    const events = await Event.find({name: user.name}).populate('user',['name','branch','year','email']).sort({date: 1});
 
     res.json(events);
 })
@@ -97,6 +108,31 @@ async function(req,res){
 });
 
 
+router.delete('/:id', auth, async function (req, res){
+    try {
+
+        const  current = await User.findOne({_id: req.user.id});
+        const event = await Event.findById(req.params.id);
+
+        if(!event){
+            return res.status(404).json({msg: 'Event not found'});
+        };
+
+        //Check user
+        if(event.user.toString() === req.user.id || current.admin){
+            await event.remove();
+            return res.send('Event removed');                
+        }
+
+        return res.status(401).json({msg: 'User not authorized'});
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error'); 
+    }
+});
+
+
 router.get('/:id', auth, async function (req, res){
     try {
 
@@ -153,5 +189,43 @@ router.put('/notinterested/:id', auth, async function(req, res){
         res.status(500).send('Server Error'); 
     }
 });
+
+
+router.get('/reminder/:id', auth, async function(req, res){
+    try {
+        const event = await Event.findById(req.params.id);
+
+        const users1 = await User.find({branch: event.target[0]});
+        const users2 = await User.find({year: event.target[0]});
+        const users = [...users1, ...users2];
+
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'krebello07',
+                pass: 'keonna07'
+            }
+        });
+
+        const mailOptions = {
+            from: 'krebello07@gmail.com',
+            to: 'kentherebel07@gmail.com',
+            subject: event.heading,
+            text: 'This is to remind you of an upcoming event '+event.desc
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if(error){
+                console.log('Did not send: '+error)
+            }else{
+                console.log('Email sent: '+info.response)
+            }
+            transporter.close();
+        })
+
+    } catch (err) {
+        
+    }
+})
 
 module.exports = router;

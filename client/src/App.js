@@ -24,6 +24,7 @@ import PrintPDF from './components/po/PrintPDF';
 import AddEvent from './components/faculty/AddEvent';
 import Events from './components/faculty/Events';
 import MyEvents from './components/faculty/MyEvents';
+import ByEvents from './components/faculty/ByEvents';
 import Event from './components/faculty/Event';
 //Redux
 import { Provider } from 'react-redux';
@@ -71,6 +72,7 @@ const App = () => {
               <PrivateRoute exact path="/add_event" component={AddEvent}/>
               <PrivateRoute exact path="/events" component={Events}/>
               <PrivateRoute exact path="/my_events" component={MyEvents}/>
+              <PrivateRoute exact path="/by_events" component={ByEvents}/>
               <PrivateRoute exact path="/event/:id" component={Event}/>
             </Switch>
           </section>

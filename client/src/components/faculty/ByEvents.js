@@ -2,20 +2,19 @@ import React ,{Fragment, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {getEvents, delEvent, interested, notInterested} from '../../actions/event'
+import {getByEvents, interested, notInterested} from '../../actions/event'
 import Moment from 'react-moment'
 
-const Events = ({auth, event, getEvents, delEvent, interested, notInterested}) => {
+const Events = ({auth, event, getByEvents, interested, notInterested}) => {
 
     useEffect(() => {
-        getEvents();
-    },[getEvents]);
+        getByEvents();
+    },[getByEvents]);
 
     return (    
         <Fragment>
             <div className="events-btn-bar">
-                <button className="btn btn-dark"><Link to="/my_events">Events For Me</Link></button>
-                <button className="btn btn-dark"><Link to="by_events">Events By Me</Link></button>
+                <button className="btn btn-dark"><Link to="/events">All Events</Link></button>
             </div>
             {event.events.map(one =>(
                 <div key={one.id} className="events">
@@ -43,14 +42,9 @@ const Events = ({auth, event, getEvents, delEvent, interested, notInterested}) =
                                 </button>)
                             }
                             <span className="likes">{one.interested.length} people are interested</span>
-                            {auth && auth.user.name === one.name && <Fragment>
-                                <button className="btn btn-light"><Link to={`/event/${one._id}`} className="links">
-                                    Check event details
-                                </Link></button>
-                                <button type="button" className="btn btn-red" onClick={() => delEvent(one._id)}>
-                                    <i className="fa fa-trash"></i>
-                                </button>
-                            </Fragment>}
+                            {auth && auth.user.name === one.name && <button className="btn btn-light"><Link to={`/event/${one._id}`} className="links">
+                                Check event details
+                            </Link></button>}
                             </Fragment>)}
                         </div>                    
                     </div>
@@ -63,10 +57,9 @@ const Events = ({auth, event, getEvents, delEvent, interested, notInterested}) =
 Events.propTypes = {
     auth: PropTypes.object.isRequired,
     event: PropTypes.object.isRequired,
-    getEvents: PropTypes.func.isRequired,
+    getByEvents: PropTypes.func.isRequired,
     interested: PropTypes.func.isRequired,
     notInterested: PropTypes.func.isRequired,
-    delEvent: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -74,4 +67,4 @@ const mapStateToProps = state => ({
     event: state.event
 })
 
-export default connect(mapStateToProps,{getEvents, interested, notInterested, delEvent})(Events)
+export default connect(mapStateToProps,{getByEvents, interested, notInterested})(Events)

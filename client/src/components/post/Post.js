@@ -18,7 +18,7 @@ const Post = ({getPost, getPosts, post:{post, loading}, match}) => {
         <div className="single-post">
             {loading || post===null ? <Spinner/> :
                 <Fragment>
-                    <PostPage post={post}/>
+                    {!loading && <PostPage post={post}/>}
                     <CommentForm postId={post._id}/>
                     {!post.loading && post.comments && <div className="comments">
                         {post.comments.map(comment => (

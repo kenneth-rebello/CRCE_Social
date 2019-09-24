@@ -29,6 +29,7 @@
       $('document').ready(function(){
         $('.sidenav').sidenav();
         $('select').formSelect();
+        $('.modal').modal();
 
         var btn = $('#goToTop');
 
@@ -44,6 +45,8 @@
           e.preventDefault();
           $('html, body').animate({scrollTop:0}, '300');
         })
+
+
       });
     </script>
   </body>

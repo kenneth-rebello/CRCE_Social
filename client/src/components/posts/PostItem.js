@@ -35,7 +35,7 @@ const PostItem = ({auth, post, addLike, removeLike, approvePost, deletePost}) =>
                     </p>
                     <div>
                         { approved && auth && auth.user && (<Fragment>
-                            { likes.filter(like => like.user === auth.user._id).length>0 ? (
+                            { likes.filter(like => like.user._id === auth.user._id).length>0 ? (
                                 <button type="button" className="btn btn-red" onClick={() => removeLike(_id)}>
                                 <span><i class="fa fa-thumbs-down"></i></span>{` `}
                                 </button>

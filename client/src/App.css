@@ -450,6 +450,10 @@
   margin: 5%;
 }
 
+.event-form{
+  padding:10px;
+}
+
 .events{
   display: grid;
   background-color: #f8f8f8;

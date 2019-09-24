@@ -1,4 +1,4 @@
-import {ADD_EVENT, EVENT_ERROR, GET_EVENTS, GET_EVENT, UPDATE_INTERESTS} from '../actions/types';
+import {ADD_EVENT, EVENT_ERROR, DELETE_EVENT, GET_EVENTS, GET_EVENT, UPDATE_INTERESTS} from '../actions/types';
 
 const initialState = {
     events: [],
@@ -29,6 +29,12 @@ export default function(state = initialState, action){
                 ...state,
                 event: payload,
                 loading: false
+            }
+        case DELETE_EVENT:
+            return{
+                ...state,
+                events: state.events.filter(event => event._id !== payload),
+                loading:false
             }
         case EVENT_ERROR:
             return{
