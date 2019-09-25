@@ -1,14 +1,18 @@
-import React, {useState, Fragment} from 'react'
+import React, {useState, useEffect, Fragment} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {addSkill} from '../../actions/profile'
+import {addSkill, removeSkill, getProfileById} from '../../actions/profile'
 
-const AddSkill = ({addSkill}) => {
+const AddSkill = ({match, getProfileById, profile, addSkill, removeSkill}) => {
 
     const [formData, setFormData] = useState({
         skill:''
     });
+
+    useEffect(() => {
+        getProfileById(match.params.id);
+    },[getProfileById])
 
     const {skill} = formData;
 
@@ -44,12 +48,31 @@ const AddSkill = ({addSkill}) => {
                     <button className="btn btn-light"><Link to="/dashboard">Go Back</Link></button>
                 </form>
             </div>
+            {!profile.loading && <div className="skill-list">
+                <table>
+                    {profile.profile.skills.map((one) => (
+                        <tr>
+                            <td>{one}</td>
+                            <td>
+                                <button onClick={() => removeSkill(one)} className="btn btn-red"><i className="fa fa-window-close"></i></button>
+                            </td>
+                        </tr>    
+                    ))}
+                </table>
+            </div>}
         </Fragment>
     )
 }
 
 AddSkill.propTypes = {
     addSkill: PropTypes.func.isRequired,
+    removeSkill: PropTypes.func.isRequired,
+    getProfileById: PropTypes.func.isRequired,
+    profile: PropTypes.object.isRequired,
 }
 
-export default connect(null, {addSkill})(withRouter(AddSkill))
+const mapStateToProps = state => ({
+    profile : state.profile,
+})
+
+export default connect(mapStateToProps, {addSkill, removeSkill, getProfileById})(withRouter(AddSkill))

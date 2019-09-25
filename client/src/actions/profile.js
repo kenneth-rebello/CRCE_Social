@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {setAlert} from './alert';
 import { GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE,ACCOUNT_DELETED, CLEAR_PROFILE, GET_PROFILES} from './types';
+import { body } from 'express-validator';
 
 
 export const getCurrentProfile = () => async dispatch => {
@@ -245,6 +246,29 @@ export const addSkill = (formData) => async dispatch => {
             payload: { msg: err.response.statusText, status: err.response.status}
         });
     }
+}
+
+export const removeSkill = (skill) => async dispatch => {
+    
+        let config = {
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }
+        console.log(skill)
+        const body = {};
+        body.skill = skill;
+
+        const res = await axios.put('/api/profile/skill/remove', body, config);
+
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        });
+
+        dispatch(setAlert('Skill Removed','dark'));
+
+    
 }
 
 export const delAccount = () => async dispatch => {

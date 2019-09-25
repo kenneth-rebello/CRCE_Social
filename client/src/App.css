@@ -222,7 +222,7 @@
   display: grid;
   align-items: center;
   justify-items: center;
-  grid-template-rows: 280px 75px 50px 50px 
+  grid-template-rows: 280px 75px 50px 100px 
 }
 
 .profile-top .heading{
@@ -236,9 +236,40 @@
   font-size: 20px;
 }
 
+.profile-contact{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.profile-contact .btn{
+  color: whitesmoke;
+  height: 60px;
+  border: none;
+  box-shadow: none;
+  background: none;
+}
+
+.profile-contact i{
+  font-size: 40px;
+}
+
+.contact-details a{
+  color: whitesmoke;
+  font-size: 20px;
+  text-decoration: underline;
+  text-decoration-color: goldenrod;
+  padding:5px;
+  display:grid;
+  justify-self: center;
+}
+
+.contact-details a:hover{
+  color: lightcyan;
+  font-size: 25px;
+}
+
 .profile-buttons{
   display: inline;
-  
 }
 
 .education{
@@ -547,7 +578,7 @@
   margin: 15px;
   margin-top: 60px;
   display: grid;
-  grid-template-rows: 60px 30px auto 60px 60px;
+  grid-template-rows: 80px 30px auto 60px 60px;
   max-height: 356px;
   position: sticky;
   height:100vh;
@@ -562,7 +593,7 @@
   margin: 15px;
   margin-top: 60px;
   display: grid;
-  grid-template-rows: 60px 30px auto 60px 60px;
+  grid-template-rows: 80px 30px auto 60px 60px;
   max-height: 500px;
   position: sticky;
   height:100vh;
@@ -744,13 +775,15 @@
   background-color: green;
   color:white;
 }
-.btn-green:hover{
-  background-color: lightgreen;
-}
 .btn-green:focus{
   background-color: green;
   color:white;
 }
+.btn-green:hover{
+  background-color: lightgreen;
+  color: green;
+}
+
 
 .btn-red{
   background-color: red;

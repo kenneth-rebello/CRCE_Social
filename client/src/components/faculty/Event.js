@@ -1,18 +1,31 @@
-import React ,{useEffect, Fragment} from 'react'
+import React ,{useEffect, Fragment, useState} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Moment from 'react-moment'
 import {Link} from 'react-router-dom'
-import {getEvent, sendReminder} from '../../actions/event'
+import {getEvent, sendReminder, sendCustomMail} from '../../actions/event'
 import Spinner from '../layouts/Spinner'
 
-const Event = ({getEvent, sendReminder, event:{event, loading}, match}) => {
+const Event = ({getEvent, sendReminder, sendCustomMail, event:{event, loading}, match}) => {
 
+    useEffect(()=>{
+        window.$('.modal').modal();
+    },[])
     useEffect(() => {
-        getEvent(match.params.id)
+        getEvent(match.params.id);
     }, [getEvent])
 
+    const Mailer = e =>{
+        setMsg(e.target.value);
+        setTimeout(()=>{
+            setMsg('')
+        },500000);
+    }
+
+    const [msg, setMsg] = useState('')
+
     return (
+        <Fragment>
         <div className="single-event">
             {loading || event===null ? <Spinner/> : (<Fragment>
                 <div className="events">
@@ -52,18 +65,32 @@ const Event = ({getEvent, sendReminder, event:{event, loading}, match}) => {
                 </div>
                 <button className='btn btn-gold' onClick={() => sendReminder(event._id)}>Send Reminder</button>
                 <span>Send a reminder email to all students about this event</span>
+                <button data-target="modal2" class="btn modal-trigger">Send Custom Message</button>
             </Fragment>)}
-        </div>                    
+        </div>
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <h4 className="heading">Send a custom message to all recipents</h4>
+                <textarea name='msg' value={msg} onChange={e => Mailer(e)} required></textarea>
+            </div>
+            <div class="modal-footer">
+                <button onClick={() =>sendCustomMail(event._id, msg)} className="btn btn-dark">
+                    <Link to="#!" class="modal-close waves-effect waves-green btn-flat">Send</Link>
+                </button>
+            </div>
+        </div>     
+        </Fragment>               
     )
 }
 
 Event.propTypes = {
     event: PropTypes.object.isRequired,
     sendReminder: PropTypes.func.isRequired,
+    sendCustomMail: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
     event: state.event
 })
 
-export default connect(mapStateToProps, {getEvent, sendReminder})(Event)
+export default connect(mapStateToProps, {getEvent, sendReminder, sendCustomMail})(Event)

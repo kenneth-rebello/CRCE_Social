@@ -51,7 +51,7 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, delUser, profile, a
 
 
                     <h2 className="heading">Educational Qualifications{`  `}<i className="fa fa-university"></i>
-                    {auth && auth.user._id === profile.profile.user._id && <button className="btn btn-light btn-icon" style={{display:'inline'}}><Link to="/add_education">
+                    {!auth.loading && auth.user._id === profile.profile.user._id && <button className="btn btn-light btn-icon" style={{display:'inline'}}><Link to="/add_education">
                         <i className="fa fa-plus"></i>
                     </Link></button>}
                     <button className="btn btn-light btn-icon" onClick={() => toggleEducation(!displayEducation)} style={{display:'inline'}}>
@@ -62,7 +62,7 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, delUser, profile, a
 
 
                     <h2 className="heading">Academic Status{`  `}<i className="fa fa-graduation-cap"></i>
-                    {auth.user._id === profile.profile.user._id && <button className="btn btn-light btn-icon" style={{display:'inline'}}><Link to="/add_status">
+                    {!auth.loading && auth.user._id === profile.profile.user._id && <button className="btn btn-light btn-icon" style={{display:'inline'}}><Link to="/add_status">
                         <i className="fa fa-plus"></i>
                     </Link></button>}
                     <button className="btn btn-light btn-icon" onClick={() => toggleStatus(!displayStatus)} style={{display:'inline'}}>

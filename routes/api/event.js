@@ -62,7 +62,7 @@ async function(req,res){
             }
             try {
                 const profile = await Profile.findOne({user:req.user.id})
-                console.log(req.body);
+                
                 const newEvent = new Event({
                     heading: req.body.heading,
                     desc: req.body.desc,
@@ -75,7 +75,7 @@ async function(req,res){
                 })      
                 const event = await newEvent.save();
         
-                console.log(event);
+                
                 return res.json(event);
         
             } catch (err) {
@@ -193,38 +193,136 @@ router.put('/notinterested/:id', auth, async function(req, res){
 
 router.get('/reminder/:id', auth, async function(req, res){
     try {
-        const event = await Event.findById(req.params.id);
+        const event = await Event.findById(req.params.id).populate('interested.user',['name','email']);
 
         const users1 = await User.find({branch: event.target[0]});
         const users2 = await User.find({year: event.target[0]});
         const users = [...users1, ...users2];
 
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'krebello07',
-                pass: 'keonna07'
-            }
+        event.interested.map(one => {
+            let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'crcesocial',
+                    pass: 'jonah1002'
+                },
+                tls: {rejectUnauthorized: false}
+            });
+    
+            let mailOptions = {
+                from: 'crcesocial@gmail.com',
+                to: one.user.email,
+                subject: event.heading,
+                text: 'Grretings '+one.user.name+'\nThis is to remind you of an upcoming event at CRCE college that you were interested in\n'+event.desc+'\nEvent co-ordinator: '+event.name
+            };
+    
+            transporter.sendMail(mailOptions, (error, info) => {
+                if(error){
+                    console.log('Did not send: '+error)
+                }else{
+                    console.log('Email sent: '+info.response)
+                }
+                transporter.close();
+            })
         });
 
-        const mailOptions = {
-            from: 'krebello07@gmail.com',
-            to: 'kentherebel07@gmail.com',
-            subject: event.heading,
-            text: 'This is to remind you of an upcoming event '+event.desc
-        };
-
-        transporter.sendMail(mailOptions, (error, info) => {
-            if(error){
-                console.log('Did not send: '+error)
-            }else{
-                console.log('Email sent: '+info.response)
-            }
-            transporter.close();
+        users.map((user) => {
+            let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'crcesocial',
+                    pass: 'jonah1002'
+                },
+                tls: {rejectUnauthorized: false}
+            });
+    
+            let mailOptions = {
+                from: 'crcesocial@gmail.com',
+                to: user.email,
+                subject: event.heading,
+                text: 'Grretings '+user.name+'\nThis is to remind you of an upcoming event at CRCE college\n'+event.desc+'\nEvent co-ordinator: '+event.name
+            };
+    
+            transporter.sendMail(mailOptions, (error, info) => {
+                if(error){
+                    console.log('Did not send: '+error)
+                }else{
+                    console.log('Email sent: '+info.response)
+                }
+                transporter.close();
+            })
         })
-
-    } catch (err) {
         
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
+
+router.post('/reminder/:id', auth, async function(req, res){
+    try {
+        const event = await Event.findById(req.params.id).populate('interested.user',['name','email']);
+
+        const users1 = await User.find({branch: event.target[0]});
+        const users2 = await User.find({year: event.target[0]});
+        const users = [...users1, ...users2];
+
+        event.interested.map(one => {
+            let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'crcesocial',
+                    pass: 'jonah1002'
+                },
+                tls: {rejectUnauthorized: false}
+            });
+    
+            let mailOptions = {
+                from: 'crcesocial@gmail.com',
+                to: one.user.email,
+                subject: event.heading,
+                text: req.body.msg
+            };
+    
+            transporter.sendMail(mailOptions, (error, info) => {
+                if(error){
+                    console.log('Did not send: '+error)
+                }else{
+                    console.log('Email sent: '+info.response)
+                }
+                transporter.close();
+            })
+        });
+
+        users.map((user) => {
+            let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'crcesocial',
+                    pass: 'jonah1002'
+                },
+                tls: {rejectUnauthorized: false}
+            });
+    
+            let mailOptions = {
+                from: 'crcesocial@gmail.com',
+                to: user.email,
+                subject: event.heading,
+                text: req.body.msg
+            };
+    
+            transporter.sendMail(mailOptions, (error, info) => {
+                if(error){
+                    console.log('Did not send: '+error)
+                }else{
+                    console.log('Email sent: '+info.response)
+                }
+                transporter.close();
+            })
+        })
+        
+    } catch (err) {
+        console.error(err.message)
     }
 })
 

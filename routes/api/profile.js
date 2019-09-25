@@ -18,7 +18,7 @@ router.use(fileUpload());
 //@access   Private
 router.get('/me', auth, async function(req,res){
     try{
-        const profile = await Profile.findOne({user: req.user.id}).populate('user', ['name','avatar','year','branch']);
+        const profile = await Profile.findOne({user: req.user.id}).populate('user', ['name','avatar','year','branch','email']);
         if(!profile){
             return res.status(400).json({msg: 'There is no existing profile'});
         }
@@ -122,7 +122,7 @@ router.get('/', async function(req, res){
 router.get('/user/:user_id', async function(req, res){
     try{
 
-        const profile = await Profile.findOne({user: req.params.user_id}).populate('user',['name','avatar','year','branch']);
+        const profile = await Profile.findOne({user: req.params.user_id}).populate('user',['name','email','avatar','year','branch']);
         
         if(!profile){
             return res.status(400).json({msg: 'There is no profile for this user'});
@@ -346,8 +346,23 @@ async function(req, res){
     try {
         const profile = await Profile.findOne({user: req.user.id}).populate('user', ['name','avatar','year','branch']);
 
-        console.log(profile.skills);
         profile.skills.unshift(skill);
+        await profile.save();
+
+        res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+});
+
+
+router.put('/skill/remove', auth, async function(req, res){
+
+    try {
+        const profile = await Profile.findOne({user: req.user.id});
+
+        profile.skills = profile.skills.filter( each => each !== req.body.skill);
         await profile.save();
 
         res.json(profile);

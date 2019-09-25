@@ -178,3 +178,25 @@ export const sendReminder = (id) => async dispatch => {
         }
     }
 }
+
+export const sendCustomMail = (id, msg) => async dispatch => {
+
+    if(window.confirm('Are you sure? An email will be sent to all students that are considered target audience.')){
+        try {
+            const config = {
+                headers:{
+                    'Content-Type' : 'application/json'
+                }
+            }
+
+            const body = {}
+            body.msg = msg;            
+            await axios.post(`/api/event/reminder/${id}`, body, config);
+
+            dispatch(setAlert('Reminders sent to all concerned students'));
+
+        } catch (error) {
+            
+        }
+    }
+}

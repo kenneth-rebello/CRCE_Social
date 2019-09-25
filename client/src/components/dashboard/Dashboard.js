@@ -51,7 +51,7 @@ const Dashboard = ({setAlert, getCurrentProfile, getPosts, auth, profile, post})
                         </Fragment>) :
                         (<Fragment className="user-switch">
                             <Link to="/create_profile" className="dash-link">Create Profile</Link>
-                            <p style={{padding:'5px'}}>You have not yet set up a profile, please add some information about yourself</p>
+                            <p style={{padding:'5px'}}>You have not yet set up a profile, please add some information about yourself to get approved by an admin</p>
                         </Fragment>)
                     }
                 </div>}
