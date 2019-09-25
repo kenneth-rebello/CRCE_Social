@@ -52,6 +52,7 @@
   height:10px;
 }
 
+
 .landing-box{
   display: grid;
   align-self: center;
@@ -247,6 +248,10 @@
   border: none;
   box-shadow: none;
   background: none;
+}
+
+.profile-contact .btn:hover{
+  color: goldenrod;
 }
 
 .profile-contact i{
@@ -838,4 +843,14 @@ input:focus::placeholder{
   z-index:100;
   background-color: lightseagreen;
   border-style: outset;
+}
+
+.chatBar{
+  position: fixed;
+  bottom: 20px;
+  right: 50px;
+  height: 20px;
+  width: 50px;
+  background-color: lightslategrey;
+  z-index:100;
 }

@@ -11,8 +11,9 @@ import Status from './Status';
 import { getProfileById, delAccount } from '../../actions/profile';
 import { getUserPosts } from '../../actions/post';
 import { delUser } from '../../actions/admin'; 
+import { followUser, unfollowUser } from '../../actions/auth';
 
-const Profile = ({ getProfileById, getUserPosts, delAccount, delUser, profile, auth, match }) => {
+const Profile = ({ getProfileById, getUserPosts, delAccount, followUser, unfollowUser, delUser, profile, auth, match }) => {
     
     const [displayEducation, toggleEducation] = useState(false);
     const [displayStatus, toggleStatus] = useState(false);
@@ -29,7 +30,7 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, delUser, profile, a
                     <ProfileTop profile={profile.profile}/>
                     <div className="profile-buttons">
                         <button className="btn btn-light"><Link to="/profiles">Go Back</Link></button>
-                        {auth.isAuthenticated && !auth.loading && auth.user._id === profile.profile.user._id && 
+                        {auth.isAuthenticated && !profile.loading && !auth.loading && auth.user && auth.user._id === profile.profile.user._id && 
                         (<Fragment>
                             <button className="btn btn-dark"><Link to="/edit_profile">
                                 {` `}<i className="fa fa-pencil"></i>Edit Profile
@@ -44,7 +45,12 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, delUser, profile, a
                             </button>}
                         {auth.isAuthenticated && !auth.loading && auth.user._id !== profile.profile.user._id &&
                         (<Fragment>
-                            <button className="btn btn-gold">Follow</button>
+                            { !auth.loading && auth.user.following.some(one => one._id === profile.profile._id) ? <button className="btn btn-light" onClick={() => unfollowUser(profile.profile._id)}>
+                                    Unfollow
+                                </button> :
+                                <button className="btn btn-gold" onClick={() => followUser(profile.profile._id)}>
+                                    Follow
+                                </button> }
                         </Fragment>)}
                     </div>
                     <ProfileAbout profile={profile.profile}/>
@@ -84,6 +90,8 @@ Profile.propTypes = {
     getUserPosts: PropTypes.func.isRequired,
     delAccount: PropTypes.func.isRequired,
     delUser: PropTypes.func.isRequired,
+    followUser: PropTypes.func.isRequired,
+    unfollowUser: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
 }
@@ -93,4 +101,4 @@ const mapStateToProps = state => ({
     auth: state.auth,
 });
 
-export default connect (mapStateToProps, { getUserPosts, getProfileById, delAccount, delUser })(Profile)
+export default connect (mapStateToProps, { getUserPosts, getProfileById, delAccount, delUser, followUser, unfollowUser })(Profile)

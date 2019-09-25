@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Navbar from './components/layouts/Navbar';
+import Chat from './components/layouts/Chat';
 import Landing from './components/layouts/Landing';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
@@ -49,6 +50,7 @@ const App = () => {
       <Router>
         <Fragment>
           <Navbar/>
+          <Chat/>
           <section className="plain-page">
           <Route exact path="/" component={Landing}/>
             <Switch>

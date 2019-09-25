@@ -3,19 +3,19 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
 import {getCurrentProfile} from '../../actions/profile';
-import {getPosts} from '../../actions/post';
+import {getConnectionPosts} from '../../actions/post';
 import {setAlert} from '../../actions/alert'
 import Spinner from '../layouts/Spinner';
 import PostItem from '../posts/PostItem';
 import PostForm from '../posts/PostForm';
 
 
-const Dashboard = ({setAlert, getCurrentProfile, getPosts, auth, profile, post}) => {
+const Dashboard = ({setAlert, getCurrentProfile, getConnectionPosts, auth, profile, post}) => {
 
     useEffect(() => {
         getCurrentProfile();
-        getPosts();
-    }, [getCurrentProfile, getPosts]);
+        getConnectionPosts();
+    }, [getCurrentProfile, getConnectionPosts]);
 
     if(auth && auth.user && !auth.loading && auth.user.admin){
         return <Redirect to="/admindash"/>
@@ -62,7 +62,7 @@ const Dashboard = ({setAlert, getCurrentProfile, getPosts, auth, profile, post})
 
 Dashboard.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
-    getPosts: PropTypes.func.isRequired,
+    getConnectionPosts: PropTypes.func.isRequired,
     setAlert: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     profile: PropTypes.object.isRequired,
@@ -75,4 +75,4 @@ const mapStateToProps = state => ({
     post: state.post
 });
        
-export default connect(mapStateToProps, {setAlert, getPosts, getCurrentProfile})(Dashboard);
+export default connect(mapStateToProps, {setAlert, getConnectionPosts, getCurrentProfile})(Dashboard);

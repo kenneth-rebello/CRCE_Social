@@ -12,7 +12,7 @@ const {check, validationResult} = require('express-validator/check');
 //@access   Public
 router.get('/', auth, async function(req,res){
     try{
-        const user = await User.findById(req.user.id).select('-password');
+        const user = await User.findById(req.user.id).select('-password').populate('following.profile',['picture']);
         res.json(user);
     }catch(err){
         res.status(500).send('Server Error');

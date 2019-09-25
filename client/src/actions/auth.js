@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert'
-import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT,CLEAR_PROFILE } from './types';
+import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT,CLEAR_PROFILE, FOLLOW, UNFOLLOW } from './types';
 import setAuthToken from '../utils/setAuthToken';
 
 //Load User
@@ -94,4 +94,44 @@ export const logout = () => async dispatch => {
     dispatch({
         type: LOGOUT
     });
+}
+
+export const followUser = (profileId) => async dispatch =>{
+    
+    let config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    let body={}
+    body.id = profileId
+
+    const res = await axios.put('/api/profile/follow', body, config);
+    
+    dispatch({
+        type: FOLLOW,
+        payload: res.data
+    })
+
+    dispatch(setAlert('Following'));
+}
+
+export const unfollowUser = profileId => async dispatch => {
+    let config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    let body={}
+    body.id = profileId
+
+    const res = await axios.put('/api/profile/unfollow', body, config);
+    
+    dispatch({
+        type: UNFOLLOW,
+        payload: res.data
+    })
+
+    dispatch(setAlert('Unfollowed'));
 }

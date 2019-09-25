@@ -1,4 +1,4 @@
-import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, ACCOUNT_DELETED } from '../actions/types';
+import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, ACCOUNT_DELETED, FOLLOW, UNFOLLOW } from '../actions/types';
 
 
 const initialState = {
@@ -36,7 +36,18 @@ export default function(state = initialState, action) {
             return{
                 ...state, token:null, isAuthenticated: false, loading:false
             };
-            
+        case FOLLOW:
+            return{
+                ...state,
+                user: payload,
+                loading: false
+            }            
+        case UNFOLLOW:
+            return{
+                ...state,
+                user: payload,
+                loading: false
+            }            
         default:
             return state
     }

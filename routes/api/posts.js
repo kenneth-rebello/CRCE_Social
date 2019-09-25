@@ -89,6 +89,32 @@ router.get('/', auth, async function (req, res){
     }
 });
 
+
+router.get('/connected', auth, async function (req, res){
+    try {
+        const me = await User.findOne({_id: req.user.id});
+
+        const profiles = await Profile.find({_id: {$in: me.following}});
+        let conn = [];
+        profiles.map((profile) => {
+            conn.unshift(profile.user)
+        })
+        console.log(conn);
+
+        const users = await User.find({_id: {$in: conn}});
+        console.log(users);
+
+        const posts = await Post.find({approved:true, user:{$in: users}}).sort({ date: -1}).populate('likes.user',['name'])    ;
+        return res.json(posts);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error'); 
+    }
+});
+
+
+
 //@route GET api/posts/user/:id
 //@desc GET posts by user id
 //@access Private

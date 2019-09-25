@@ -158,6 +158,60 @@ router.delete('/', auth, async function(req, res){
     }
 });
 
+router.put('/follow', auth, async(req,res) => {
+    try {
+        
+        let user = await User.findById(req.user.id);
+
+        const { id } = req.body;
+
+        
+        if(user.following.some(one => one._id == id)){
+            return res.status(400).json({msg: 'Already connected'});
+        }else{
+            let other = await Profile.findOne({_id: id});
+            let otherUser = await User.findOne({_id: other.user});
+            let me = await Profile.findOne({user: req.user.id});
+            otherUser.following.unshift(me._id);
+            await otherUser.save();
+            user.following.unshift(id);
+            await user.save();
+
+        }
+
+        user = await User.findById(req.user.id).populate('following.profile',['picture']);
+
+        res.json(user)
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+})
+
+router.put('/unfollow', auth, async(req,res) => {
+    try {
+        
+        let user = await User.findById(req.user.id);
+
+        const { id } = req.body;
+        if(user.following.some(one => one._id == id)){
+            user.following = user.following.filter(one => one._id != id);
+            await user.save();
+        }else{
+            return res.status(400).json({msg: 'Not connected yet'});
+        }
+
+        user = await User.findById(req.user.id).populate('following.profile',['picture']);
+
+        res.json(user)
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+})
+
 router.post('/picture', auth, async (req, res) => {
 
     if(req.files === null){
@@ -174,7 +228,6 @@ router.post('/picture', auth, async (req, res) => {
 
     const posts = await Post.find({user:req.user.id});
     posts.map(async(post) => {
-        console.log(post)
         await Post.findOneAndUpdate({_id:post._id}, {$set:{picture: fileName}})
     });
 

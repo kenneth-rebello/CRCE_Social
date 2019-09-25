@@ -36,9 +36,9 @@ const userSchema = new mongoose.Schema({
         default: Date.now
     },
     following: [{
-        user:{
+        profile:{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'user'
+            ref: 'profile'
         }
     }]
 });
