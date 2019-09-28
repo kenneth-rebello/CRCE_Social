@@ -1,8 +1,8 @@
 import axios from 'axios'
-import {ADD_MESSAGE, MESSAGE_RECEIVED, ADD_USER, GET_MSGS} from './types';
-import { Types } from 'mongoose';
+import {ADD_MESSAGE, GET_MSGS, GET_CHAT_USERS, LOAD_CHAT_TO} from './types';
 
-export const addMessageAction = (socket, msg) => async dispatch => {
+
+export const addMessageAction = (socket, msg, to) => async dispatch => {
 
     let config = {
         headers: {
@@ -12,6 +12,7 @@ export const addMessageAction = (socket, msg) => async dispatch => {
 
     let body = {} 
     body.msg = msg;
+    body.to = to;
 
     const res = await axios.post(`/api/chat/newmessage`, body, config)
 
@@ -32,24 +33,44 @@ export const updateMessageState = (allmsgs) => async dispatch => {
 
 }
 
-export const addUser = (user) => async dispatch => {
+export const loadChat = (me, to) => async dispatch => {
+
+    const config = {
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    }
+
+    let body={}
+    body.me = me;
+    body.to = to;
+
+    const res = await axios.get('/api/chat/load', body, config);
+
+
+} 
+
+export const loadChatUserTo = (user, me, socket) => dispatch => {
+
     dispatch({
-        type:ADD_USER,
-        user: user
+        type: LOAD_CHAT_TO,
+        payload: user
     })
+
+    let data ={}
+    data.to = user._id;
+    data.from = me._id;
+
+    socket.emit('initial_data', data);
 }
 
-export const messageReceived = (message, sender) => async dispatch => {
-    
-    dispatch({
-        type: MESSAGE_RECEIVED,
-        // payload: res.data
-    })
-}
+export const getAllChatUsers = () => async dispatch => {
 
-export const populateUserList = users => async dispatch =>{
+    const res = await axios.get('/api/chat/users');
+
     dispatch({
-        type: Types.LIST_USERS,
-        // payload: res.data
+        type: GET_CHAT_USERS,
+        payload: res.data
     })
+
 }

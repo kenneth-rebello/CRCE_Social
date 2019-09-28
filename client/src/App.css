@@ -545,6 +545,10 @@
   padding:10px;
 }
 
+.events img{
+  height: 360px;
+  width: 480px;
+}
 
 .events-btn-bar{
   background-color: lightgray;
@@ -579,6 +583,34 @@
   display: grid;
   background: lightseagreen;
 }
+
+.userlist{
+  margin: 5px;
+  margin-top:15px;
+}
+
+.userlist .singlechatbtn{
+  max-height: 150px;
+  width:100%;
+  background-color: whitesmoke;
+  border: solid;
+}
+
+.userlist .singlechatbtn:active{
+  background-color: lightseagreen;
+}
+
+.userlist .singlechatbtn img{
+  height: 100px;
+  width:100px;
+  margin:5px;
+  float:left;
+}
+
+.userlist .singlechatbtn .username{
+  font-size: 20px;
+  float:right;
+}  
 
 .messages{
   display: grid;

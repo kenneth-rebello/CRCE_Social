@@ -1,6 +1,7 @@
-import {ADD_MESSAGE, MESSAGE_RECEIVED, ADD_USER, LIST_USERS, GET_MSGS} from '../actions/types';
+import {ADD_MESSAGE, MESSAGE_RECEIVED, GET_MSGS, GET_CHAT_USERS, LOAD_CHAT_TO} from '../actions/types';
 
 const initialState = {
+    to: null,
     users: [],
     messages: [],
     loading: true
@@ -11,7 +12,6 @@ export default function(state = initialState, action){
     const {payload, type} = action;
 
     switch(type){
-        case MESSAGE_RECEIVED:
         case ADD_MESSAGE:
             return {
                 ...state,
@@ -24,14 +24,17 @@ export default function(state = initialState, action){
                 messages: payload,
                 loading: false
             }
-        case ADD_USER:
+        case GET_CHAT_USERS:
             return{
                 ...state,
-                users: [...state.users, payload]
+                users: payload,
+                loading: false
             }
-        case LIST_USERS:
+        case LOAD_CHAT_TO:
             return{
-                
+                ...state,
+                to: payload,
+                loading:false
             }
         default:
             return state;

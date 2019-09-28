@@ -2,8 +2,8 @@ const express = require('express');
 const connectDB = require('./config/db');
 const socket = require('socket.io');
 const http = require('http');
-const Message = require('./models/Message')
-;
+const Message = require('./models/Message');
+const Chat = require('./models/Chat');
 const app = express();
 
 //CONNECT DATABASE
@@ -24,7 +24,6 @@ app.use('/api/posts', require('./routes/api/posts'));
 app.use('/api/admin', require('./routes/api/admin'));
 app.use('/api/event', require('./routes/api/event'));
 app.use('/api/chat', require('./routes/api/chat'));
-// app.use('/api/connect', require('./routes/api/connect'));
 
 const PORT = process.env.PORT || 5000;
 
@@ -45,9 +44,23 @@ io.on('connection', function (socket) {
         io.sockets.emit('change_data')
     });
 
-    socket.on('initial_data', async() =>{
-        const msgs = await Message.find().populate('user',['name']);
-        io.sockets.emit("get_data", msgs);
+    socket.on('initial_data', async(data) =>{
+        if(data){
+            
+            let chat = await Chat.findOne({user1:data.to, user2: data.from})
+            if(!chat){
+                chat = await Chat.findOne({user2:data.to, user1: data.from})
+            }
+            if(chat){
+               
+                const msgs = await Message.find({_id: {$in: chat.messages}}).populate('user',['name']);
+                
+                io.sockets.emit("get_data", msgs);
+            }
+        }
+        else{
+            io.sockets.emit("get_data", null);
+        }
     })
     
 });

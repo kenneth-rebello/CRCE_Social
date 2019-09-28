@@ -26,8 +26,13 @@ const AddEvent = ({addEvent, history}) => {
 
     const Submitter = e => {
         e.preventDefault();
-        formData.file = fileData;
-        addEvent(formData, history);
+        const newFormData = new FormData();
+        fileData && newFormData.append("file",fileData);
+        newFormData.append("date",formData.date);
+        newFormData.append("heading",formData.heading);
+        newFormData.append("desc",formData.desc);
+        newFormData.append("target",formData.target);
+        addEvent(newFormData, history);
     }
 
     return (
