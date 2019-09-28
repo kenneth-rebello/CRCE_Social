@@ -180,7 +180,7 @@
   margin:5px;
   width:90%;
   justify-self: center;
-  max-height: 300px;
+  max-height: 213px;
 }
 
 .profile img{
@@ -190,13 +190,25 @@
 }
 .profile .profile-details{
   display: grid;
-  grid-template-rows: 10px, 10px, 10px;
+  grid-template-rows: 10px, 10px, 10px, auto;
 }
 
 .profile .profile-details .line{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   padding-left: 5%;
+}
+
+.profile .profile-details .profile-buttons{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.profile .profile-details .profile-buttons .btn{
+  display: grid;
+  height: 30px;
+  width: 30%;
+  font-size:12px;
 }
 
 .profile .profile-details h1{
@@ -557,6 +569,76 @@
   border-radius: 15px;
   max-height: 300px;
 }
+
+.chat-window{
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.user-bar{
+  display: grid;
+  background: lightseagreen;
+}
+
+.messages{
+  display: grid;
+  grid-template-rows: 490px 50px;
+  height: 100%;
+  margin: 10px;
+  margin-bottom: 5px; 
+}
+
+.message-list{
+  display: grid;
+  background: whitesmoke;
+  overflow: scroll;
+}
+
+.new-message{
+  display: grid;
+  background: whitesmoke;
+  width: 95%;
+  justify-self: center;
+  align-self: center;
+  grid-template-columns: 6fr 1fr;
+  height: 30px;
+}
+
+.message{
+  display:grid;
+  grid-template-rows: 20px auto;
+  padding: 5px;
+  margin: 10px;
+  width: auto;
+  min-height: auto;
+}
+
+.msg-me{
+  display: grid;
+  justify-self: right;
+  background-color: teal;
+}
+
+.msg-you{
+  justify-self: left;
+  background-color: lightseagreen;
+}
+
+.message h1{
+  font-size: 20px;
+  margin: 0px;
+  padding:0px;
+  font-family: 'Merriweather', sans-serif;
+  color: whitesmoke;
+}
+
+.message p{
+  font-size: 15px;
+  background-color: whitesmoke;
+  font-family: 'Roboto Slab', serif;
+  font-weight: bold; 
+}
+
 /* Dashboard */
 
 .dashboard{
@@ -603,6 +685,7 @@
   position: sticky;
   height:100vh;
   top: 130px;
+  z-index:90;
 }
 
 .admindash .user-admin a{
@@ -845,12 +928,22 @@ input:focus::placeholder{
   border-style: outset;
 }
 
-.chatBar{
-  position: fixed;
-  bottom: 20px;
-  right: 50px;
-  height: 20px;
-  width: 50px;
-  background-color: lightslategrey;
-  z-index:100;
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 100;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  z-index: 100;
 }

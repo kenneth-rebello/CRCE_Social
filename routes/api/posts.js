@@ -99,11 +99,9 @@ router.get('/connected', auth, async function (req, res){
         profiles.map((profile) => {
             conn.unshift(profile.user)
         })
-        console.log(conn);
 
         const users = await User.find({_id: {$in: conn}});
-        console.log(users);
-
+        
         const posts = await Post.find({approved:true, user:{$in: users}}).sort({ date: -1}).populate('likes.user',['name'])    ;
         return res.json(posts);
 
@@ -241,7 +239,7 @@ async function(req,res){
     try {
 
         const user = await User.findById(req.user.id).select('-password');
-        const profile  = await Profile.find({user:user._id})
+        const profile  = await Profile.findOne({user:user._id})
         const post = await Post.findById(req.params.id);
 
         const newComment ={
@@ -250,7 +248,7 @@ async function(req,res){
             picture: profile.picture,
             user: req.user.id
         };
-
+        
         post.comments.unshift(newComment);
 
         await post.save();

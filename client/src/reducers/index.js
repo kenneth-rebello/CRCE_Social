@@ -6,6 +6,7 @@ import post from './post';
 import pending from './pending';
 import eligible from './eligible';
 import event from './event';
+import chat from './chat';
 
 export default combineReducers({
     alert,
@@ -14,5 +15,6 @@ export default combineReducers({
     post,
     pending,
     eligible,
-    event
+    event,
+    chat
 });

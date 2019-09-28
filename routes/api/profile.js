@@ -47,7 +47,7 @@ router.post('/', [auth], async function(req, res){
         achievements,
         position,
         bio,
-        githubusername,
+        github,
         linkedin,
         twitter,
         youtube,
@@ -66,13 +66,14 @@ router.post('/', [auth], async function(req, res){
     if(skills){
         ProfileFields.skills = skills.split(',').map(skill => skill.trim());
     }
-    if(githubusername) ProfileFields.dept = githubusername;
+
     ProfileFields.social = {}
     if(linkedin) ProfileFields.social.linkedin = linkedin;
     if(twitter) ProfileFields.social.twitter = twitter;
     if(youtube) ProfileFields.social.youtube = youtube;
     if(facebook) ProfileFields.social.facebook = facebook;
     if(instagram) ProfileFields.social.instagram = instagram;
+    if(github) ProfileFields.social.github = github;
 
     try{
         

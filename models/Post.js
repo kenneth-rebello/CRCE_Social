@@ -13,6 +13,10 @@ const PostSchema = new Schema({
     picture:{
         type: String
     },
+    public:{
+        type: Boolean,
+        default: true
+    },
     upload:{
         type: String
     },

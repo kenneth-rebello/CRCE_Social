@@ -16,7 +16,7 @@ const CreateProfile = props => {
         location:'',
         skills:'',
         position:'',
-        githubusername:'',
+        github:'',
         bio:'',
         twitter:'',
         facebook:'',
@@ -26,7 +26,7 @@ const CreateProfile = props => {
     })
 
     let { contact, dateOfBirth, location, skills, achievements, position, 
-        githubusername, bio,twitter,facebook,youtube,instagram, linkedin} = formData;
+        github, bio,twitter,facebook,youtube,instagram, linkedin} = formData;
 
     const Changer = e =>{
         setFormData({...formData, [e.target.name]: e.target.value})
@@ -76,18 +76,6 @@ const CreateProfile = props => {
                     HTML,CSS,JavaScript,PHP)</small>
                 </div>
                 <div className="form-group">
-                <input
-                    type="text"
-                    placeholder="Github Username"
-                    name="githubusername"
-                    value={githubusername} onChange={(e)=>Changer(e)}
-                ></input>
-                <small className="form-text"
-                    >If you want your latest repos and a Github link, include your
-                    username</small
-                >
-                </div>
-                <div className="form-group">
                 <textarea placeholder="A short bio of yourself" name="bio" value={bio} onChange={(e)=>Changer(e)}></textarea>
                 <small className="form-text">Tell us a little about yourself</small>
                 </div>
@@ -118,6 +106,10 @@ const CreateProfile = props => {
 
                     <div className="form-group">
                     <input type="text" placeholder="Instagram URL" name="instagram" value={instagram} onChange={(e)=>Changer(e)}></input>
+                    </div>
+
+                    <div className="form-group">
+                    <input type="text" placeholder="Github URL" name="github" value={github} onChange={(e)=>Changer(e)}></input>
                     </div>
                 </Fragment>}
                 

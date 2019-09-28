@@ -24,14 +24,14 @@ const ProfileItem = ({auth, profile, isAuth, approveUser, rejectUser}) => {
                     </div>
                     {isAuth && auth.user && auth.user.approved &&<Link to={`/profile/${_id}`} >View Profile</Link>}
                     {auth && auth.user && auth.user.admin && !approved &&
-                        <Fragment>
+                        <div className="profile-buttons">
                             <button className="btn btn-green" onClick={() => approveUser(_id)}>
                                 Approve
                             </button>
                             <button className="btn btn-red" onClick={()=> rejectUser(profile._id)}>
                                 Reject
                             </button>
-                        </Fragment>}
+                        </div>}
                 </div>
             </div>
         </Fragment>

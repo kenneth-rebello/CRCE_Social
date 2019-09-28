@@ -62,7 +62,7 @@ const AdminDash = ({getCurrentProfile, getPendingPosts, getPendingUsers, getPost
                 <div className="user-admin">
                     <h1 className="heading">{auth && auth.user && auth.user.name }</h1>
                     {profile.profile !== null?
-                        (<Fragment className="user-switch">
+                        (<Fragment>
                             {auth.user && <Link to={`/profile/${auth.user._id}`} className="dash-link">View Profile</Link>}
                             <div className="dash-img">
                                 {profile.profile.picture && <img src={require(`../../../public/profile-pictures/${profile.profile.picture}`)} alt={`${profile.profile.picture}`}/>}
