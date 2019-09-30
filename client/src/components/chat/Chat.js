@@ -43,6 +43,12 @@ class Chat extends React.Component {
         socket.emit('initial_data', data)
     }
 
+    handleKeyDown = (e) => {
+        if(e.key === 'Enter'){
+            this.sendMessage(this.state.msg)
+        }
+    }
+
     componentDidMount (){
         socket.emit("initial_data" ,null);
         socket.on("get_data", this.getData);
@@ -79,7 +85,7 @@ class Chat extends React.Component {
                         ))}
                     </div>
                     {!this.props.chat.loading && this.props.chat.to && <div className="new-message">
-                        <input type="text" onChange = {e => {this.setState({msg: e.target.value })}} value={this.state.msg} placeholder="New Message"></input> 
+                        <input id='newmsg' type="text" onKeyDown={(e) => this.handleKeyDown(e)} onChange = {e => {this.setState({msg: e.target.value })}} value={this.state.msg} placeholder="New Message"></input> 
                         <button className="btn btn-dark" onClick={() => this.sendMessage(this.state.msg)}>Send</button>
                     </div>}
                 </div>

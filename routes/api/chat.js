@@ -39,7 +39,6 @@ router.post('/newmessage', auth, async (req, res) => {
 router.get('/users', auth, async (req,res) => {
 
     const user = await User.findById(req.user.id);
-    console.log(user);
 
     const friends = await Profile.find({_id: {$in: user.following}}).populate('user',['name']);
 

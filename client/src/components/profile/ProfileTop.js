@@ -34,12 +34,12 @@ const ProfileTop = ({ profile }) => {
                     <button className="btn btn-dark" onClick={() => toggleMail(!showMail)}><i className="fa fa-envelope"></i></button>
                 </div>
                 <div className="contact-details">
-                    {showLinkedin && social.linkedin && <a href={`${social.linkedin}`} target='_blank'>{social.linkedin}</a>}
-                    {showGithub && social.github && <a  href={`${social.github}`} target='_blank'>{social.github}</a>}
-                    {showTwitter && social.twitter && <a  href={`${social.twitter}`} target='_blank'>{social.twitter}</a>}
-                    {showFB && social.facebook && <a  href={`${social.facebook}`} target='_blank'>{social.facebook}</a>}
-                    {showInsta && social.instagram && <a  href={`${social.instagram}`} target='_blank'>{social.instagram}</a>}
-                    {showYoutube && social.youtube && <a  href={`${social.youtube}`} target='_blank'>{social.youtube}</a>}
+                    {showLinkedin && social && social.linkedin && <a href={`${social.linkedin}`} target='_blank'>{social.linkedin}</a>}
+                    {showGithub && social && social.github && <a  href={`${social.github}`} target='_blank'>{social.github}</a>}
+                    {showTwitter && social && social.twitter && <a  href={`${social.twitter}`} target='_blank'>{social.twitter}</a>}
+                    {showFB && social &&  social.facebook && <a  href={`${social.facebook}`} target='_blank'>{social.facebook}</a>}
+                    {showInsta && social && social.instagram && <a  href={`${social.instagram}`} target='_blank'>{social.instagram}</a>}
+                    {showYoutube && social && social.youtube && <a  href={`${social.youtube}`} target='_blank'>{social.youtube}</a>}
                     {showMobile && contact && <a target='_blank'>{contact[0]}</a>}
                     {showMail && email && <a  href={`${email}`} target='_blank'>{email}</a>}
                 </div>

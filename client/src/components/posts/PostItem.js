@@ -49,7 +49,7 @@ const PostItem = ({auth, post, addLike, removeLike, approvePost, deletePost}) =>
                                 <i className="fa fa-comments"></i>{`  `}<span className='comment-count'>{comments.length}</span>
                             </Link>
                         </Fragment>)}
-                        {auth && auth.user && !auth.loading && (user === auth.user._id || ( auth.user && auth.user.admin)) &&
+                        {auth && auth.user && !auth.loading && ((user === auth.user._id) || ( auth.user && auth.user.admin)) &&
                             <button type="button" className="btn btn-red" style={{float:'right'}} onClick={e => deletePost(_id)}>
                                 <i className="fa fa-trash"></i>
                             </button>
