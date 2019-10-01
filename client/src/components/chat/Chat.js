@@ -4,6 +4,7 @@ import io from "socket.io-client"
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
 import Userlist from '../chat/Userlist';
+import Spinner from '../layouts/Spinner';
 import * as chatActions from '../../actions/chat'
 
 
@@ -65,7 +66,8 @@ class Chat extends React.Component {
     render() {
         
         return(
-            <div className="chat-window">
+            <Fragment>
+            { !this.props.auth.loading && this.props.auth.user && this.props.auth.user.approved ? <div className="chat-window">
                 <div className="user-bar">
                     <Userlist socket={socket}/>
                 </div>
@@ -89,7 +91,8 @@ class Chat extends React.Component {
                         <button className="btn btn-dark" onClick={() => this.sendMessage(this.state.msg)}>Send</button>
                     </div>}
                 </div>
-            </div>
+            </div> : <h1 className="heading">You have to be approved by an admin to start chatting with other users. Kindly wait until approved</h1>}
+            </Fragment>
         )
     }
 }

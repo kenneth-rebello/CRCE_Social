@@ -78,7 +78,7 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, followUser, unfollo
                     {displayStatus && !profile.loading && <Status user = {profile.profile.user} status = {profile.profile.status}/>}
 
                     
-                    {auth.user && <UserPosts/>}
+                    {!auth.loading && auth.user && auth.user.approved && <UserPosts/>}
                 </div>
             </Fragment>}
         </Fragment>

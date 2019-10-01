@@ -1,30 +1,19 @@
-import React, {Fragment, useEffect, useState} from 'react'
+import React, {Fragment, useEffect} from 'react'
 import PropTypes from 'prop-types';
-import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {getCurrentProfile} from '../../actions/profile';
-import {getConnectionPosts, getPendingPosts} from '../../actions/post';
+import { getPendingPosts} from '../../actions/post';
 import { getPendingUsers } from '../../actions/admin';
 import Spinner from '../layouts/Spinner';
 import PostItem from '../posts/PostItem';
-import PostForm from '../posts/PostForm';
 import ProfileItem from '../profiles/ProfileItem';
 
-const AdminDash = ({getCurrentProfile, getPendingPosts, getPendingUsers, getConnectionPosts, auth, profile, pending, post}) => {
+const AdminDash = ({getPendingPosts, getPendingUsers, auth, profile, pending, post}) => {
 
     useEffect(() => {
-        getCurrentProfile();
-        getConnectionPosts();
         getPendingPosts();
         getPendingUsers()
-    }, [getCurrentProfile, getPendingPosts, getConnectionPosts, getPendingUsers]);
+    }, [getPendingPosts, getPendingUsers]);
 
-    const [displayPendingPosts, togglePendingPosts] = useState(false);
-    const [displayPendingUsers, togglePendingUsers] = useState(false);
-
-    if(auth && auth.user && !auth.loading && !auth.user.admin){
-        return <Redirect to="/dashboard"/>
-    }
     
     return (
         (profile.loading && auth.loading && pending.loading && post.loading) && profile.profile === null ? <Spinner /> :
@@ -33,54 +22,24 @@ const AdminDash = ({getCurrentProfile, getPendingPosts, getPendingUsers, getConn
             <div className="admindash">
                 <div className="admindash-half">
 
-                    {displayPendingPosts && (<Fragment>
+                    <Fragment>
                         <h1 className="heading">Posts pending for approval</h1>
                         <div className="posts">
                             {pending.posts.map(post => (
                                 <PostItem key={post._id} post={post}/>
                             ))}
                         </div>
-                    </Fragment>)}
-                    {displayPendingUsers && (<Fragment>
+                    </Fragment>
+                </div>
+                <div className="admindash-half">
+                   <Fragment>
                         <h1 className="heading">Users awaiting approval</h1>
                         <div className="users">  
                             {pending.users.map(profile => (
                                 <ProfileItem key={profile._id} profile={profile}/>
                             ))}
                         </div>
-                    </Fragment>)
-                    }
-
-                    {post.loading && auth.loading? (<Spinner/>):
-                    <div className="posts">
-                        <PostForm />
-                        {post.posts.map(post => (
-                            <PostItem key={post._id} post={post}/>
-                        ))}
-                    </div>}
-                </div>
-                <div className="user-admin">
-                    <h1 className="heading">{auth && auth.user && auth.user.name }</h1>
-                    {profile.profile !== null?
-                        (<Fragment>
-                            {auth.user && <Link to={`/profile/${auth.user._id}`} className="dash-link">View Profile</Link>}
-                            <div className="dash-img">
-                                {profile.profile.picture && <img src={require(`../../../public/profile-pictures/${profile.profile.picture}`)} alt={`${profile.profile.picture}`}/>}
-                            </div>
-                        </Fragment>) :
-                        (<Fragment className="user-switch">
-                            <Link to="/create_profile" className="dash-link">Create Profile</Link>
-                            <p>You have not yet set up a profile, please add some information about yourself</p>
-                        </Fragment>)
-                    }
-                    {auth && auth.user && auth.user.admin && <div className="admin-buttons">
-                        <button className="btn btn-light" onClick={() => togglePendingPosts(!displayPendingPosts)}>
-                            Show Pending Post{`  `}<i className="fa fa-pencil-square-o"></i>
-                        </button>
-                        <button className="btn btn-light" onClick={() => togglePendingUsers(!displayPendingUsers)}>
-                            Show Pending Users{`  `}<i className="fa fa-users"></i>
-                        </button>
-                    </div>}         
+                    </Fragment>
                 </div>
             </div>
         </Fragment>
@@ -88,8 +47,6 @@ const AdminDash = ({getCurrentProfile, getPendingPosts, getPendingUsers, getConn
 }
 
 AdminDash.propTypes = {
-    getCurrentProfile: PropTypes.func.isRequired,
-    getConnectionPosts: PropTypes.func.isRequired,
     getPendingPosts: PropTypes.func.isRequired,
     getPendingUsers: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
@@ -105,4 +62,4 @@ const mapStateToProps = state => ({
     pending: state.pending
 });
 
-export default connect(mapStateToProps, {getConnectionPosts, getCurrentProfile, getPendingPosts, getPendingUsers})(AdminDash)
+export default connect(mapStateToProps, {getPendingPosts, getPendingUsers})(AdminDash)

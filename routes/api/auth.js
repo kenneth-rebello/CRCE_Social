@@ -5,7 +5,8 @@ const User = require('../../models/User')
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const config = require('config');
-const {check, validationResult} = require('express-validator/check');
+const {check, validationResult} = require('express-validator');
+const nodemailer = require('nodemailer');
 
 //@route    GET api/auth
 //@desc     Test route
@@ -43,6 +44,11 @@ async function(req,res){
             });
         }
         
+        if(!user.confirmed){
+            return res.status(400).json({
+                errors: [{msg: 'Please verify your email to activate your account'}]
+            });
+        }
 
         //Check password match
 
@@ -73,6 +79,49 @@ async function(req,res){
 
 });
 
+router.post('/send_confirmation', async (req, res)=>{
 
+    const user = await User.findById(req.body.id);
+
+    const url = `http:localhost:3000/confirm/${user.email}/${user._id}`
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'crcesocial',
+            pass: 'jonah1002'
+        },
+        tls: {rejectUnauthorized: false}
+    });
+
+    let mailOptions = {
+        from: 'crcesocial@gmail.com',
+        to: user.email,
+        subject: `Email Verification - CRCE Social`,
+        text: `Please click the following link to verify your email id and access your CRCE Social account ${url}`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if(error){
+            console.log('Did not send: '+error)
+        }else{
+            console.log('Email sent: '+info.response)
+        }
+        transporter.close();
+    })
+})
+
+router.post('/confirm_email', async(req,res) => {
+
+    const user = await User.findById(req.body.id);
+
+    if(user.email === req.body.email){
+        user.confirmed = true;
+        await  user.save();
+        return res.json({check: true})
+    }else{
+        return res.json({check: false})
+    }
+
+})
 
 module.exports = router;

@@ -13,6 +13,7 @@
   background: none;
   box-shadow: none;
   font-size: 30px;
+  height:100%;
 }
 
 .navbar .alerts{
@@ -31,8 +32,9 @@
   background-color: teal;
   color: whitesmoke;
   font-family: 'Cinzel' serif;
-  float:right;
-  width:100%;
+  display: grid;
+  justify-items: right;
+  opacity:0.8;
 }
 
 .sidenavbar-own{
@@ -52,7 +54,6 @@
 
 .navbar button{
   display: grid;
-  align-items: center;
   color: whitesmoke; 
   background: none;
   border: none;
@@ -210,6 +211,7 @@
 .profile img{
   height: 200px;
   width: 200px;
+  border-radius: 50%;
   border: solid whitesmoke;
 }
 .profile .profile-details{
@@ -412,7 +414,7 @@
 .post .item-img{
   height:140px;
   width:140px;
-  border-radius: 40px;
+  border-radius: 50%;
 }
 .post-user .heading{
   font-size: 15px;
@@ -511,7 +513,7 @@
 }
 
 .comment{
-  font-size: 25px;
+  font-size: 20px;
   font-family: 'Roboto Slab', serif;
 }
 
@@ -595,7 +597,6 @@
   grid-template-columns: 1fr 1fr;  
   border: 2px solid teal;
   border-radius: 15px;
-  max-height: 300px;
 }
 
 .chat-window{
@@ -704,7 +705,7 @@
 
 .admindash{
   display: grid;
-  grid-template-columns:4fr 1fr;
+  grid-template-columns:1fr 1fr;
 }
 
 .dashboard .posts{
@@ -732,32 +733,6 @@
   width:95%
 }
 
-.admindash .user-admin{
-  margin: 15px;
-  margin-top: 60px;
-  display: grid;
-  grid-template-rows: 80px 30px auto 60px 60px;
-  max-height: 500px;
-  position: sticky;
-  height:100vh;
-  top: 130px;
-  z-index:90;
-}
-
-.admindash .user-admin a{
-  color:teal;
-}
-.admindash .user-admin a:hover{
-  color:lightseagreen;
-}
-
-.admindash .user-admin img{
-  height: 256px;
-  width: 256px;
-  border-radius: 150px;
-  border: solid 3px goldenrod;
-  border-style: inset;
-}
 
 .dashboard .user img{
   height: 256px;
@@ -765,17 +740,6 @@
   border-radius: 150px;
   border: solid 3px goldenrod;
   border-style: inset;
-}
-
-
-.admindash .user-admin .admin-buttons{
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-items: center;
-}
-
-.admin-buttons .btn{
-  width:90%;
 }
 
 .dashboard .user .user-switch{
@@ -788,10 +752,6 @@
   justify-self: center;
 }
 
-.admindash .user-admin h1{
-  font-size: 20px;
-  justify-self: center;
-}
 
 .dashboard .user .heading{
   color: goldenrod;

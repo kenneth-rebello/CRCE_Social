@@ -38,20 +38,12 @@ async function(req,res){
             });
         }
 
-        //Get users gravatar
-
-        const avatar = gravatar.url(email,{
-            s: '200',
-            r: 'pg',
-            d: 'mm'
-        }) 
 
         user = new User({
             name,
             email,
             branch,
             year,
-            avatar,
             password
         });
 
@@ -63,18 +55,7 @@ async function(req,res){
 
         await user.save();
 
-        //Return jsonwebtoken
-
-        const payload = {
-            user: {
-                id: user.id
-            }
-        };
-
-        jwt.sign(payload, config.get('jwtSecret'), {expiresIn: 360000},(err, token) => {
-            if(err) throw err;
-            res.json({token});
-        })
+        return res.json({id: user._id})        
 
     } catch(err){
         console.error(err.message);

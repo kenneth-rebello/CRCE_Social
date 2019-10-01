@@ -6,7 +6,7 @@ import { register } from '../../actions/auth';
 import PropTypes from 'prop-types'
 
 
-const Register = (props) => {
+const Register = ({register, setAlert, history, user, isAuth}) => {
 
     const [ formData, setFormData ] = useState({
         name: '',
@@ -24,16 +24,11 @@ const Register = (props) => {
     const Submitter = e =>{
         e.preventDefault();
         if(password !== password_confirm) {
-            props.setAlert('Passwords do not match', 'danger');
+            setAlert('Passwords do not match', 'danger');
 
         }else{
-            props.register({name, email, branch, year, password});
+            register({name, email, branch, year, password, history});
         }
-    }
-
-    //Redirect if logged in
-    if(props.isAuth){
-        return <Redirect to="/dashboard"/>
     }
     
     return (

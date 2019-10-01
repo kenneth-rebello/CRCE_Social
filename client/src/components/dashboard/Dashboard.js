@@ -10,16 +10,13 @@ import PostItem from '../posts/PostItem';
 import PostForm from '../posts/PostForm';
 
 
-const Dashboard = ({setAlert, getCurrentProfile, getConnectionPosts, auth, profile, post}) => {
+const Dashboard = ({getCurrentProfile, getConnectionPosts, auth, profile, post}) => {
 
     useEffect(() => {
         getCurrentProfile();
         getConnectionPosts();
     }, [getCurrentProfile, getConnectionPosts]);
 
-    if(auth && auth.user && !auth.loading && auth.user.admin){
-        return <Redirect to="/admindash"/>
-    }
     
     return (
         profile.loading && profile.profile === null ? <Spinner /> : 
@@ -48,6 +45,7 @@ const Dashboard = ({setAlert, getCurrentProfile, getConnectionPosts, auth, profi
                             </div>
                             {!profile.loading && profile.profile.position === 'Placement Officer' && <button className="btn btn-light"><Link to="/po_form">Create Eligibility List</Link></button>}
                             {!profile.loading && profile.profile.position === 'Faculty' && <button className="btn btn-light"><Link to="/add_event">Add Event</Link></button>}
+                            {!auth.loading && auth.user && auth.user.admin && <button className="btn btn-light"><Link to="/admindash">Check Admin Dashboard</Link></button>}
                         </Fragment>) :
                         (<Fragment className="user-switch">
                             <Link to="/create_profile" className="dash-link">Create Profile</Link>

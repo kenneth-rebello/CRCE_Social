@@ -41,7 +41,7 @@ const ProfileTop = ({ profile }) => {
                     {showInsta && social && social.instagram && <a  href={`${social.instagram}`} target='_blank'>{social.instagram}</a>}
                     {showYoutube && social && social.youtube && <a  href={`${social.youtube}`} target='_blank'>{social.youtube}</a>}
                     {showMobile && contact && <a target='_blank'>{contact[0]}</a>}
-                    {showMail && email && <a  href={`${email}`} target='_blank'>{email}</a>}
+                    {showMail && email && <a  href={`mailto:${email}`} target='_blank'>{email}</a>}
                 </div>
             </div>
         </Fragment>
