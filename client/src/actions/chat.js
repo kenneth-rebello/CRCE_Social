@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {ADD_MESSAGE, GET_MSGS, GET_CHAT_USERS, LOAD_CHAT_TO} from './types';
+import {ADD_MESSAGE, GET_MSGS, GET_CHAT_USERS, LOAD_CHAT_TO, GET_NOTIFS, ADD_NOTIF} from './types';
 
 
 export const addMessageAction = (socket, msg, to) => async dispatch => {
@@ -15,11 +15,17 @@ export const addMessageAction = (socket, msg, to) => async dispatch => {
     body.to = to;
 
     const res = await axios.post(`/api/chat/newmessage`, body, config)
+    const notif = await axios.post('api/notif/msg', body, config)
 
     dispatch({
         type: ADD_MESSAGE,
         payload: res.data
     });
+
+    dispatch({
+        type: ADD_NOTIF,
+        payload: notif.data
+    })
 
     socket.emit('sendmessage')
 }
@@ -31,6 +37,12 @@ export const updateMessageState = (allmsgs) => async dispatch => {
         payload: allmsgs
     });
 
+    const res = await axios.get('/api/notif');
+
+    dispatch({
+        type: GET_NOTIFS,
+        payload: res.data
+    })
 }
 
 export const loadChat = (me, to) => async dispatch => {

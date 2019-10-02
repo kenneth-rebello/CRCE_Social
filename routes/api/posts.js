@@ -119,7 +119,7 @@ router.get('/connected', auth, async function (req, res){
 router.get('/user/:id', async function(req,res){
     try {
 
-        const posts = await Post.find({user:req.params.id}).sort({date: -1}).populate('likes.user',['name']);
+        const posts = await Post.find({user:req.params.id, approved:true}).sort({date: -1}).populate('likes.user',['name']);
         return res.json(posts)
         
 

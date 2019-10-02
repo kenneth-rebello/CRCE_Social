@@ -10,7 +10,7 @@ const Posts = ({getPosts, post, auth}) => {
 
     useEffect(() => {
         document.title="Posts - CRCE Social"
-    })
+    },[])
 
     useEffect(() => {
         getPosts();

@@ -7,6 +7,7 @@ import pending from './pending';
 import eligible from './eligible';
 import event from './event';
 import chat from './chat';
+import notif from './notif';
 
 export default combineReducers({
     alert,
@@ -16,5 +17,6 @@ export default combineReducers({
     pending,
     eligible,
     event,
-    chat
+    chat,
+    notif
 });

@@ -1,11 +1,16 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 import Alert from './Alert'
+import { getUnseenNotifs } from '../../actions/notif';
 
 const Navbar = (props) => {
+
+    useEffect(() => {
+        props.getUnseenNotifs();
+    },[props.getUnseenNotifs])
 
     const [displayNav, toggleNav] = useState(false)
 
@@ -17,6 +22,7 @@ const Navbar = (props) => {
                 <Link to="" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></Link>
                 <ul className="right hide-on-med-and-down nav-links">
                     {props.auth && !props.auth.loading && props.auth.user && <li><Link to={`/profile/${props.auth.user._id}`}>{props.auth.user.name}</Link></li>}
+                    {props.notif && props.notif.unseen  && <li><Link to="/notifs"><i className="fa fa-bell"> {props.notif.unseen.length}</i></Link></li>}
                     <li><button type="button" className="btn btn-dark" onClick={()=>toggleNav(!displayNav)}><i className="fa fa-caret-down"></i></button></li>
                 </ul>
             </div>
@@ -37,6 +43,8 @@ const Navbar = (props) => {
 
         <ul className="sidenav sidenavbar-own" id="mobile-demo">
             <li><Link to="/dashboard">Home</Link></li>
+            {props.auth && !props.auth.loading && props.auth.user && <li><Link to={`/profile/${props.auth.user._id}`}>{props.auth.user.name}</Link></li>}
+            {props.notif && props.notif.unseen &&  <li><Link to="/notifs">Notifications {props.notif.unseen.length}</Link></li>}
             <li><Link to="/chat">Chat</Link></li>
             <li><Link to="/profiles">Profiles</Link></li>
             <li><Link to="/posts">Posts</Link></li>
@@ -81,18 +89,21 @@ const Navbar = (props) => {
 }
 
 Navbar.propTypes = {
+    getUnseenNotifs: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     isAuth: PropTypes.bool.isRequired,
     alert: PropTypes.array,
     auth: PropTypes.object.isRequired,
+    notif: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
     loading: state.auth.loading,
     isAuth: state.auth.isAuthenticated,
     alert: state.alert,
-    auth: state.auth
+    auth: state.auth,
+    notif: state.notif
 });
 
-export default connect(mapStateToProps, { logout })(Navbar);
+export default connect(mapStateToProps, { logout, getUnseenNotifs })(Navbar);

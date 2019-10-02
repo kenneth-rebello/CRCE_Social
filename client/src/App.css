@@ -664,11 +664,11 @@
 
 .message{
   display:grid;
-  grid-template-rows: 20px auto;
+  grid-template-rows: 20px max-content 10px;
   padding: 5px;
   margin: 10px;
   width: auto;
-  min-height: auto;
+  height: fit-content;
 }
 
 .msg-me{
@@ -683,7 +683,7 @@
 }
 
 .message h1{
-  font-size: 20px;
+  font-size: 1.3rem;
   margin: 0px;
   padding:0px;
   font-family: 'Merriweather', sans-serif;
@@ -691,10 +691,47 @@
 }
 
 .message p{
-  font-size: 15px;
+  font-size: 1rem;
   background-color: whitesmoke;
   font-family: 'Roboto Slab', serif;
   font-weight: bold; 
+}
+
+.message span{
+  padding:0;
+  font-size: 0.8rem;
+  color: whitesmoke;
+}
+
+.notifs{
+  display: grid;
+}
+
+.single-notif{
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  justify-self: center;
+  width: 90%;
+  padding:2%;
+  margin:2%;
+  border: solid 2px teal;
+  border-radius: 25px;
+  height: max-content;
+}
+
+.single-notif img{
+  height: 120px;
+  width:120px;
+  margin: 2%;
+  border-radius: 50%;
+}
+
+.single-notif .notif-details{
+  display: grid;
+}
+
+.single-notif .notif-details p{
+  font-size: 1.5rem;
 }
 
 /* Dashboard */

@@ -4,7 +4,7 @@ import io from "socket.io-client"
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
 import Userlist from '../chat/Userlist';
-import Spinner from '../layouts/Spinner';
+import Moment from 'react-moment';
 import * as chatActions from '../../actions/chat'
 
 
@@ -80,9 +80,11 @@ class Chat extends React.Component {
                                 {!this.props.auth.loading && this.props.auth.user._id === msg.user._id ? <div className="message msg-me">
                                     <h1>{msg.user.name}</h1>
                                     <p>{msg.text}</p>
+                                    <span><Moment format='DD/MM HH:MM'>{msg.date}</Moment></span>
                                 </div> : <div className="message msg-you">
                                     <h1>{msg.user.name}</h1>
                                     <p>{msg.text}</p>
+                                    <span><Moment format='DD/MM HH:MM'>{msg.date}</Moment></span>
                                 </div>}
                             </Fragment>
                         ))}

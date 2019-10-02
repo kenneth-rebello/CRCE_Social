@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Navbar from './components/layouts/Navbar';
+import NavClass from './components/layouts/NavClass';
 import Landing from './components/layouts/Landing';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
@@ -27,7 +27,8 @@ import Events from './components/faculty/Events';
 import MyEvents from './components/faculty/MyEvents';
 import ByEvents from './components/faculty/ByEvents';
 import Event from './components/faculty/Event';
-import Chat from './components/chat/Chat'
+import Chat from './components/chat/Chat';
+import Notifications from'./components/notifs/Notifications';
 //Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -50,15 +51,16 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Fragment>
-          <Navbar/>
+          <NavClass/>
           <section className="plain-page">
           <Route exact path="/" component={Landing}/>
             <Switch>
               <Route exact path="/register" component={Register}/>
               <Route exact path="/login" component={Login}/>
               <Route exact path="/confirm/:email/:id" component={Confirm}/>
-              <Route exact path="/profiles" component={Profiles}/>
+              <PrivateRoute exact path="/profiles" component={Profiles}/>
               <PrivateRoute exact path="/profile/:id" component={Profile}/>
+              <PrivateRoute exact path="/notifs" component={Notifications}/>
               <PrivateRoute exact path="/admindash" component={AdminDash}/>
               <PrivateRoute exact path="/dashboard" component={Dashboard}/>
               <PrivateRoute exact path="/posts" component={Posts}/>

@@ -43,3 +43,7 @@ export const GET_MSGS = "GET_MSGS";
 export const LOAD_CHAT = "LOAD_CHAT";
 export const GET_CHAT_USERS = "GET_CHAT_USERS";
 export const LOAD_CHAT_TO = "LOAD_CHAT_TO";
+export const GET_NOTIFS = "GET_NOTIFS"; 
+export const GET_UNSEEN_NOTIFS = "GET_UNSEEN_NOTIFS"; 
+export const ADD_NOTIF = "ADD_NOTIF";
+export const REMOVE_NOTIF = "REMOVE_NOTIF";
