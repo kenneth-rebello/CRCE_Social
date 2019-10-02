@@ -9,6 +9,10 @@ import CommentItem from './CommentItem';
 
 const Post = ({getPost, getPosts, post:{post, loading}, match}) => {
 
+    useEffect(() => {
+        document.title = 'Post - CRCE Social'
+    },[])
+
     useEffect(()=> {
         getPosts()
         getPost(match.params.id);

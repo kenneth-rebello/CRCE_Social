@@ -6,6 +6,10 @@ import {createProfile, getCurrentProfile} from '../../actions/profile'
 
 const EditProfile = ({profile: {profile, loading}, createProfile, getCurrentProfile, history}) => {
     
+    useEffect(() => {
+        document.title = 'Edit Your Profile - CRCE Social'
+    },[])    
+    
     const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
     const [formData, setFormData] = useState({

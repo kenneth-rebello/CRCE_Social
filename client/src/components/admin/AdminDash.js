@@ -10,6 +10,10 @@ import ProfileItem from '../profiles/ProfileItem';
 const AdminDash = ({getPendingPosts, getPendingUsers, auth, profile, pending, post}) => {
 
     useEffect(() => {
+        document.title = 'Administrator Dashboard - CRCE Social'
+    },[]);
+
+    useEffect(() => {
         getPendingPosts();
         getPendingUsers()
     }, [getPendingPosts, getPendingUsers]);

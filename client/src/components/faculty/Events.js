@@ -8,6 +8,10 @@ import Moment from 'react-moment'
 const Events = ({auth, event, getEvents, delEvent, interested, notInterested}) => {
 
     useEffect(() => {
+        document.title = 'Events - CRCE Social'
+    },[]);
+
+    useEffect(() => {
         getEvents();
     },[getEvents]);
 
@@ -17,6 +21,8 @@ const Events = ({auth, event, getEvents, delEvent, interested, notInterested}) =
                 <button className="btn btn-dark"><Link to="/my_events">Events For Me</Link></button>
                 <button className="btn btn-dark"><Link to="by_events">Events By Me</Link></button>
             </div>
+            {event.events.length > 0 ? 
+            <Fragment>
             {event.events.map(one =>(
                 <div key={one.id} className="events">
                     <div className="event-photo">
@@ -24,7 +30,9 @@ const Events = ({auth, event, getEvents, delEvent, interested, notInterested}) =
                             : <p>No image</p>}
                     </div>
                     <div className="event-details">
-                        <h1 className="heading">{one.heading}</h1>
+                        <h1 className="heading"><Link to={`/event/${one._id}`} className="links">
+                            {one.heading}
+                        </Link></h1>
                         <p className="desc">{one.desc}</p>
                         <div className="event-footer">
                             <div>
@@ -44,9 +52,6 @@ const Events = ({auth, event, getEvents, delEvent, interested, notInterested}) =
                             }
                             <span className="likes">{one.interested.length} people are interested</span>
                             {auth && auth.user.name === one.name && <Fragment>
-                                <button className="btn btn-light"><Link to={`/event/${one._id}`} className="links">
-                                    Check event details
-                                </Link></button>
                                 <button type="button" className="btn btn-red" onClick={() => delEvent(one._id)}>
                                     <i className="fa fa-trash"></i>
                                 </button>
@@ -56,6 +61,7 @@ const Events = ({auth, event, getEvents, delEvent, interested, notInterested}) =
                     </div>
                 </div>
             ))}
+            </Fragment> : <h1 className="heading">No Events To Show</h1>}
         </Fragment>
     )
 }

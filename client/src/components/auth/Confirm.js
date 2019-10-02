@@ -7,6 +7,7 @@ import {confirmEmail} from '../../actions/auth'
 const Confirm = ({confirmEmail, match}) => {
 
     useEffect(() => {
+        document.title = 'Email Confirmation - CRCE Social'
         confirmEmail(match.params.email, match.params.id)
     },[])
 

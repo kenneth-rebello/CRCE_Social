@@ -1,10 +1,14 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState, useEffect} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {createProfile} from '../../actions/profile'
 
 const CreateProfile = props => {
+
+    useEffect(() => {
+        document.title = 'Create A Profile - CRCE Social'
+    },[])
     
     const [displaySocialInputs, toggleSocialInputs] = useState(false);
 

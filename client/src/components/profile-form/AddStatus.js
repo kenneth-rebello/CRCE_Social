@@ -1,10 +1,14 @@
-import React, {useState, Fragment} from 'react'
+import React, {useState, Fragment, useEffect} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {addStatus} from '../../actions/profile'
 
 const AddStatus = ({addStatus, history}) => {
+
+    useEffect(() => {
+        document.title = 'Add Your Semester Results - CRCE Social'
+    },[])
 
     const [formData, setFormData] = useState({
         semester:'',

@@ -6,6 +6,10 @@ import {addSkill, removeSkill, getProfileById} from '../../actions/profile'
 
 const AddSkill = ({match, getProfileById, profile, addSkill, removeSkill}) => {
 
+    useEffect(() => {
+        document.title = 'Add/Remove A Skill - CRCE Social'
+    },[])
+
     const [formData, setFormData] = useState({
         skill:''
     });

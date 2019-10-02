@@ -102,9 +102,7 @@ router.get('/connected', auth, async function (req, res){
 
         const users = await User.find({_id: {$in: conn}});
         
-        const posts1 = await Post.find({approved:true, user:{$in: users}}).sort({ date: -1}).populate('likes.user',['name']);
-        const posts2 = await Post.find({approved:true, user:me._id}).sort({ date: -1}).populate('likes.user',['name']);
-        const posts = [...posts2, ...posts1]
+        const posts = await Post.find({approved:true, $or: [{user:{$in: users}}, {user:me._id}]}).sort({ date: -1}).populate('likes.user',['name']);
         return res.json(posts);
 
     } catch (err) {

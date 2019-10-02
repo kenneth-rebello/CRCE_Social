@@ -10,7 +10,8 @@ const Event = ({getEvent, sendReminder, sendCustomMail, event:{event, loading}, 
 
     useEffect(()=>{
         window.$('.modal').modal();
-    },[])
+        event && (document.title = `${event.heading}`)
+    },[event])
     useEffect(() => {
         getEvent(match.params.id);
     }, [getEvent])

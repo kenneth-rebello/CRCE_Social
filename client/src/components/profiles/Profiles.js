@@ -8,6 +8,10 @@ import ProfileItem from './ProfileItem';
 const Profiles = ({getAllProfiles, profile}) => {
 
     useEffect(() => {
+        document.title = 'All Profiles - CRCE Social'
+    },[])
+
+    useEffect(() => {
         getAllProfiles();
     }, [getAllProfiles]);
 

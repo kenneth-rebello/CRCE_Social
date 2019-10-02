@@ -19,6 +19,10 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, followUser, unfollo
     const [displayStatus, toggleStatus] = useState(false);
 
     useEffect(() => {
+        profile.profile && profile.profile.user && (document.title = `${profile.profile.user.name}`)
+    },[profile]);
+
+    useEffect(() => {
         getUserPosts(match.params.id);
         getProfileById(match.params.id);
     },[getUserPosts, getProfileById])

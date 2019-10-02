@@ -2,10 +2,14 @@ import React ,{Fragment, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {getByEvents, interested, notInterested} from '../../actions/event'
+import {getByEvents, delEvent, interested, notInterested} from '../../actions/event'
 import Moment from 'react-moment'
 
-const Events = ({auth, event, getByEvents, interested, notInterested}) => {
+const Events = ({auth, event, delEvent, getByEvents, interested, notInterested}) => {
+
+    useEffect(() => {
+        document.title = 'Events By Me - CRCE Social'
+    },[]);
 
     useEffect(() => {
         getByEvents();
@@ -16,6 +20,8 @@ const Events = ({auth, event, getByEvents, interested, notInterested}) => {
             <div className="events-btn-bar">
                 <button className="btn btn-dark"><Link to="/events">All Events</Link></button>
             </div>
+            {event.events.length > 0 ? 
+            <Fragment>
             {event.events.map(one =>(
                 <div key={one.id} className="events">
                     <div className="event-photo">
@@ -23,7 +29,9 @@ const Events = ({auth, event, getByEvents, interested, notInterested}) => {
                             : <p>No image</p>}
                     </div>
                     <div className="event-details">
-                        <h1 className="heading">{one.heading}</h1>
+                        <h1 className="heading"><Link to={`/event/${one._id}`} className="links">
+                            {one.heading}
+                        </Link></h1>
                         <p className="desc">{one.desc}</p>
                         <div className="event-footer">
                             <div>
@@ -42,14 +50,16 @@ const Events = ({auth, event, getByEvents, interested, notInterested}) => {
                                 </button>)
                             }
                             <span className="likes">{one.interested.length} people are interested</span>
-                            {auth && auth.user.name === one.name && <button className="btn btn-light"><Link to={`/event/${one._id}`} className="links">
-                                Check event details
-                            </Link></button>}
+                            {auth && auth.user.name === one.name && <Fragment>
+                                <button type="button" className="btn btn-red" onClick={() => delEvent(one._id)}>
+                                    <i className="fa fa-trash"></i>
+                                </button>
+                            </Fragment>}
                             </Fragment>)}
                         </div>                    
                     </div>
                 </div>
-            ))}
+            ))} </Fragment> : <h1 className="heading">No Events To Show</h1>}
         </Fragment>
     )
 }
@@ -60,6 +70,7 @@ Events.propTypes = {
     getByEvents: PropTypes.func.isRequired,
     interested: PropTypes.func.isRequired,
     notInterested: PropTypes.func.isRequired,
+    delEvent: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -67,4 +78,4 @@ const mapStateToProps = state => ({
     event: state.event
 })
 
-export default connect(mapStateToProps,{getByEvents, interested, notInterested})(Events)
+export default connect(mapStateToProps,{getByEvents, delEvent, interested, notInterested})(Events)

@@ -1,10 +1,14 @@
-import React, {useState, Fragment} from 'react'
+import React, {useState, Fragment, useEffect} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {editPicture} from '../../actions/profile'
 
 const EditPicture = ({editPicture, history}) => {
+
+    useEffect(() => {
+        document.title = 'Edit Your Profile Picture - CRCE Social'
+    },[])
 
     const [fileData, setFileData] = useState('');
     const [fileName, setFileName] = useState('');

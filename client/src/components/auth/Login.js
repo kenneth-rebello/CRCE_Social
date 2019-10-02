@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import {Link, Redirect} from  'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -6,6 +6,10 @@ import { login } from '../../actions/auth';
 
 
 const Login = (props) => {
+
+    useEffect(() => {
+        document.title = 'Login - CRCE Social'
+    },[]);
 
     const [ formData, setFormData ] = useState({
         email: '',

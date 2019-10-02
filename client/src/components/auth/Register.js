@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
@@ -7,6 +7,10 @@ import PropTypes from 'prop-types'
 
 
 const Register = ({register, setAlert, history, user, isAuth}) => {
+
+    useEffect(() => {
+        document.title = 'Register A New Account - CRCE Social'
+    },[]);
 
     const [ formData, setFormData ] = useState({
         name: '',

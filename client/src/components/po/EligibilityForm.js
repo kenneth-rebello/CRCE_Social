@@ -1,10 +1,14 @@
-import React, {useState, Fragment} from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
 import {generateList} from '../../actions/admin';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 const EligibilityForm = ({generateList, history}) => {
+
+    useEffect(() => {
+        document.title = 'Generate List Of Eligible Students For Placement-CRCE Social'
+    },[]);
 
     const [formData, setFormData] = useState({
         companyName:'',

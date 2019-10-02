@@ -9,6 +9,10 @@ import PostForm from './PostForm';
 const Posts = ({getPosts, post, auth}) => {
 
     useEffect(() => {
+        document.title="Posts - CRCE Social"
+    })
+
+    useEffect(() => {
         getPosts();
     },[getPosts]);
 

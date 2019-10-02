@@ -1,4 +1,4 @@
-import React ,{Fragment}from 'react';
+import React ,{Fragment, useEffect}from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
@@ -8,6 +8,10 @@ const Eligible = ({eligible}) => {
 
     const {loading, students} = eligible;
     const company = students.shift()
+
+    useEffect(() => {
+        company && (document.title=`Eligible Students For ${company.company}`)
+    },[company]);
 
     if(students.length<=0){
         return <Redirect to="/po_form"/>

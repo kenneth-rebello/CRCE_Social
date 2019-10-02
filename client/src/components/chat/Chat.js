@@ -51,6 +51,7 @@ class Chat extends React.Component {
     }
 
     componentDidMount (){
+        document.title = 'Chat - CRCE Social'
         socket.emit("initial_data" ,null);
         socket.on("get_data", this.getData);
         socket.on("change_data", this.changeData);
