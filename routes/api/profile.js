@@ -55,10 +55,14 @@ router.post('/', [auth], async function(req, res){
         instagram
     } = req.body;
 
+    let dOb = new Date(dateOfBirth)
+
     //Build Profile Object
     const ProfileFields = {};
     ProfileFields.user = req.user.id;
     if(dateOfBirth) ProfileFields.dateOfBirth = dateOfBirth;
+    let birthday =dOb.getDate().toString()+'-'+(dOb.getMonth()+1).toString()
+    ProfileFields.birthday = birthday;
     if(contact) ProfileFields.contact = contact;
     if(location) ProfileFields.location = location;
     if(position) ProfileFields.position = position;

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { setAlert } from './alert'
-import { ADD_EVENT, EVENT_ERROR, GET_EVENTS, GET_EVENT, UPDATE_INTERESTS, DELETE_EVENT } from './types';
+import {eventNotif} from './notif'
+import { ADD_EVENT, EVENT_ERROR, GET_EVENTS, GET_EVENT, UPDATE_INTERESTS, DELETE_EVENT, CLEAN } from './types';
 
 export const addEvent = (formData, history) => async dispatch =>{
 
@@ -20,7 +21,7 @@ export const addEvent = (formData, history) => async dispatch =>{
         });
 
         dispatch(setAlert('Event Created', 'success'));
-
+        dispatch(eventNotif(res.data));
         history.push('/events');
 
     } catch (err) {
@@ -33,6 +34,8 @@ export const addEvent = (formData, history) => async dispatch =>{
 
 
 export const getEvents = () => async dispatch => {
+
+    dispatch({type: CLEAN});
 
     try {
 
@@ -110,7 +113,7 @@ export const delEvent = id => async dispatch => {
     if(window.confirm('Are you sure? This can NOT be undone.')){
         try {
             
-            const res = await axios.delete(`/api/event/${id}`);
+            await axios.delete(`/api/event/${id}`);
             
             dispatch({
                 type:DELETE_EVENT,

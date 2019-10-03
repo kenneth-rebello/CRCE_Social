@@ -1,4 +1,4 @@
-import {GET_PENDING_POSTS, GET_PENDING_USERS, PENDING_ERROR, REMOVE_PENDING} from '../actions/types';
+import {GET_PENDING_POSTS, GET_PENDING_USERS, PENDING_ERROR, REMOVE_PENDING, CLEAN} from '../actions/types';
 
 const initialState = {
     posts: [],
@@ -35,6 +35,12 @@ export default function(state = initialState, action){
                 ...state,
                 users: state.users.filter(each => each._id !== payload),
                 loading:false
+            }
+        case CLEAN:
+            return{
+                ...state,
+                users:[],
+                posts:[]
             }
         default:
             return state;

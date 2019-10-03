@@ -16,7 +16,7 @@ const PostPage = ({auth, post, addLike, removeLike, approvePost, deletePost}) =>
     },[])
 
 
-    let { _id, text, upload, approved, name, picture, user, likes, comments, date } = post;
+    let { _id, text, upload, approved, name, picture, user, likes, date } = post;
 
     return (
         <Fragment>
@@ -69,7 +69,7 @@ const PostPage = ({auth, post, addLike, removeLike, approvePost, deletePost}) =>
                 <div class="modal-content">
                     <h4 className='heading'>Likes</h4>
                     <table>
-                        {likes.map((like) => (
+                        {likes.length> 0 && likes.map((like) => (
                             <Fragment>
                                 <tr>
                                     <td><Link to={`/profile/${like.user._id}`}>{like.user.name}</Link></td>

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {setAlert} from './alert';
-import { GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE,ACCOUNT_DELETED, CLEAR_PROFILE, GET_PROFILES} from './types';
-import { body } from 'express-validator';
+import { GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE,ACCOUNT_DELETED, CLEAR_PROFILE, GET_PROFILES, CLEAN} from './types';
 
 
 export const getCurrentProfile = () => async dispatch => {
@@ -23,6 +22,7 @@ export const getCurrentProfile = () => async dispatch => {
 export const getAllProfiles = () => async dispatch => {
 
     try {
+        dispatch({type: CLEAN});
         const res = await axios.get('/api/profile');
 
         dispatch({type: CLEAR_PROFILE});

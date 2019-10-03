@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import PostItem from '../posts/PostItem';
@@ -13,7 +13,7 @@ const UserPosts = ({auth, post, profile:{profile}}) => {
             <h1 className="heading">Posts By {user.name.trim().split(' ')[0]}</h1>
             <div className="posts">
                 {post.posts.length<=0 && <h1 className="heading">No Posts To Show</h1>}
-                {post.posts.length<=0 && auth.user._id == user._id && <PostForm/>}
+                {post.posts.length<=0 && auth.user._id === user._id && <PostForm/>}
                 {!post.loading && post.posts.map(postitem => (
                     <PostItem key={postitem._id} post={postitem}/>
                 ))}

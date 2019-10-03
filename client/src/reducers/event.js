@@ -1,4 +1,4 @@
-import {ADD_EVENT, EVENT_ERROR, DELETE_EVENT, GET_EVENTS, GET_EVENT, UPDATE_INTERESTS} from '../actions/types';
+import {ADD_EVENT, EVENT_ERROR, DELETE_EVENT, GET_EVENTS, GET_EVENT, UPDATE_INTERESTS, CLEAN} from '../actions/types';
 
 const initialState = {
     events: [],
@@ -47,6 +47,12 @@ export default function(state = initialState, action){
                 ...state,
                 events: state.events.map(event => event._id === payload.id ? {...event, interested:payload.interested} : event),
                 loading:false
+            }
+        case CLEAN:
+            return{
+                ...state,
+                events:[],
+                event: null
             }
         default:
             return state;

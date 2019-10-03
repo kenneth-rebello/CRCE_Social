@@ -16,7 +16,7 @@ const Post = ({getPost, getPosts, post:{post, loading}, match}) => {
     useEffect(()=> {
         getPosts()
         getPost(match.params.id);
-    },[getPost, getPosts])
+    },[getPost, getPosts, match])
 
     return (
         <div className="single-post">

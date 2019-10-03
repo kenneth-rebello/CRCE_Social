@@ -1,11 +1,9 @@
 import React,{Fragment, useState} from 'react'
-import PropTypes from 'prop-types'
-import {Link} from 'react-router-dom'
 
 const ProfileTop = ({ profile }) => {
 
     let {position, location, social, user ,contact, picture} = profile;
-    let { name, avatar, year, branch, email } = user;
+    let { name, year, branch, email } = user;
 
     const [showLinkedin, toggleLinkedin] = useState(false);
     const [showGithub, toggleGithub] = useState(false);
@@ -21,6 +19,7 @@ const ProfileTop = ({ profile }) => {
             <div className="profile-top bg-primary p-2">
                 { picture && <img className="round-img" src={require(`../../../public/profile-pictures/${picture}`)} alt=""/>}
                 <h1 className="heading">{name}</h1>
+                <p>{position}</p>
                 <p>{year} - {branch}</p>
                 <p>{location}</p>
                 <div className="profile-contact">
@@ -34,14 +33,14 @@ const ProfileTop = ({ profile }) => {
                     <button className="btn btn-dark" onClick={() => toggleMail(!showMail)}><i className="fa fa-envelope"></i></button>
                 </div>
                 <div className="contact-details">
-                    {showLinkedin && social && social.linkedin && <a href={`${social.linkedin}`} target='_blank'>{social.linkedin}</a>}
-                    {showGithub && social && social.github && <a  href={`${social.github}`} target='_blank'>{social.github}</a>}
-                    {showTwitter && social && social.twitter && <a  href={`${social.twitter}`} target='_blank'>{social.twitter}</a>}
-                    {showFB && social &&  social.facebook && <a  href={`${social.facebook}`} target='_blank'>{social.facebook}</a>}
-                    {showInsta && social && social.instagram && <a  href={`${social.instagram}`} target='_blank'>{social.instagram}</a>}
-                    {showYoutube && social && social.youtube && <a  href={`${social.youtube}`} target='_blank'>{social.youtube}</a>}
-                    {showMobile && contact && <a target='_blank'>{contact[0]}</a>}
-                    {showMail && email && <a  href={`mailto:${email}`} target='_blank'>{email}</a>}
+                    {showLinkedin && social && social.linkedin && <a href={`${social.linkedin}`} target='_blank' rel="noopener noreferrer">{social.linkedin}</a>}
+                    {showGithub && social && social.github && <a  href={`${social.github}`} target='_blank' rel="noopener noreferrer">{social.github}</a>}
+                    {showTwitter && social && social.twitter && <a  href={`${social.twitter}`} target='_blank' rel="noopener noreferrer">{social.twitter}</a>}
+                    {showFB && social &&  social.facebook && <a  href={`${social.facebook}`} target='_blank' rel="noopener noreferrer">{social.facebook}</a>}
+                    {showInsta && social && social.instagram && <a  href={`${social.instagram}`} target='_blank' rel="noopener noreferrer">{social.instagram}</a>}
+                    {showYoutube && social && social.youtube && <a  href={`${social.youtube}`} target='_blank' rel="noopener noreferrer">{social.youtube}</a>}
+                    {showMobile && contact && <p>{contact[0]}</p>}
+                    {showMail && email && <a  href={`mailto:${email}`} target='_blank' rel="noopener noreferrer">{email}</a>}
                 </div>
             </div>
         </Fragment>

@@ -337,18 +337,18 @@
 .profile-about{
   background-color: white;
   display: grid;
-  grid-template-rows: auto 60px 100px;
+  grid-template-columns: 1fr 1fr;
   row-gap: 5px;
   justify-items: center;
 }
 
-.profile-about .heading{
-  color: goldenrod;
-  font-size:40px;
+.profile-about .skill-set{
+  border-left: solid 1px black;
+  padding:2%;
 }
 
 .profile-about .skills{
-  font-size:25px;
+  font-size:1.5rem;
 }
 
 .profile-about .bio{
@@ -356,12 +356,19 @@
   justify-items: center;
   grid-template-rows: 60px auto;
   row-gap: 1px;
-  font-size: 30px;
+  font-size: 1.5rem;
+  padding:2%;
 }
 
 .skills li{
   display: inline;
   padding:5px;
+}
+
+.profile-about .heading{
+  color: goldenrod;
+  font-size:2rem;
+  justify-self: left;
 }
 
 /* Posts */
@@ -450,6 +457,7 @@
 
 .user-posts{
   display: grid;
+  justify-self: center;
   grid-template-rows: 100px auto;
 }
 
@@ -615,35 +623,45 @@
   margin-top:15px;
 }
 
-.userlist .singlechatbtn{
+.singlechatbtn {
+  width: 100%;
+}
+
+.userlist .singlechat{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   max-height: 150px;
   width:100%;
   background-color: whitesmoke;
   border: solid;
 }
 
-.userlist .singlechatbtn:active{
+.userlist .singlechat:active{
   background-color: lightseagreen;
 }
 
-.userlist .singlechatbtn img{
+.userlist .singlechat img{
   height: 100px;
   width:100px;
-  margin:5px;
-  float:left;
+  margin:2%;
 }
-
-.userlist .singlechatbtn .username{
-  font-size: 20px;
-  float:right;
-}  
+  
+.userlist .singlechat .username{
+  font-size: 1rem;
+}
 
 .messages{
   display: grid;
-  grid-template-rows: 490px 50px;
+  grid-template-rows: 100px 400px 50px;
   height: 100%;
   margin: 10px;
   margin-bottom: 5px; 
+}
+
+.messages .userhead{
+  font-size: 2rem;
+  color:goldenrod;
+  padding:0;
 }
 
 .message-list{
@@ -733,6 +751,12 @@
 .single-notif .notif-details p{
   font-size: 1.5rem;
 }
+
+.single-notif .notif-details p i{
+  font-size: 2.5rem;
+  color: goldenrod;
+}
+
 
 /* Dashboard */
 
@@ -980,6 +1004,7 @@ input:focus::placeholder{
   z-index:100;
   background-color: lightseagreen;
   border-style: outset;
+  cursor: pointer;
 }
 
 .dropdown {

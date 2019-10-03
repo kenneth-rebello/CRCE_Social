@@ -8,8 +8,10 @@ const Userlist = ({auth, chat, loadChatUserTo, socket}) => {
         <div className="userlist">
             {!chat.loading&& !auth.loading && chat.users.map(user => (
                 <button onClick={(e)=> loadChatUserTo(user.user, auth.user, socket)} className="singlechatbtn">
-                    <div>{user.picture && <img src={require(`../../../public/profile-pictures/${user.picture}`)}></img>}</div>
-                    <h1 className="username">{user.user.name}</h1>
+                    <div className="singlechat">
+                        {user.picture && <img src={require(`../../../public/profile-pictures/${user.picture}`)} alt='...'></img>}
+                        <h1 className="username">{user.user.name}</h1>
+                    </div>
                 </button>
             ))}
         </div>

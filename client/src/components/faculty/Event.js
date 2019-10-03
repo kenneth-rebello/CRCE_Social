@@ -14,7 +14,7 @@ const Event = ({getEvent, sendReminder, sendCustomMail, event:{event, loading}, 
     },[event])
     useEffect(() => {
         getEvent(match.params.id);
-    }, [getEvent])
+    }, [getEvent, match])
 
     const Mailer = e =>{
         setMsg(e.target.value);
@@ -31,7 +31,7 @@ const Event = ({getEvent, sendReminder, sendCustomMail, event:{event, loading}, 
             {loading || event===null ? <Spinner/> : (<Fragment>
                 <div className="events">
                     <div className="event-photo">
-                        {!loading && event.upload ? <img src={require(`../../../public/events/${event.upload}`)}/> 
+                        {!loading && event.upload ? <img src={require(`../../../public/events/${event.upload}`)} alt='...'/> 
                             : <p>No image</p>}
                     </div>
                     <div className="event-details">

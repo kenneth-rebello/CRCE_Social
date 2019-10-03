@@ -47,3 +47,5 @@ export const GET_NOTIFS = "GET_NOTIFS";
 export const GET_UNSEEN_NOTIFS = "GET_UNSEEN_NOTIFS"; 
 export const ADD_NOTIF = "ADD_NOTIF";
 export const REMOVE_NOTIF = "REMOVE_NOTIF";
+export const NOTIF_ERROR = "NOTIF_ERROR";
+export const CLEAN  = "CLEAN";

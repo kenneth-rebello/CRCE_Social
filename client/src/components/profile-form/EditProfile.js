@@ -39,9 +39,9 @@ const EditProfile = ({profile: {profile, loading}, createProfile, getCurrentProf
             dateOfBirth: loading || !profile.dateOfBirth? '' : profile.dateOfBirth,
             bio: loading || !profile.bio ? '' : profile.bio,
         });
-    }, [loading]);
+    }, [getCurrentProfile, profile, loading]);
 
-    let { contact, dateOfBirth, location, achievements, position, 
+    let { contact, dateOfBirth, location,  position, 
         github, bio,twitter,facebook,youtube,instagram, linkedin} = formData;
 
     const Changer = e =>{

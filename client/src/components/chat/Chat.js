@@ -1,5 +1,6 @@
 import React,{Fragment} from 'react'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
 import io from "socket.io-client"
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
@@ -35,6 +36,8 @@ class Chat extends React.Component {
 
     getData = allMsgs => {
         allMsgs && this.props.actions.updateMessageState(allMsgs);
+        let obj = document.getElementById('get-down');
+        obj && (obj.scrollTop = obj.scrollHeight - obj.clientHeight + 1500);
     }
 
     changeData = () => {
@@ -42,6 +45,8 @@ class Chat extends React.Component {
         data.to = !this.props.chat.loading && this.props.chat.to._id;
         data.from = !this.props.auth.loading && this.props.auth.user._id;
         socket.emit('initial_data', data)
+        let obj = document.getElementById('get-down');
+        obj && (obj.scrollTop = obj.scrollHeight - obj.clientHeight + 1500);
     }
 
     handleKeyDown = (e) => {
@@ -56,6 +61,8 @@ class Chat extends React.Component {
         socket.on("get_data", this.getData);
         socket.on("change_data", this.changeData);
         this.props.actions.getAllChatUsers();
+        let obj = document.getElementById('get-down');
+        obj && (obj.scrollTop = obj.scrollHeight - obj.clientHeight );
     }
 
     componentWillUnmount() {
@@ -73,8 +80,10 @@ class Chat extends React.Component {
                     <Userlist socket={socket}/>
                 </div>
                 <div className="messages">
-                    <div className="message-list">
-                        <h1 className="userhead">{this.props.chat.to && this.props.chat.to.name}</h1>
+                    {this.props.chat.to && <h1 className="userhead heading"><Link to={`/profile/${this.props.chat.to._id}`}>
+                        {this.props.chat.to.name}
+                    </Link></h1>}
+                    <div className="message-list" id="get-down">
                         {!this.props.chat.loading && this.props.chat.messages.map(msg => (
                             <Fragment>
                                 {!this.props.auth.loading && this.props.auth.user._id === msg.user._id ? <div className="message msg-me">

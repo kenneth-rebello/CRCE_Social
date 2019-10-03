@@ -29,7 +29,7 @@ const CreateProfile = props => {
         instagram:''
     })
 
-    let { contact, dateOfBirth, location, skills, achievements, position, 
+    let { contact, dateOfBirth, location, skills, position, 
         github, bio,twitter,facebook,youtube,instagram, linkedin} = formData;
 
     const Changer = e =>{

@@ -1,4 +1,4 @@
-import {GET_ELIGIBLE_USERS} from '../actions/types';
+import {GET_ELIGIBLE_USERS, CLEAN} from '../actions/types';
 
 const initialState = {
     students:[],
@@ -15,6 +15,11 @@ export default function(state = initialState, action){
                 ...state,
                 students: payload,
                 loading:false
+            }
+        case CLEAN:
+            return{
+                ...state,
+                students:[]
             }
         default:
             return state;

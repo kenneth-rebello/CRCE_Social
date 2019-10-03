@@ -9,6 +9,9 @@ const ProfileSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
+    birthday:{
+        type: String
+    },
     picture:{
         type: String
     },

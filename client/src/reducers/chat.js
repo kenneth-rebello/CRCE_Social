@@ -1,4 +1,4 @@
-import {ADD_MESSAGE, MESSAGE_RECEIVED, GET_MSGS, GET_CHAT_USERS, LOAD_CHAT_TO} from '../actions/types';
+import {ADD_MESSAGE, CLEAN, GET_MSGS, GET_CHAT_USERS, LOAD_CHAT_TO} from '../actions/types';
 
 const initialState = {
     to: null,
@@ -35,6 +35,12 @@ export default function(state = initialState, action){
                 ...state,
                 to: payload,
                 loading:false
+            }
+        case CLEAN:
+            return{
+                ...state,
+                users:[],
+                messages:[]
             }
         default:
             return state;

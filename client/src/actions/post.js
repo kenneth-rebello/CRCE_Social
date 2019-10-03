@@ -1,10 +1,11 @@
 import axios from 'axios';
 import {setAlert} from './alert';
-import {GET_POSTS, GET_POST, POST_ERROR, ADD_POST, CLEAR_POSTS, UPDATE_LIKES, GET_PENDING_POSTS, GET_PENDING_USERS, PENDING_ERROR, DELETE_POST, ADD_COMMENT, REMOVE_COMMENT} from './types';
+import {likeNotif} from './notif';
+import {GET_POSTS, GET_POST, POST_ERROR, ADD_POST, UPDATE_LIKES, GET_PENDING_POSTS, PENDING_ERROR, DELETE_POST, ADD_COMMENT, REMOVE_COMMENT, CLEAN} from './types';
 
 export const getPosts = () => async dispatch => {
     try {
-        
+        dispatch({type: CLEAN});
         const res = await axios.get('/api/posts');
 
         dispatch({
@@ -101,7 +102,7 @@ export const deletePost = id => async dispatch => {
     if(window.confirm('Are you sure? This can NOT be undone.')){
         try {
             
-            const res = await axios.delete(`/api/posts/${id}`);
+            await axios.delete(`/api/posts/${id}`);
             
             dispatch({
                 type:DELETE_POST,
@@ -128,6 +129,8 @@ export const addLike = (postId) => async dispatch => {
             type:UPDATE_LIKES,
             payload: {id:postId, likes: res.data}
         })
+
+        dispatch(likeNotif(postId));
     } catch (err) {
         dispatch({
             type: POST_ERROR,
@@ -184,7 +187,7 @@ export const deleteComment = (postId, commentId) => async dispatch => {
    
     if(window.confirm('Are you sure? This can NOT be undone.')){
         try {
-            const res = await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
+            await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
 
             dispatch({
                 type: REMOVE_COMMENT,
@@ -205,7 +208,7 @@ export const deleteComment = (postId, commentId) => async dispatch => {
 
 export const getPendingPosts = () => async dispatch => {
     try {
-        
+        dispatch({type: CLEAN});
         const res = await axios.get('/api/admin/posts');
 
         dispatch({

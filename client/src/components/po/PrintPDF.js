@@ -2,7 +2,7 @@ import React,{Fragment}from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom';
-import { Document, Page, Text, View,Image, PDFViewer, StyleSheet} from '@react-pdf/renderer'
+import { Document, Page, Text, View, PDFViewer, StyleSheet} from '@react-pdf/renderer'
 import Spinner from '../layouts/Spinner'
 
 const PrintPDF = ({eligible}) => {

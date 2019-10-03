@@ -1,7 +1,7 @@
 import React ,{Fragment,useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {getCurrentProfile} from '../../actions/profile';
 import {getConnectionPosts} from '../../actions/post';
 import {setAlert} from '../../actions/alert'

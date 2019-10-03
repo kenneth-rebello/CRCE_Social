@@ -26,7 +26,7 @@ const Events = ({auth, event, getEvents, delEvent, interested, notInterested}) =
             {event.events.map(one =>(
                 <div key={one.id} className="events">
                     <div className="event-photo">
-                        {!event.loading && one.upload ? <img src={require(`../../../public/events/${one.upload}`)}/> 
+                        {!event.loading && one.upload ? <img src={require(`../../../public/events/${one.upload}`)} alt='...'/> 
                             : <p>No image</p>}
                     </div>
                     <div className="event-details">

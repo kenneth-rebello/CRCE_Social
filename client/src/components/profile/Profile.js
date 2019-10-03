@@ -25,7 +25,7 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, followUser, unfollo
     useEffect(() => {
         getUserPosts(match.params.id);
         getProfileById(match.params.id);
-    },[getUserPosts, getProfileById])
+    },[getUserPosts, getProfileById, match])
     
     return (
         <Fragment>

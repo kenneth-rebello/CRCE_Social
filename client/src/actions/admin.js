@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { GET_PENDING_USERS, PENDING_ERROR, GET_ELIGIBLE_USERS, REMOVE_PENDING, REMOVE_PROFILE } from './types';
+import { GET_PENDING_USERS, PENDING_ERROR, GET_ELIGIBLE_USERS, REMOVE_PENDING, REMOVE_PROFILE, CLEAN } from './types';
 import { getPendingPosts, getPosts} from './post';
 import {setAlert} from './alert';
 
 export const approvePost = (postId) => async dispatch =>{
     try {
 
-        const res = await axios.get(`/api/admin/approve/post/${postId}`);
+        await axios.get(`/api/admin/approve/post/${postId}`);
         
         dispatch(getPendingPosts());
         dispatch(getPosts());
@@ -22,7 +22,7 @@ export const approvePost = (postId) => async dispatch =>{
 export const approveUser = (userId) => async dispatch =>{
     try {
 
-        const res = await axios.get(`/api/admin/approve/user/${userId}`);
+        await axios.get(`/api/admin/approve/user/${userId}`);
         
         dispatch(getPendingUsers());
         
@@ -57,6 +57,8 @@ export const rejectUser = (id) => async dispatch => {
 
 export const getPendingUsers = () => async dispatch => {
     try {
+
+        dispatch({type: CLEAN})
         
         const res = await axios.get('/api/admin/users');
 
@@ -76,7 +78,7 @@ export const getPendingUsers = () => async dispatch => {
 export const delUser = (id) => async dispatch => {
     try {
         
-        const res = await axios.delete(`/api/admin/user/${id}`);
+        await axios.delete(`/api/admin/user/${id}`);
 
         dispatch({
             type: REMOVE_PROFILE,

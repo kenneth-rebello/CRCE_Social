@@ -17,6 +17,13 @@ const notifSchema = new mongoose.Schema({
     seen:{
         type: Boolean,
         default: false
+    },
+    refer:{
+        type: String
+    },
+    to:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
     }
 });
 

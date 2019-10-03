@@ -16,7 +16,7 @@ const AddSkill = ({match, getProfileById, profile, addSkill, removeSkill}) => {
 
     useEffect(() => {
         getProfileById(match.params.id);
-    },[getProfileById])
+    },[getProfileById, match])
 
     const {skill} = formData;
 

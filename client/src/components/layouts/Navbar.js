@@ -8,9 +8,11 @@ import { getUnseenNotifs } from '../../actions/notif';
 
 const Navbar = (props) => {
 
+    const {getUnseenNotifs} = props;
+
     useEffect(() => {
-        props.getUnseenNotifs();
-    },[props.getUnseenNotifs])
+        getUnseenNotifs();
+    },[getUnseenNotifs, props.notif])
 
     const [displayNav, toggleNav] = useState(false)
 

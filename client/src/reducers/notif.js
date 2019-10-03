@@ -1,8 +1,9 @@
-import {GET_NOTIFS, ADD_NOTIF, REMOVE_NOTIF, GET_UNSEEN_NOTIFS} from '../actions/types';
+import {GET_NOTIFS, ADD_NOTIF, REMOVE_NOTIF, GET_UNSEEN_NOTIFS, NOTIF_ERROR, CLEAN} from '../actions/types';
 
 const initialState = {
     tray: [],
     unseen: [],
+    error:[],
     loading: true
 }
 
@@ -28,6 +29,23 @@ export default function(state = initialState, action){
                 ...state,
                 tray: [...state.tray, payload]
             }
+        case REMOVE_NOTIF:
+            return{
+                ...state,
+                tray: state.tray.filter(notif => notif._id !== payload),
+                loading: false
+            }
+        case CLEAN:
+            return{
+                ...state,
+                tray: []
+            }
+        case NOTIF_ERROR:
+            return{
+                ...state,
+                error: payload,
+                loading:false
+            };
         default:
             return state
     }
