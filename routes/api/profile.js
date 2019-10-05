@@ -430,5 +430,35 @@ router.put('/skill/remove', auth, async function(req, res){
     }
 });
 
+router.post('/search', auth, async function(req, res){
+    try {
+        
+        const users = await User.find({name:{$regex: req.body.terms}});
+        
+        const profiles = await Profile.find({user: {$in: users}}).populate('user', ['name','approved','year','branch']);
+        
+        res.json(profiles);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+})
+
+router.get('/following/:id', auth, async function(req, res){
+
+    try {
+        
+        const user = await User.findById(req.params.id);
+
+        const friends = await Profile.find({_id: {$in: user.following}}).populate('user',['name','approved','year','branch']);
+        
+        res.json(friends);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server error');
+    }
+
+})
 
 module.exports = router;

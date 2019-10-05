@@ -49,7 +49,6 @@ router.get('/reject/user/:id', auth, async (req, res) => {
 
     await Profile.findOneAndRemove({_id: profile._id})
     await User.findOneAndRemove({_id: profile.user._id})
-    console.log(profile);
 
     res.json(profile);
 });

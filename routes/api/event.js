@@ -51,8 +51,6 @@ async function(req,res){
 
     const user = await User.findById(req.user.id).select('-password');
     if(req.files){
-
-        console.log(req.files);
         
         const file = req.files.file;
         const fileName = `crceSocialevent${Date.now()}${file.name}`

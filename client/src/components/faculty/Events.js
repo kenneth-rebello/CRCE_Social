@@ -30,9 +30,11 @@ const Events = ({auth, event, getEvents, delEvent, interested, notInterested}) =
                             : <p>No image</p>}
                     </div>
                     <div className="event-details">
-                        <h1 className="heading"><Link to={`/event/${one._id}`} className="links">
+                        {auth && auth.user && auth.user.name === one.name ? <h1 className="heading"><Link to={`/event/${one._id}`}>
                             {one.heading}
-                        </Link></h1>
+                        </Link></h1>:<h1 className="heading">
+                            {one.heading}
+                        </h1>}
                         <p className="desc">{one.desc}</p>
                         <div className="event-footer">
                             <div>

@@ -40,8 +40,6 @@ export const rejectUser = (id) => async dispatch => {
         
         const res = await axios.get(`/api/admin/reject/user/${id}`);
 
-        console.log(res);
-
         dispatch({
             type: REMOVE_PENDING,
             payload: res.data._id

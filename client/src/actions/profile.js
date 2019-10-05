@@ -255,7 +255,7 @@ export const removeSkill = (skill) => async dispatch => {
                 'Content-Type': 'application/json'
             }
         }
-        console.log(skill)
+        
         const body = {};
         body.skill = skill;
 
@@ -294,4 +294,35 @@ export const delAccount = () => async dispatch => {
             });
         }
     }
+}
+
+export const searchProfiles = (terms) => async dispatch => {
+
+    let config = {
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    }
+
+    let body = {}
+    body.terms = terms;
+
+    const res = await axios.post('/api/profile/search', body, config);
+
+    dispatch({
+        type: GET_PROFILES,
+        payload: res.data
+    });
+
+}
+
+export const getFollowing = (userID) => async dispatch => {
+
+    const res = await axios.get(`/api/profile/following/${userID}`);
+
+    dispatch({
+        type: GET_PROFILES,
+        payload: res.data
+    })
+
 }

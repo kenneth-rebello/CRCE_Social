@@ -1,25 +1,19 @@
-import React, {Fragment, useEffect} from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React ,{useEffect, Fragment} from 'react'
+import PropTypes from 'prop-types'
+import {getFollowing} from '../../actions/profile';
+import {connect} from 'react-redux'
+import ProfileItem from '../profiles/ProfileItem';
 import Spinner from '../layouts/Spinner';
-import {getAllProfiles} from '../../actions/profile';
-import ProfileItem from './ProfileItem';
-import SearchProfile from './SearchProfile';
 
-const Profiles = ({getAllProfiles, profile}) => {
+const Following = ({profile, getFollowing, match}) => {
 
     useEffect(() => {
-        document.title = 'All Profiles - CRCE Social'
+        getFollowing(match.params.id)
     },[])
-
-    useEffect(() => {
-        getAllProfiles();
-    }, [getAllProfiles]);
 
     return (
         <Fragment>
-            <SearchProfile/>
-            {profile.loading ? <Spinner/> : (<div className="all-profiles">
+            {!profile.loading && profile.profiles ? (<div className="all-profiles">
                 <h1 className="heading">All Users</h1>
                 <div className="profiles">
                     {profile.profiles.length<=0 || !profile ? 
@@ -30,18 +24,18 @@ const Profiles = ({getAllProfiles, profile}) => {
                         ))
                     )}
                 </div>
-            </div>)}
+            </div>): <Spinner/> }
         </Fragment>
     )
 }
 
-Profiles.propTypes = {
+Following.propTypes = {
+    getFollowing: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
-    getAllProfiles: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
     profile: state.profile
-});
+})
 
-export default connect(mapStateToProps, {getAllProfiles})(Profiles)
+export default connect(mapStateToProps, {getFollowing})(Following)

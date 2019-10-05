@@ -16,6 +16,7 @@ import AddStatus from './components/profile-form/AddStatus';
 import EditPicture from './components/profile-form/EditPicture';
 import Profiles from './components/profiles/Profiles'
 import Profile from './components/profile/Profile'
+import Following from './components/profile/Following';
 import Posts from './components/posts/Posts'
 import Post from './components/post/Post';
 import AdminDash from './components/admin/AdminDash';
@@ -60,6 +61,7 @@ const App = () => {
               <Route exact path="/confirm/:email/:id" component={Confirm}/>
               <PrivateRoute exact path="/profiles" component={Profiles}/>
               <PrivateRoute exact path="/profile/:id" component={Profile}/>
+              <PrivateRoute exact path="/following/:id" component={Following}/>
               <PrivateRoute exact path="/notifs" component={Notifications}/>
               <PrivateRoute exact path="/admindash" component={AdminDash}/>
               <PrivateRoute exact path="/dashboard" component={Dashboard}/>

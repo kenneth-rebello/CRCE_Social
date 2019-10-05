@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import {getMyEvents} from '../../actions/event'
 import Moment from 'react-moment'
 
-const MyEvents = ({event, getMyEvents}) => {
+const MyEvents = ({auth, event, getMyEvents}) => {
 
     useEffect(() => {
         document.title = 'Events For Me - CRCE Social'
@@ -29,9 +29,11 @@ const MyEvents = ({event, getMyEvents}) => {
                             : <p>No image</p>}
                     </div>
                     <div className="event-details">
-                        <h1 className="heading"><Link to={`/event/${one._id}`} className="links">
+                        {auth && auth.user && auth.user.name === one.name ? <h1 className="heading"><Link to={`/event/${one._id}`}>
                             {one.heading}
-                        </Link></h1>
+                        </Link></h1>:<h1 className="heading">
+                            {one.heading}
+                        </h1>}
                         <p className="desc">{one.desc}</p>
                         <span className="event-date">Date: <Moment format='DD/MM/YYYY'>{one.date}</Moment></span>
                         <span className="event-by">Created By: {one.name}</span>
@@ -44,11 +46,13 @@ const MyEvents = ({event, getMyEvents}) => {
 
 MyEvents.propTypes = {
     event: PropTypes.object.isRequired,
+    auth:PropTypes.object.isRequired,
     getMyEvents: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
-    event: state.event
+    event: state.event,
+    auth: state.auth
 })
 
 export default connect(mapStateToProps,{getMyEvents})(MyEvents)

@@ -45,22 +45,6 @@ export const updateMessageState = (allmsgs) => async dispatch => {
     })
 }
 
-// export const loadChat = (me, to) => async dispatch => {
-
-//     const config = {
-//         headers:{
-//             'Content-Type': 'application/json'
-//         }
-//     }
-
-//     let body={}
-//     body.me = me;
-//     body.to = to;
-
-//     const res = await axios.get('/api/chat/load', body, config);
-
-
-// } 
 
 export const loadChatUserTo = (user, me, socket) => dispatch => {
 

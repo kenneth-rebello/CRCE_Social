@@ -56,6 +56,9 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, followUser, unfollo
                                     Follow
                                 </button> }
                         </Fragment>)}
+                        {auth && auth.user && <button className="btn btn-dark"><Link to={`/following/${profile.profile.user._id}`}>
+                            Following
+                        </Link></button>}
                     </div>
                     <ProfileAbout profile={profile.profile}/>
 
