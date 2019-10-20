@@ -54,7 +54,7 @@ const PostItem = ({auth, post, addLike, removeLike, approvePost, deletePost}) =>
                                 <i className="fa fa-trash"></i>
                             </button>
                         }
-                        {auth.user.admin && !approved &&
+                        {auth && auth.user && auth.user.admin && !approved &&
                             <button onClick={() => approvePost(_id)} className="btn btn-green">Approve</button>
                         }
                     </div>

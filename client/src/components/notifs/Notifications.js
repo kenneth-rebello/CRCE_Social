@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import Img from 'react-image'
 import {Link} from 'react-router-dom';
 import {getNotifs, deleteNotif} from '../../actions/notif'
 import Moment from 'react-moment'
@@ -17,7 +18,7 @@ const Notifications = ({notif, getNotifs, deleteNotif}) => {
         <div className="notifs">
             {notif && notif.tray.map(each => (
             <div className="single-notif" key={each._id}>
-                {each.picture ? <div><img src={require(`../../../public/profile-pictures/${each.picture}`)} alt='...'></img></div>
+                {each.picture ? <div><Img src={require(`../../../public/profile-pictures/${each.picture}`)} alt='...'/></div>
                 : <div></div>}
                 <div className="notif-details">
                     <p>{each.kind === "msg" && <i className="fa fa-inbox"></i>}

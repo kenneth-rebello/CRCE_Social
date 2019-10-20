@@ -225,7 +225,7 @@ router.post('/picture', auth, async (req, res) => {
 
     const profile = await Profile.findOne({user: req.user.id}).populate('user',['name']);
     const file = req.files.file;
-    const fileName = `crceSocial${profile.user.name}${Date.now()}${file.name}`
+    const fileName = `crceSocial${profile.user.name.split(' ')[0]}${Date.now()}${file.name.split()[0]}`
 
     if(profile.picture){
         fs.unlink(`./client/public/profile-pictures/${profile.picture}`, err => {});
@@ -336,6 +336,7 @@ async function(req, res){
     let cgpa = parseFloat(sgpa);
     profile.status.forEach((stat)=>{
         cgpa = cgpa + parseFloat(stat.sgpa)
+        backlogs = backlogs + parseInt(stat.backlogs)
     })
     
     profile.status.length>0 && (cgpa = parseFloat(cgpa/(profile.status.length+1)))

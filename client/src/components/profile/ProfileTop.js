@@ -1,4 +1,5 @@
 import React,{Fragment, useState} from 'react'
+import Img from 'react-image'
 
 const ProfileTop = ({ profile }) => {
 
@@ -17,7 +18,7 @@ const ProfileTop = ({ profile }) => {
     return (
         <Fragment>
             <div className="profile-top bg-primary p-2">
-                { picture && <img className="round-img" src={require(`../../../public/profile-pictures/${picture}`)} alt=""/>}
+                { picture && <Img className="round-img" src={require(`../../../public/profile-pictures/${picture}`)} alt=""/>}
                 <h1 className="heading">{name}</h1>
                 <p>{position}</p>
                 <p>{year} - {branch}</p>

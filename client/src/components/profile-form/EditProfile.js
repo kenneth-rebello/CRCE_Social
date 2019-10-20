@@ -65,7 +65,7 @@ const EditProfile = ({profile: {profile, loading}, createProfile, getCurrentProf
                 <form className="form" onSubmit={(e)=>Submitter(e)}>
                     <div className="form-group">
                     <select name="position" className="browser-default own-default" value={position} onChange={(e)=>Changer(e)}>
-                        <option value="">* Select Position</option>
+                        <option value="" disabled>* Select Position</option>
                         <option value="Student">Student</option>
                         <option value="Assistant Teacher">Assistant Teacher</option>
                         <option value="Teacher">Teacher</option>

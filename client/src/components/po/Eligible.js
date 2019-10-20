@@ -2,7 +2,8 @@ import React ,{Fragment, useEffect}from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
-import Spinner from '../layouts/Spinner'
+import Spinner from '../layouts/Spinner';
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 const Eligible = ({eligible}) => {
 
@@ -20,7 +21,8 @@ const Eligible = ({eligible}) => {
         <Fragment>
             { !loading ? (<Fragment>
                 <h1 className="heading">Eligible students for placement at {`${company.company}`}</h1>
-                <table>
+                <ReactHTMLTableToExcel className="btn btn-dark" table="eligible-list" filename={`eligible-students-for-${company.company}`} sheet="eligible-students" buttonText="Download a Excel sheet"/>
+                <table id="eligible-list">
                     <tr>
                         <th>Name</th>
                         <th>Year</th>
@@ -42,8 +44,6 @@ const Eligible = ({eligible}) => {
                         </tr>
                     ))}
                 </table>
-                {students.unshift(company)}
-            <Link className="btn btn-dark" to="/print_list">Print List</Link>
             </Fragment>):
             (
                 <Fragment>

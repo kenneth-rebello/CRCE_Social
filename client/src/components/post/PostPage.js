@@ -2,6 +2,7 @@ import React ,{Fragment, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import Moment from 'react-moment';
+import Img from 'react-image'
 import {connect} from 'react-redux';
 import Spinner from '../layouts/Spinner';
 import {deletePost, addLike, removeLike} from '../../actions/post';
@@ -26,7 +27,7 @@ const PostPage = ({auth, post, addLike, removeLike, approvePost, deletePost}) =>
                 <div>
                     <Link to={`/profile/${user}`} className="post-user">
                     <div>
-                        {picture && <img className="item-img" src={require(`../../../public/profile-pictures/${picture}`)} alt=""/>}
+                        {picture && <Img className="item-img" src={require(`../../../public/profile-pictures/${picture}`)} alt=""/>}
                     </div>
                     <h1 className="heading">{name}</h1>
                     </Link>

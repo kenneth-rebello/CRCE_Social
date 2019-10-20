@@ -67,11 +67,16 @@ router.delete('/user/:id', auth, async (req, res) => {
 
 router.post('/po/eligible', auth, async (req, res) => {
 
-    const {dept, pointer, backlogs, companyName} = req.body;
+    const {dept, year, pointer, backlogs, companyName} = req.body;
     let users = []
     
-    if(dept!=""){
+    if(year!="" && dept!=""){
+        users = await User.find({branch:dept, year:year})
+    }
+    else if(dept!=""){
         users = await User.find({branch:dept});
+    }else if(year!=""){
+        users = await User.find({year:year})
     }else{
         users = await User.find();
     }

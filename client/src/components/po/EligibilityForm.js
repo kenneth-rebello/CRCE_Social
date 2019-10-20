@@ -14,10 +14,11 @@ const EligibilityForm = ({generateList, history}) => {
         companyName:'',
         pointer:'',
         backlogs:'',
-        dept: ''
+        dept: '',
+        year:''
     });
 
-    const {companyName, pointer, backlogs, dept} = formData;
+    const {companyName, pointer, backlogs, dept, year} = formData;
 
     const Changer = e => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -49,6 +50,16 @@ const EligibilityForm = ({generateList, history}) => {
                             <option value="PROD">PROD</option>
                             <option value="MECH">MECH</option>
                             <option value="CSE">CSE</option>
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <select name="year" className="browser-default own-default" value={year} onChange={e => Changer(e)}>
+                            <option value="" disabled>Select the branch</option>
+                            <option value="">ALL</option>
+                            <option value="FE">FE</option>
+                            <option value="SE">SE</option>
+                            <option vlaue="TE">TE</option>
+                            <option value="BE">BE</option>
                         </select>
                     </div>
                     <div className="form-group">
