@@ -248,6 +248,17 @@ router.post('/picture', auth, async (req, res) => {
     
 })
 
+router.delete('/picture', auth, async(req, res)=>{
+
+    const updated = await Profile.findOneAndUpdate({user: req.user.id}, { $set:{picture: undefined}}, {new:true});
+    res.json(updated);
+
+    const posts = await Post.find({user:req.user.id});
+    posts.map(async(post) => {
+        await Post.findOneAndUpdate({_id:post._id}, {$set:{picture: undefined}})
+    });
+})
+
 
 //@route    PUT api/profile/experience
 //@desc     Add Profile Education
@@ -332,7 +343,34 @@ async function(req, res){
     }
 
     const profile = await Profile.findOne({user: req.user.id}).populate('user', ['name','avatar','year','branch']);
-    const { semester, sgpa, backlogs } = req.body;
+    let { semester, sgpa, backlogs } = req.body;
+
+
+    if(semester === 'First' && profile.status[0]){
+        return res.status(400).json({errors: [{msg: 'Incorrect semester'}]});
+    }
+    if(semester === 'Second' && profile.status[0].semester != 'First'){
+        return res.status(400).json({errors: [{msg: 'Incorrect semester'}]});
+    }
+    if(semester === 'Third' && profile.status[0].semester != 'Second'){
+        return res.status(400).json({errors: [{msg: 'Incorrect semester'}]});
+    }
+    if(semester === 'Fourth' && profile.status[0].semester != 'Third'){
+        return res.status(400).json({errors: [{msg: 'Incorrect semester'}]});
+    }
+    if(semester === 'Fifth' && profile.status[0].semester != 'Fourth'){
+        return res.status(400).json({errors: [{msg: 'Incorrect semester'}]});
+    }
+    if(semester === 'Sixth' && profile.status[0].semester != 'Fifth'){
+        return res.status(400).json({errors: [{msg: 'Incorrect semester'}]});
+    }
+    if(semester === 'Seventh' && profile.status[0].semester != 'Sixth'){
+        return res.status(400).json({errors: [{msg: 'Incorrect semester'}]});
+    }
+    if(semester === 'Eighth' && profile.status[0].semester != 'Seventh'){
+        return res.status(400).json({errors: [{msg: 'Incorrect semester'}]});
+    }
+
     let cgpa = parseFloat(sgpa);
     profile.status.forEach((stat)=>{
         cgpa = cgpa + parseFloat(stat.sgpa)

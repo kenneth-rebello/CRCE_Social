@@ -9,7 +9,7 @@ const Following = ({profile, getFollowing, match}) => {
 
     useEffect(() => {
         getFollowing(match.params.id)
-    },[])
+    },[getFollowing])
 
     return (
         <Fragment>

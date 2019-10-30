@@ -2,13 +2,14 @@ import React, {useState, Fragment, useEffect} from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {editPicture} from '../../actions/profile'
+import {editPicture, deletePicture, getProfileById} from '../../actions/profile'
 
-const EditPicture = ({editPicture, history}) => {
+const EditPicture = ({editPicture, deletePicture, getProfileById, history, profile, auth}) => {
 
     useEffect(() => {
-        document.title = 'Edit Your Profile Picture - CRCE Social'
-    },[])
+        document.title = 'Edit Your Profile Picture - CRCE Social';
+        !auth.loading && getProfileById(auth.user._id)
+    },[getProfileById, auth])
 
     const [fileData, setFileData] = useState('');
     const [fileName, setFileName] = useState('');
@@ -25,6 +26,10 @@ const EditPicture = ({editPicture, history}) => {
         editPicture(formData,history);
     }
 
+    const Deleter = () =>{
+        deletePicture(history);
+    }
+
     return (
         <Fragment>
             <div className="profile-forms">
@@ -39,6 +44,7 @@ const EditPicture = ({editPicture, history}) => {
                     <input type="submit" value="Add" className="btn btn-dark"></input>
                 
                     <button className="btn btn-light"><Link to="/profile/me">Go Back</Link></button>
+                    {!profile.loading && profile.profile.picture && <button className="btn btn-red" onClick={()=>Deleter()}>Delete</button>}
                 </form>
             </div>
         </Fragment>
@@ -47,6 +53,13 @@ const EditPicture = ({editPicture, history}) => {
 
 EditPicture.propTypes = {
     editPicture: PropTypes.func.isRequired,
+    deletePicture: PropTypes.func.isRequired,
+    getProfileById: PropTypes.func.isRequired,
 }
 
-export default connect(null, {editPicture})(withRouter(EditPicture))
+export const mapStateToProps = state => ({
+    profile: state.profile,
+    auth: state.auth
+})
+
+export default connect(mapStateToProps, {editPicture, deletePicture, getProfileById})(withRouter(EditPicture))

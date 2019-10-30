@@ -2,7 +2,6 @@ import React ,{Fragment}from 'react'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import Img from 'react-image'
 import {approveUser, rejectUser} from '../../actions/admin'
 import ProfilePhoto from './ProfilePhoto';
 
@@ -10,7 +9,7 @@ const ProfileItem = ({auth, profile, isAuth, approveUser, rejectUser}) => {
 
     const {user, position, location, picture} = profile;
     const {_id, name, approved, branch, year} = user;
-    const img = '../../../public/profile-pictures/'
+    
     return (
         <Fragment>
             <div className="profile">

@@ -1,3 +1,9 @@
+.btn{
+  border-radius: 10px;
+  margin: 1%;
+  size: 2rem;
+}
+
 .navbar{
   background-color: teal;
   color: whitesmoke;
@@ -15,6 +21,8 @@
   box-shadow: none;
   font-size: 1rem;
   height:100%;
+  margin-right: 20%;
+  margin-top: 25%;
 }
 
 .navbar .alerts{
@@ -241,6 +249,7 @@
   height: 30px;
   width: 30%;
   font-size:12px;
+  margin: 0.5%;
 }
 
 .profile .profile-details h1{
@@ -754,6 +763,7 @@
 
 .single-notif .notif-details{
   display: grid;
+  margin:1.5%;
 }
 
 .single-notif .notif-details p{
@@ -845,6 +855,7 @@
 
 .edit-profile-actions .btn{
   width:80%;
+  margin:5%;
 }
 
 
@@ -885,10 +896,6 @@
 }
 
 /* Buttons */
-.btn{
-  border-radius: 10px;
-  margin: 10px;
-}
 
 .btn a{
   color:inherit;

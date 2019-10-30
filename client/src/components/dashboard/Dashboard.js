@@ -2,7 +2,6 @@ import React ,{Fragment,useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import Img from 'react-image'
 import {getCurrentProfile} from '../../actions/profile';
 import {getConnectionPosts} from '../../actions/post';
 import {setAlert} from '../../actions/alert'

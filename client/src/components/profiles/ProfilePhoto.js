@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 const ProfilePhoto = ({picture}) => {
     return (
@@ -9,8 +8,5 @@ const ProfilePhoto = ({picture}) => {
     )
 }
 
-ProfilePhoto.propTypes = {
-
-}
 
 export default ProfilePhoto

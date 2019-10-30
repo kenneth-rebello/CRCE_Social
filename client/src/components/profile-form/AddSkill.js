@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {addSkill, removeSkill, getProfileById} from '../../actions/profile'
 
-const AddSkill = ({match, getProfileById, profile, addSkill, removeSkill}) => {
+const AddSkill = ({auth, getProfileById, profile, addSkill, removeSkill}) => {
 
     useEffect(() => {
         document.title = 'Add/Remove A Skill - CRCE Social'
@@ -15,8 +15,8 @@ const AddSkill = ({match, getProfileById, profile, addSkill, removeSkill}) => {
     });
 
     useEffect(() => {
-        getProfileById(match.params.id);
-    },[getProfileById, match])
+        !auth.loading && getProfileById(auth.user._id);
+    },[getProfileById, auth])
 
     const {skill} = formData;
 
@@ -54,7 +54,7 @@ const AddSkill = ({match, getProfileById, profile, addSkill, removeSkill}) => {
             </div>
             {!profile.loading && <div className="skill-list">
                 <table>
-                    {profile.profile.skills.map((one) => (
+                    {!profile.loading && profile.profile.skills.map((one) => (
                         <tr>
                             <td>{one}</td>
                             <td>
@@ -77,6 +77,7 @@ AddSkill.propTypes = {
 
 const mapStateToProps = state => ({
     profile : state.profile,
+    auth: state.auth
 })
 
 export default connect(mapStateToProps, {addSkill, removeSkill, getProfileById})(withRouter(AddSkill))

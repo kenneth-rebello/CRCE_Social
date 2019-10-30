@@ -109,7 +109,32 @@ export const editPicture  = (formData, history) => async dispatch => {
         history.push('/dashboard');
 
     } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status}
+        });
+    }
+}
+
+export const deletePicture = (history) => async dispatch => {
+    try {
         
+        const res = await axios.delete('/api/profile/picture');
+
+        dispatch({
+            type: UPDATE_PROFILE,
+            payload: res.data
+        })
+
+        dispatch(setAlert('Profile Picture Deleted','dark'));
+
+        history.push('/dashboard');
+
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status}
+        });
     }
 }
 

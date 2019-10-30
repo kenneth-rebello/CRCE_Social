@@ -1,7 +1,7 @@
 import React ,{Fragment, useEffect}from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Link, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import Spinner from '../layouts/Spinner';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 

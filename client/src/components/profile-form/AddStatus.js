@@ -39,7 +39,17 @@ const AddStatus = ({addStatus, history}) => {
                 <small>* = required field</small>
                 <form className="form" onSubmit={e => Submitter(e)}>
                     <div className="form-group">
-                        <input type="text" placeholder="* Semester (eg: First, Second..)" name="semester" value={semester} onChange = {e => Changer(e)} required></input>
+                        <select name="semester" className="browser-default own-default" value={semester} onChange={(e)=>Changer(e)} required>
+                            <option value="" disabled>* Select Semster</option>
+                            <option value="First">First</option>
+                            <option value="Second">Second</option>
+                            <option value="Third">Third</option>
+                            <option value="Fourth">Fourth</option>
+                            <option value="Fifth">Fifth</option>
+                            <option value="Sixth">Sixth</option>
+                            <option value="Seventh">Seventh</option>
+                            <option value="Eighth">Eighth</option>
+                        </select>
                     </div>
                     <div className="form-group">
                         <p>* SGPA</p>
