@@ -1,7 +1,9 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import PropTypes from 'prop-types'
 
-const ProfileAbout = ({ profile }) => {
+
+const ProfileAbout = ({ profile, auth}) => {
 
     let { bio, skills, user } = profile;
     let {_id, name} = user;
@@ -11,13 +13,12 @@ const ProfileAbout = ({ profile }) => {
             { bio && (<div className="bio">
                 <h2 className="heading">About {name.trim().split(' ')[0]}</h2>
                 <p>{bio}</p>
-                {/* <div className="line"></div> */}
             </div>)}
             <div className='skill-set'>
                 <h2 className="heading">
                     {name.trim().split(' ')[0]}s Skill Set {`  `}
                     <i className="fa fa-code"></i>{`  `}
-                    <button className="btn btn-light" style={{display:'inline', float:'right'}}><Link to={`/add_skill/${_id}`}><i className="fa fa-plus"></i></Link></button>
+                    {auth.user._id === _id && <button className="btn btn-light" style={{display:'inline', float:'right'}}><Link to={`/add_skill`}><i className="fa fa-plus"></i></Link></button>}
                 </h2>
                 <ul className="skills">
                     {skills.map((skill, index) => (
@@ -32,7 +33,8 @@ const ProfileAbout = ({ profile }) => {
 }
 
 ProfileAbout.propTypes = {
-
+    profile: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
 }
 
 export default ProfileAbout

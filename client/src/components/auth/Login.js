@@ -16,9 +16,20 @@ const Login = (props) => {
         password: ''
     });
 
+    const [ptooltip, setPTooltip] = useState('');
+    const [etooltip, setETooltip] = useState('');
+    
     const { email, password } = formData;
 
-    const Changer = e => setFormData({...formData, [e.target.name]: e.target.value});
+    const Changer = e => {
+        setFormData({...formData, [e.target.name]: e.target.value});
+        if(e.target.name === "password"){
+            e.target.value.length > 5 || e.target.value.length === 0 ? setPTooltip('') : setPTooltip('Password too short')
+        }
+        if(e.target.name === 'email'){
+            e.target.value.includes('@') || e.target.value.length === 0 ? setETooltip('') : setETooltip('Not a valid email')
+        }
+    }
 
     const Submitter = async e =>{
         e.preventDefault();
@@ -40,6 +51,7 @@ const Login = (props) => {
                             <div className='form-group'>
                                 <input type="email" placeholder="Email Address" name="email" value={email} onChange={e => Changer(e)} required/>
                             </div>
+                            {etooltip!=='' && <span className="tooltip-alert"><i className="fa fa-exclamation-triangle"></i>{etooltip}</span>}
                             <div className="form-group">
                                 <input
                                     type="password"
@@ -51,6 +63,7 @@ const Login = (props) => {
                                     required
                                 />
                             </div>
+                            {ptooltip!=='' && <span className="tooltip-alert"><i className="fa fa-exclamation-triangle"></i>{ptooltip}</span>}
                             <div className="form-group">
                                 <input type="submit" className="btn btn-dark" value="Login" />
                             </div>

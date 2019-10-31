@@ -21,9 +21,25 @@ const Register = ({register, setAlert, history, user, isAuth}) => {
         year:''
     });
 
+    const [ptooltip, setPTooltip] = useState('');
+    const [etooltip, setETooltip] = useState('');
+    const [ctooltip, setCToolTip] = useState('');
+
+
     const { name, email, password, password_confirm, branch, year } = formData;
 
-    const Changer = e => setFormData({...formData, [e.target.name]: e.target.value});
+    const Changer = e => {
+        setFormData({...formData, [e.target.name]: e.target.value});
+        if(e.target.name === "password"){
+            e.target.value.length > 5 || e.target.value.length === 0 ? setPTooltip('') : setPTooltip('Password too short')
+        }
+        if(e.target.name === 'email'){
+            e.target.value.includes('@') || e.target.value.length === 0 ? setETooltip('') : setETooltip('Not a valid email')
+        }
+        if(e.target.name === "password_confirm"){
+            e.target.value === password || e.target.value.length === 0 ? setCToolTip('') : setCToolTip('Passwords do not match')
+        }
+    }
 
     const Submitter = e =>{
         e.preventDefault();
@@ -49,6 +65,7 @@ const Register = ({register, setAlert, history, user, isAuth}) => {
                         <div className="form-group">
                             <input type="email" placeholder="Email Address" name="email" value={email} onChange={e => Changer(e)} />
                         </div>
+                        {etooltip!=='' && <span className="tooltip-alert"><i className="fa fa-exclamation-triangle"></i>{etooltip}</span>}
                         <div className="form-group">
                             <input
                                 type="password"
@@ -60,6 +77,7 @@ const Register = ({register, setAlert, history, user, isAuth}) => {
                                 required
                             />
                         </div>
+                        {ptooltip!=='' && <span className="tooltip-alert"><i className="fa fa-exclamation-triangle"></i>{ptooltip}</span>}
                         <div className="form-group">
                             <input
                                 type="password"
@@ -71,6 +89,7 @@ const Register = ({register, setAlert, history, user, isAuth}) => {
                                 required
                             />
                         </div>
+                        {ctooltip!=='' && <span className="tooltip-alert"><i className="fa fa-exclamation-triangle"></i>{ctooltip}</span>}
                         <div className="form-group">
                             <select name="branch" value={branch} className="browser-default own-default" onChange={e => Changer(e)}>
                                 <option value="" disabled>Select you branch</option>

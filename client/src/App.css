@@ -995,6 +995,11 @@ input:focus::placeholder{
   color: teal;
 }
 
+.tooltip-alert{
+  color: red;
+  padding:5%;
+}
+
 #goToTop{
   display:none;
   transition: 0.5s;

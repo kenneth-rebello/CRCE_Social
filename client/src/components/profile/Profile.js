@@ -60,7 +60,7 @@ const Profile = ({ getProfileById, getUserPosts, delAccount, followUser, unfollo
                             Following
                         </Link></button>}
                     </div>
-                    <ProfileAbout profile={profile.profile}/>
+                    <ProfileAbout profile={profile.profile} auth={auth}/>
 
 
                     <h2 className="heading">Educational Qualifications{`  `}<i className="fa fa-university"></i>

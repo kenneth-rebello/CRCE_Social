@@ -57,7 +57,7 @@ const AddEvent = ({addEvent, history}) => {
                 required></textarea><br/>
                 <span>Enter event date</span>
                 <input type="date" name="date" value={date} onChange={e => Changer(e)}/>
-                <select name="target" onChange={e => Changer(e)} value={target} className="browser-default own-default" multiple>
+                <select name="target" onChange={e => Changer(e)} value={target} className="browser-default own-default">
                     <option value="" disabled>Select a target audience</option>
                     <option value="FE">FE</option>
                     <option value="SE">SE</option>
