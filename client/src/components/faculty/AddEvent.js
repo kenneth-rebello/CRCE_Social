@@ -6,7 +6,7 @@ import {addEvent} from '../../actions/event'
 const AddEvent = ({addEvent, history}) => {
 
     useEffect(() => {
-        document.title = 'Add A New Event - CRCE Social'
+        document.title = 'Add A New Event - Edu-Social'
     })
 
     const [formData, setFormData] = useState({

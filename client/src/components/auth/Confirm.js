@@ -7,14 +7,14 @@ import {confirmEmail} from '../../actions/auth'
 const Confirm = ({confirmEmail, match}) => {
 
     useEffect(() => {
-        document.title = 'Email Confirmation - CRCE Social'
+        document.title = 'Email Confirmation - Edu-Social'
         confirmEmail(match.params.email, match.params.id)
     },[confirmEmail, match])
 
     return (
         <div>
             <h1 className="heading">Your email id is being confirmed</h1>
-            <Link to="/login">Login to CRCE Social</Link>
+            <Link to="/login">Login to Edu-Social</Link>
         </div>
     )
 }

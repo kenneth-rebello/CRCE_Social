@@ -7,7 +7,7 @@ import {addStatus} from '../../actions/profile'
 const AddStatus = ({addStatus, history}) => {
 
     useEffect(() => {
-        document.title = 'Add Your Semester Results - CRCE Social'
+        document.title = 'Add Your Semester Results - Edu-Social'
     },[])
 
     const [formData, setFormData] = useState({
@@ -34,7 +34,6 @@ const AddStatus = ({addStatus, history}) => {
                 <h1 className="heading">
                     Add Your Latest Semester Pointers
                 </h1>
-                <p className="lead">(as given on CRCE student portal)</p>
 
                 <small>* = required field</small>
                 <form className="form" onSubmit={e => Submitter(e)}>

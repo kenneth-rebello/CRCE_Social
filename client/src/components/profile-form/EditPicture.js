@@ -7,7 +7,7 @@ import {editPicture, deletePicture, getProfileById} from '../../actions/profile'
 const EditPicture = ({editPicture, deletePicture, getProfileById, history, profile, auth}) => {
 
     useEffect(() => {
-        document.title = 'Edit Your Profile Picture - CRCE Social';
+        document.title = 'Edit Your Profile Picture - Edu-Social';
         !auth.loading && getProfileById(auth.user._id)
     },[getProfileById, auth])
 

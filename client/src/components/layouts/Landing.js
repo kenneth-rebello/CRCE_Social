@@ -11,12 +11,12 @@ const Landing = ({isAuth}) => {
     return (
         <div className="page">
             <div className="landing-box">
-                <span className="title">CRCE Social</span>
+                <span className="title">Edu-Social</span>
                 <p>
                     Create a profile, share posts, connect with potential recruiters, teachers or fellow
                     students.
                 </p>
-                <Link to="/register">Join CRCE Social today! Click here to register</Link>
+                <Link to="/register">Join Edu-Social today! Click here to register</Link>
             </div>
         </div>
     )

@@ -9,7 +9,7 @@ import Moment from 'react-moment'
 const MyEvents = ({auth, event, getMyEvents}) => {
 
     useEffect(() => {
-        document.title = 'Events For Me - CRCE Social'
+        document.title = 'Events For Me - Edu-Social'
     },[])
 
     useEffect(() => {

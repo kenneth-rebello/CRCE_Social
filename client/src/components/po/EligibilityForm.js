@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 const EligibilityForm = ({generateList, history}) => {
 
     useEffect(() => {
-        document.title = 'Generate List Of Eligible Students For Placement-CRCE Social'
+        document.title = 'Generate List Of Eligible Students For Placement- Edu-Social'
     },[]);
 
     const [formData, setFormData] = useState({

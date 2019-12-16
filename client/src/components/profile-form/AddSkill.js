@@ -7,7 +7,7 @@ import {addSkill, removeSkill, getProfileById} from '../../actions/profile'
 const AddSkill = ({auth, getProfileById, profile, addSkill, removeSkill}) => {
 
     useEffect(() => {
-        document.title = 'Add/Remove A Skill - CRCE Social'
+        document.title = 'Add/Remove A Skill - Edu-Social'
     },[])
 
     const [formData, setFormData] = useState({

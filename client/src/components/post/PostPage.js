@@ -1,4 +1,4 @@
-import React ,{Fragment, useEffect} from 'react';
+import React ,{Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import Moment from 'react-moment';
@@ -11,11 +11,6 @@ import PostImage from '../posts/PostImage'
 
 
 const PostPage = ({auth, post, addLike, removeLike, approvePost, deletePost}) => {
-
-    useEffect(() => {
-        window.$('.modal').modal();
-    },[])
-
 
     let { _id, text, upload, approved, name, picture, user, likes, date } = post;
 

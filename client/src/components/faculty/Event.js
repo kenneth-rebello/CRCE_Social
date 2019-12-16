@@ -10,7 +10,6 @@ import Spinner from '../layouts/Spinner'
 const Event = ({getEvent, sendReminder, sendCustomMail, event:{event, loading}, match}) => {
 
     useEffect(()=>{
-        window.$('.modal').modal();
         event && (document.title = `${event.heading}`)
     },[event])
     useEffect(() => {

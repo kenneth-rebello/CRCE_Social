@@ -8,7 +8,7 @@ import { login } from '../../actions/auth';
 const Login = (props) => {
 
     useEffect(() => {
-        document.title = 'Login - CRCE Social'
+        document.title = 'Login - Edu-Social'
     },[]);
 
     const [ formData, setFormData ] = useState({

@@ -20,7 +20,7 @@ const Navbar = (props) => {
         <Fragment>
         <nav className="navbar">
             <div className="nav-wrapper">
-                <Link to="/" className="title brand-logo">CRCE Social</Link>
+                <Link to="/" className="title brand-logo">Edu-Social</Link>
                 <Link to="" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></Link>
                 <ul className="right hide-on-med-and-down nav-links">
                     {props.auth && !props.auth.loading && props.auth.user && <li><Link to={`/profile/${props.auth.user._id}`}>{props.auth.user.name}</Link></li>}
@@ -61,7 +61,7 @@ const Navbar = (props) => {
         <Fragment>
         <nav className="navbar">
             <div className="nav-wrapper">
-                <Link to="/" className="title brand-logo">CRCE Social</Link>
+                <Link to="/" className="title brand-logo">Edu-Social</Link>
                 <Link to="" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></Link>
                 <ul className="right hide-on-med-and-down nav-links">
                     <li><Link to="/login">Login</Link></li>

@@ -9,7 +9,7 @@ import Moment from 'react-moment'
 const Notifications = ({notif, getNotifs, deleteNotif}) => {
 
     useEffect(()=> {
-        document.title = 'Notifications - CRCE Social'
+        document.title = 'Notifications - Edu-Social'
     })
     useEffect(() => {
         getNotifs()

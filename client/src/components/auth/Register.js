@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 const Register = ({register, setAlert, history, user, isAuth}) => {
 
     useEffect(() => {
-        document.title = 'Register A New Account - CRCE Social'
+        document.title = 'Register A New Account - Edu-Social'
     },[]);
 
     const [ formData, setFormData ] = useState({

@@ -1,7 +1,7 @@
 {
-    "name": "portfolio",
+    "name": "edusocial-project",
     "description": "",
-    "repository": "https://github.com/kenneth-rebello/Portfolio",
+    "repository": "https://github.com/kenneth-rebello/Edu_Social",
     "logo":"",
     "keywords":"",
     "image":"heroku/nodejs"

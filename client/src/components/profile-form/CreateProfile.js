@@ -7,7 +7,7 @@ import {createProfile} from '../../actions/profile'
 const CreateProfile = props => {
 
     useEffect(() => {
-        document.title = 'Create A Profile - CRCE Social'
+        document.title = 'Create A Profile - Edu-Social'
     },[])
     
     const [displaySocialInputs, toggleSocialInputs] = useState(false);

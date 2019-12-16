@@ -7,7 +7,7 @@ import {addEducation} from '../../actions/profile'
 const AddEducation = ({addEducation, history}) => {
 
     useEffect(() => {
-        document.title = 'Add Your Education - CRCE Social'
+        document.title = 'Add Your Education - Edu-Social'
     },[])
 
     const [formData, setFormData] = useState({

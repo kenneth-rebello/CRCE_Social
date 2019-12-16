@@ -12,7 +12,7 @@ import PostForm from '../posts/PostForm';
 const Dashboard = ({getCurrentProfile, getConnectionPosts, auth, profile, post}) => {
 
     useEffect(() => {
-        document.title = 'CRCE Social'
+        document.title = 'Edu-Social'
     },[]);
 
     useEffect(() => {

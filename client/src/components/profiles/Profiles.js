@@ -9,7 +9,7 @@ import SearchProfile from './SearchProfile';
 const Profiles = ({getAllProfiles, profile}) => {
 
     useEffect(() => {
-        document.title = 'All Profiles - CRCE Social'
+        document.title = 'All Profiles - Edu-Social'
     },[])
 
     useEffect(() => {
