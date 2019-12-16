@@ -3,7 +3,7 @@ import React from 'react'
 const PostImage = ({upload}) => {
     return (
         <div>
-            <img className="post-img" src={require(`../../../public/posts/${upload}`)} alt="..."/>
+            <img className="post-img" src={upload} alt="..."/>
         </div>
     )
 }

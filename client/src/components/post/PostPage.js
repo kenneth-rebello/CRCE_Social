@@ -1,4 +1,4 @@
-import React ,{Fragment} from 'react';
+import React ,{Fragment,useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import Moment from 'react-moment';
@@ -12,7 +12,11 @@ import PostImage from '../posts/PostImage'
 
 const PostPage = ({auth, post, addLike, removeLike, approvePost, deletePost}) => {
 
-    let { _id, text, upload, approved, name, picture, user, likes, date } = post;
+    useEffect(() => {
+        window.$('.modal').modal();
+    },[])
+
+    let { _id, text, url, approved, name, picture, user, likes, date } = post;
 
     return (
         <Fragment>
@@ -30,7 +34,7 @@ const PostPage = ({auth, post, addLike, removeLike, approvePost, deletePost}) =>
         
                 <div className="post-data">
                     <p className="post-text">{text}</p>
-                    {upload && <PostImage upload={upload}/>}
+                    {url && <PostImage upload={url}/>}
                     <p className="post-date">
                         Posted on <Moment format='DD/MM/YYYY'>{date}</Moment>
                     </p>
@@ -61,8 +65,8 @@ const PostPage = ({auth, post, addLike, removeLike, approvePost, deletePost}) =>
                     </div>
                 </div>
             </div>
-            <div id="modal1" class="modal">
-                <div class="modal-content">
+            <div id="modal1" className="modal">
+                <div className="modal-content">
                     <h4 className='heading'>Likes</h4>
                     <table>
                         {likes.length> 0 && likes.map((like) => (

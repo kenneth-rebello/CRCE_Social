@@ -1,7 +1,6 @@
 import React ,{Fragment, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import Img from 'react-image'
 import {Link} from 'react-router-dom'
 import {getMyEvents} from '../../actions/event'
 import Moment from 'react-moment'
@@ -26,7 +25,7 @@ const MyEvents = ({auth, event, getMyEvents}) => {
             {event.events.map(one =>(
                 <div key={one.id} className="events">
                     <div className="event-photo">
-                        {!event.loading && one.upload ? <Img src={require(`../../../public/events/${one.upload}`)} alt='...'/> 
+                        {!event.loading && one.upload ? <img src={one.url} alt='...'/> 
                             : <p>No image</p>}
                     </div>
                     <div className="event-details">

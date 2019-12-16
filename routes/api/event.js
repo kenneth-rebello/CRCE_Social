@@ -1,14 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const {check, validationResult} = require('express-validator/check');
-const fileUpload = require('express-fileupload')
 const auth = require('../../middleware/auth');
 const Event = require('../../models/Event');
 const User = require('../../models/User');
 const Profile = require('../../models/Profile');
 const nodemailer = require('nodemailer');
 
-router.use(fileUpload());
 
 
 router.get('/', auth, async(req, res) => {
@@ -40,7 +38,9 @@ router.get('/faculty', auth, async(req,res) => {
 
 
 router.post('/', [auth, [
-    check('desc', 'Description is required').not().isEmpty()
+    check('heading', 'Title is required').not().isEmpty(),
+    check('desc', 'Description is required').not().isEmpty(),
+    check('date', 'Date is required').not().isEmpty()
 ]],
 async function(req,res){
     
@@ -50,60 +50,28 @@ async function(req,res){
     }
 
     const user = await User.findById(req.user.id).select('-password');
-    if(req.files){
+    
+    try {
+        const profile = await Profile.findOne({user:req.user.id})
         
-        const file = req.files.file;
-        const fileName = `crceSocialevent${Date.now()}${file.name}`
+        const newEvent = new Event({
+            heading: req.body.heading,
+            desc: req.body.desc,
+            date: req.body.date,
+            target: req.body.target,
+            name: user.name,
+            picture: profile.picture,
+            url: req.body.url ? req.body.url : '',
+            user: req.user.id
+        })      
+        const event = await newEvent.save();
 
-        file.mv(`./client/public/events/${fileName}`,async err => {
-            if(err){
-                console.error(err);
-                return res.status(500).send(err);
-            }
-            try {
-                const profile = await Profile.findOne({user:req.user.id})
-                
-                const newEvent = new Event({
-                    heading: req.body.heading,
-                    desc: req.body.desc,
-                    date: req.body.date,
-                    target: req.body.target,
-                    name: user.name,
-                    picture: profile.picture,
-                    upload: fileName,
-                    user: req.user.id
-                })      
-                const event = await newEvent.save();
         
-                
-                return res.json(event);
-        
-            } catch (err) {
-                console.error(err.message);
-                return res.status(500).send('Server Error');
-            }
-        });
-    }else{
-        try {
-            const profile = await Profile.findOne({user:req.user.id})
-    
-            const newEvent = new Event({
-                heading: req.body.heading,
-                desc: req.body.desc,
-                date: req.body.date,
-                target: req.body.target,
-                name: user.name,
-                picture: profile.picture,
-                user: req.user.id
-            })      
-            const event = await newEvent.save();
-    
-            return res.json(event);
-    
-        } catch (err) {
-            console.error(err.message);
-            res.status(500).send('Server Error');
-        }
+        return res.json(event);
+
+    } catch (err) {
+        console.error(err.message);
+        return res.status(500).send('Server Error');
     }
 });
 

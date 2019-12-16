@@ -17,7 +17,7 @@ const PostSchema = new Schema({
         type: Boolean,
         default: true
     },
-    upload:{
+    url:{
         type: String
     },
     text:{

@@ -5,20 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     
     <title>Edu-Social</title>
-    <link href="https://fonts.googleapis.com/css?family=Cinzel:900|Merriweather:700|Roboto+Slab:300|Abril+Fatface|Gayathri:400|Crimson+Pro|Acme|Crimson+Text|Dosis|Saira+Stencil+One|Teko&display=swap" rel="stylesheet">
-    <link href="/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Import font awesome -->
+    <script src="https://kit.fontawesome.com/ff4b34b022.js" crossorigin="anonymous"></script>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel:900|Merriweather:700|Roboto+Slab:300|Abril+Fatface|Gayathri:400|Crimson+Pro|Acme|Crimson+Text|Dosis|Saira+Stencil+One|Teko&display=swap" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
-    <script src="/css/materialize.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
       crossorigin="anonymous">
-    </script>
-    <script>
-      $('.dropdown-trigger').dropdown();
     </script>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -27,13 +24,14 @@
   <body>
     <div id="root"></div>
 
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
       $('document').ready(function(){
         $('.sidenav').sidenav();
         $('select').formSelect();
         $('.modal').modal();
-        
+        $('.dropdown-trigger').dropdown();        
 
         var btn = $('#goToTop');
 

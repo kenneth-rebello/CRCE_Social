@@ -46,9 +46,9 @@ const Dashboard = ({getCurrentProfile, getConnectionPosts, auth, profile, post})
                             <div className="dash-img">
                                 {profile.profile.picture && <img src={require(`../../../public/profile-pictures/${profile.profile.picture}`)} alt=""/>}
                             </div>
-                            {!profile.loading && profile.profile.position === 'Placement Officer' && <button className="btn btn-light"><Link to="/po_form">Create Eligibility List</Link></button>}
+                            {!profile.loading && profile.profile.position === 'Placement Officer' && <button className="btn btn-light"><Link to="/po_form">Eligibility List</Link></button>}
                             {!profile.loading && profile.profile.position === 'Faculty' && <button className="btn btn-light"><Link to="/add_event">Add Event</Link></button>}
-                            {!auth.loading && auth.user && auth.user.admin && <button className="btn btn-light"><Link to="/admindash">Check Admin Dashboard</Link></button>}
+                            {!auth.loading && auth.user && auth.user.admin && <button className="btn btn-light"><Link to="/admindash">Admin Dashboard</Link></button>}
                         </Fragment>) :
                         (<Fragment className="user-switch">
                             <Link to="/create_profile" className="dash-link">Create Profile</Link>

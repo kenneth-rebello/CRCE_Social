@@ -18,7 +18,7 @@ const EventSchema = new Schema({
     name:{
         type: String
     },
-    upload:{
+    url:{
         type: String
     },
     target:{

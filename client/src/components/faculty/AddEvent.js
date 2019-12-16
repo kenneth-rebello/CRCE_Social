@@ -14,29 +14,19 @@ const AddEvent = ({addEvent, history}) => {
         heading:'',
         desc:'',
         target: '',
+        url:''
     });
-    const [fileData, setFileData] = useState('');
-    const [fileName, setFileName] = useState('');
 
-    let { date, heading, desc, target} = formData;
+
+    let { date, heading, desc, target, url} = formData;
+
     const Changer = e =>{
         setFormData({...formData, [e.target.name]: e.target.value})
     }
 
-    const Handler = e =>{
-        setFileData(e.target.files[0]);
-        setFileName(e.target.files[0].name);
-    }
-
     const Submitter = e => {
         e.preventDefault();
-        const newFormData = new FormData();
-        fileData && newFormData.append("file",fileData);
-        newFormData.append("date",formData.date);
-        newFormData.append("heading",formData.heading);
-        newFormData.append("desc",formData.desc);
-        newFormData.append("target",formData.target);
-        addEvent(newFormData, history);
+        addEvent(formData, history);
     }
 
     return (
@@ -47,14 +37,16 @@ const AddEvent = ({addEvent, history}) => {
             <form className="form" onSubmit={e => Submitter(e)}>
                 <input type="text" name="heading" value={heading} placeholder="Enter event title" onChange={e => Changer(e)}/>
                 <textarea
-                name="desc"
-                type="text" 
-                cols="90"
-                rows="10"
-                placeholder="Event description"
-                value={desc}
-                onChange={e => Changer(e)}
-                required></textarea><br/>
+                    name="desc"
+                    type="text" 
+                    cols="90"
+                    rows="10"
+                    placeholder="Event description"
+                    value={desc}
+                    onChange={e => Changer(e)}
+                    required
+                />
+                <br/>
                 <span>Enter event date</span>
                 <input type="date" name="date" value={date} onChange={e => Changer(e)}/>
                 <select name="target" onChange={e => Changer(e)} value={target} className="browser-default own-default">
@@ -70,7 +62,10 @@ const AddEvent = ({addEvent, history}) => {
                     <option value="MECH">MECH</option>
                     <option value="CSE">CSE</option>
                 </select>
-                <i className="fa fa-file-image-o"></i><input name="upload" type="file" className="btn btn-light" onChange ={e => Handler(e)} accept=".jpg, .jpeg, .bmp, .png, .gif"/>
+                <div className="button-grid">
+                    <i className="fa fa-file-image-o"></i>
+                    <input name="url" type="text" value={url} onChange ={e => Changer(e)} placeholder="Enter image url"/>
+                </div>
                 <input type="submit" className="btn btn-dark" value="Add" />
             </form>
         </div>

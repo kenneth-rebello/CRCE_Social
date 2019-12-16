@@ -31,7 +31,7 @@ const Event = ({getEvent, sendReminder, sendCustomMail, event:{event, loading}, 
             {loading || event===null ? <Spinner/> : (<Fragment>
                 <div className="events">
                     <div className="event-photo">
-                        {!loading && event.upload ? <Img src={require(`../../../public/events/${event.upload}`)} alt='...'/> 
+                        {!loading && event.url ? <Img src={event.url} alt='...'/> 
                             : <p>No image</p>}
                     </div>
                     <div className="event-details">

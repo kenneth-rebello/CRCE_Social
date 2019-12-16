@@ -11,7 +11,7 @@ import PostImage from './PostImage'
 
 const PostItem = ({auth, post, addLike, removeLike, approvePost, deletePost}) => {
 
-    let { _id, text, upload, approved, name, picture, user, likes, comments, date } = post;
+    let { _id, text, url, approved, name, picture, user, likes, comments, date } = post;
 
     return (
         <Fragment>
@@ -29,7 +29,7 @@ const PostItem = ({auth, post, addLike, removeLike, approvePost, deletePost}) =>
         
                 <div className="post-data">
                     <p className="post-text">{text}</p>
-                    {upload && <PostImage upload={upload}/>}
+                    {url && <PostImage upload={url}/>}
                     <p className="post-date">
                         Posted on <Moment format='DD/MM/YYYY'>{date}</Moment>
                     </p>
