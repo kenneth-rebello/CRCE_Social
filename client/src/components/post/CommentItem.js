@@ -13,7 +13,7 @@ const CommentItem = ({auth, postId, comment, deleteComment}) => {
             <div className="comment-item">
                 <div className="comment-header">
                     <div>
-                        {picture && <img className="comment-img" src={require(`../../../public/profile-pictures/${picture}`)} alt=""/>}
+                        {picture && <img className="comment-img" src={`image/${picture}`} alt=""/>}
                     </div>                  
                     <div>
                         <h4>{name}</h4>

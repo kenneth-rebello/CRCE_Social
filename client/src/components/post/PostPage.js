@@ -26,7 +26,7 @@ const PostPage = ({auth, post, addLike, removeLike, approvePost, deletePost}) =>
                 <div>
                     <Link to={`/profile/${user}`} className="post-user">
                     <div>
-                        {picture && <Img className="item-img" src={require(`../../../public/profile-pictures/${picture}`)} alt=""/>}
+                        {picture && <Img className="item-img" src={`image/${picture}`} alt=""/>}
                     </div>
                     <h1 className="heading">{name}</h1>
                     </Link>

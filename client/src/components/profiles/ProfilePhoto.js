@@ -3,7 +3,7 @@ import React from 'react'
 const ProfilePhoto = ({picture}) => {
     return (
         <div>
-            <img className="item-img" src={require(`../../../public/profile-pictures/${picture}`)} alt=""/>
+            <img className="item-img" src={`image/${picture}`} alt=""/>
         </div>
     )
 }

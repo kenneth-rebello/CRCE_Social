@@ -1,4 +1,4 @@
 {
-    "mongoURI": "mongodb://localhost/crceSocial",
+    "mongoURI": "mongodb+srv://Kenneth:keonna07@cluster0-vmgsf.mongodb.net/test?retryWrites=true&w=majority",
     "jwtSecret": "mysecrettoken"
 }
