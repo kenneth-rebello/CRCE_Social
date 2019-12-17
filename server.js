@@ -1,6 +1,7 @@
 const express = require('express');
 const socket = require('socket.io');
 const http = require('http');
+const path = require('path');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
@@ -40,9 +41,13 @@ app.use(bodyParser.json());
 app.use(express.json({extended: false}));
 app.use(methodOverride('_method'));
 
-app.get('/', function(req, res){
-    res.send('API Running..');
-});
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static(path.join(__dirname, 'client/build')));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
+    });
+}
 
 //Define Routes
 app.use('/api/users', require('./routes/api/users'));
