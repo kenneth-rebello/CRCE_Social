@@ -3,7 +3,8 @@ import {GET_NOTIFS, ADD_NOTIF, REMOVE_NOTIF, GET_UNSEEN_NOTIFS, NOTIF_ERROR, CLE
 const initialState = {
     tray: [],
     unseen: [],
-    error:[],
+    error:'',
+    status: '',
     loading: true
 }
 
@@ -43,7 +44,8 @@ export default function(state = initialState, action){
         case NOTIF_ERROR:
             return{
                 ...state,
-                error: payload,
+                error: payload.msg,
+                status: payload.status,
                 loading:false
             };
         default:

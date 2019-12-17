@@ -5,7 +5,8 @@ const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: false,
     loading: true,
-    user: null
+    user: null,
+    error: null
 }
 
 export default function(state = initialState, action) {
@@ -37,7 +38,7 @@ export default function(state = initialState, action) {
         case LOGOUT:
             localStorage.removeItem('token');
             return{
-                ...state, token:null, isAuthenticated: false, loading:false
+                ...state, token:null, isAuthenticated: false, loading:false, error: payload
             };
         case FOLLOW:
             return{
