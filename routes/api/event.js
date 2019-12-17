@@ -181,7 +181,7 @@ router.get('/reminder/:id', auth, async function(req, res){
                 from: 'crcesocial@gmail.com',
                 to: one.user.email,
                 subject: event.heading,
-                text: 'Grretings '+one.user.name+'\nThis is to remind you of an upcoming event at CRCE college that you were interested in\n'+event.desc+'\nEvent co-ordinator: '+event.name
+                text: 'Greetings '+one.user.name+'\nThis is to remind you of an upcoming event that you were interested in\n'+event.desc+'\nEvent co-ordinator: '+event.name
             };
     
             transporter.sendMail(mailOptions, (error, info) => {
@@ -208,7 +208,7 @@ router.get('/reminder/:id', auth, async function(req, res){
                 from: 'crcesocial@gmail.com',
                 to: user.email,
                 subject: event.heading,
-                text: 'Grretings '+user.name+'\nThis is to remind you of an upcoming event at CRCE college\n'+event.desc+'\nEvent co-ordinator: '+event.name
+                text: 'Greetings '+user.name+'\nThis is to remind you of an upcoming event \n'+event.desc+'\nEvent co-ordinator: '+event.name
             };
     
             transporter.sendMail(mailOptions, (error, info) => {

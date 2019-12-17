@@ -74,7 +74,7 @@ const Navbar = (props) => {
             </div>)}     
         </nav>
 
-        <ul className="sidenavbar-own sidenav" id="mobile-demo">
+        <ul className="sidenav sidenavbar-own" id="mobile-demo">
             <li><Link to="/login">Login</Link></li>
             <li><Link to="/register">Register</Link></li>
         </ul>

@@ -45,6 +45,13 @@ const Login = (props) => {
         <Fragment>
             <div className="page">
                 <div className="auth">
+                    <div className="demo">
+                        Demo Account
+                        <br/>
+                        <h1>Email: <u><b>test@gmail.com</b></u></h1>
+                        <h1>Password: <u><b>qwertyuiop</b></u></h1>
+                        <p>Mobile friendly display updates coming soon...</p>
+                    </div>
                     <div className="auth-box">
                         <h1 className="heading">Login</h1>
                         <form className="form" onSubmit={e => Submitter(e)}>

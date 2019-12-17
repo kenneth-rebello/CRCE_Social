@@ -55,6 +55,7 @@ const Register = ({register, setAlert, history, user, isAuth}) => {
         <Fragment>
             <div className="page">
                 <div className="auth">
+                    <div></div>
                     <div class="auth-box">
                     <h1 className="heading">Sign Up</h1>
                     <p className="lead">Create Your Account</p>

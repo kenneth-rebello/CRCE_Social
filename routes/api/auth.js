@@ -83,7 +83,7 @@ router.post('/send_confirmation', async (req, res)=>{
 
     const user = await User.findById(req.body.id);
 
-    const url = `http:localhost:3000/confirm/${user.email}/${user._id}`
+    const url = `https://edusocial.herokuapp.com//confirm/${user.email}/${user._id}`
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -96,8 +96,8 @@ router.post('/send_confirmation', async (req, res)=>{
     let mailOptions = {
         from: 'crcesocial@gmail.com',
         to: user.email,
-        subject: `Email Verification - CRCE Social`,
-        text: `Please click the following link to verify your email id and access your CRCE Social account ${url}`
+        subject: `Email Verification - Edu-Social`,
+        text: `Please click the following link to verify your email id and access your Edu-Social account ${url}`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
