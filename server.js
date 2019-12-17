@@ -41,10 +41,6 @@ app.use(bodyParser.json());
 app.use(express.json({extended: false}));
 app.use(methodOverride('_method'));
 
-if(process.env.NODE_ENV === "production"){
-    app.use(express.static(path.join(__dirname, 'client/build')));
-}
-
 //Define Routes
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
@@ -54,6 +50,15 @@ app.use('/api/admin', require('./routes/api/admin'));
 app.use('/api/event', require('./routes/api/event'));
 app.use('/api/chat', require('./routes/api/chat'));
 app.use('/api/notif', require('./routes/api/notif'));
+
+//Serve static assets
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static('client/build'));
+
+    app.get('*', (req, res)=>{
+        res.sendFile(path.resolve(__dirname, 'client', 'build','index.html'));
+    })
+}
 
 app.get('/image/:filename', (req, res)=>{
     
