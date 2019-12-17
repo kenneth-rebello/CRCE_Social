@@ -2,7 +2,6 @@ import React ,{useEffect, Fragment, useState} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Moment from 'react-moment'
-import Img from 'react-image'
 import {Link} from 'react-router-dom'
 import {getEvent, sendReminder, sendCustomMail} from '../../actions/event'
 import Spinner from '../layouts/Spinner'
@@ -31,7 +30,7 @@ const Event = ({getEvent, sendReminder, sendCustomMail, event:{event, loading}, 
             {loading || event===null ? <Spinner/> : (<Fragment>
                 <div className="events">
                     <div className="event-photo">
-                        {!loading && event.url ? <Img src={event.url} alt='...'/> 
+                        {!loading && event.url ? <img src={event.url} alt='...'/> 
                             : <p>No image</p>}
                     </div>
                     <div className="event-details">
