@@ -51,15 +51,6 @@ app.use('/api/event', require('./routes/api/event'));
 app.use('/api/chat', require('./routes/api/chat'));
 app.use('/api/notif', require('./routes/api/notif'));
 
-//Serve static assets
-if(process.env.NODE_ENV === "production"){
-    app.use(express.static('client/build'));
-
-    app.get('*', (req, res)=>{
-        res.sendFile(path.resolve(__dirname, 'client', 'build','index.html'));
-    })
-}
-
 app.get('/image/:filename', (req, res)=>{
     
     gfs.files.findOne({filename: req.params.filename}, (err, file) => {
@@ -77,6 +68,15 @@ app.get('/image/:filename', (req, res)=>{
         }
     });
 });
+
+//Serve static assets
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static('client/build'));
+
+    app.get('*', (req, res)=>{
+        res.sendFile(path.resolve(__dirname, 'client', 'build','index.html'));
+    })
+}
 
 const PORT = process.env.PORT || 5000;
 
