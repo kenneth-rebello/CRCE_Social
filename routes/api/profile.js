@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const {check, validationResult} = require('express-validator');
-const fileUpload = require('express-fileupload')
 const path = require('path');
 const fs = require('fs');
 const Profile = require('../../models/Profile');
