@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
-const {check, validationResult} = require('express-validator/check');
+const {check, validationResult} = require('express-validator');
 const fileUpload = require('express-fileupload')
 const path = require('path');
 const fs = require('fs');
@@ -9,9 +9,15 @@ const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 const Post = require('../../models/Post');
 
-router.use(fileUpload());
+const mongoose = require('mongoose');
+const crypto = require('crypto');
+const config = require('config');
+const db = config.get('mongoURI');
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
 
-
+let gfs;
 
 //@route    GET api/profile/me
 //@desc     Open a users profile
@@ -219,36 +225,75 @@ router.put('/unfollow', auth, async(req,res) => {
 
 router.post('/picture', auth, async (req, res) => {
 
-    if(req.files === null){
-        return res.status(400).json({msg : 'No file uploaded'});
-    }
-
-    const profile = await Profile.findOne({user: req.user.id}).populate('user',['name']);
-    const file = req.files.file;
-    const fileName = `crceSocial${profile.user.name.split(' ')[0]}${Date.now()}${file.name.split()[0]}`
-
-    if(profile.picture){
-        fs.unlink(`./client/public/profile-pictures/${profile.picture}`, err => {});
-    }
-
     const posts = await Post.find({user:req.user.id});
-    posts.map(async(post) => {
-        await Post.findOneAndUpdate({_id:post._id}, {$set:{picture: fileName}})
+
+    const conn = mongoose.createConnection(db, {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useFindAndModify: false,
+        useUnifiedTopology: true
     });
 
-    file.mv(`./client/public/profile-pictures/${fileName}`,async err => {
-        if(err){
-            console.error(err);
-            return res.status(500).send(err);
+    const storage = new GridFsStorage({
+        url: db,
+        file: (req, file) => {
+            return new Promise((resolve, reject) => {
+                
+                crypto.randomBytes(16, (err, buf) => {
+                    
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    const filename = buf.toString('hex') + path.extname(file.originalname);
+
+                    const fileInfo = {
+                        filename: filename,
+                        bucketName: 'uploads'
+                    };
+                    resolve(fileInfo);
+                });
+            });
         }
-
-        const updated = await Profile.findOneAndUpdate({user: req.user.id}, { $set:{picture: fileName}}, {new:true});
-        res.json(updated);
     });
-    
+
+    const upload = multer({ storage }).single('file');
+
+    conn.once('open', async() => {
+        console.log('MongoDB Uploader connected');
+        gfs = Grid(conn.db, mongoose.mongo);
+        gfs.collection('uploads');
+        upload(req, res, async()=>{
+            console.log('Success');
+            const profile = await Profile.findOne({user: req.user.id});
+            if(profile.picture){
+                gfs.remove({filename: profile.picture, root: 'uploads'}, (err) => {
+                    if(err){
+                        return res.status(404).json({err: err});
+                    }
+                });
+            }
+            const updated = await Profile.findOneAndUpdate({user: req.user.id}, { $set:{picture: req.file.filename}}, {new:true});
+            posts.map(async(post) => {
+                await Post.findOneAndUpdate({_id:post._id}, {$set:{picture: req.file.filename}})
+            });
+            res.json(updated);
+        });
+    });
+
 })
 
 router.delete('/picture', auth, async(req, res)=>{
+
+    const profile = await Profile.findOne({user: req.user.id});
+    
+    if(profile.picture){
+        gfs.remove({filename: profile.picture, root: 'uploads'}, (err) => {
+            if(err){
+                return res.status(404).json({err: err});
+            }
+        });
+    }
 
     const updated = await Profile.findOneAndUpdate({user: req.user.id}, { $set:{picture: undefined}}, {new:true});
     res.json(updated);

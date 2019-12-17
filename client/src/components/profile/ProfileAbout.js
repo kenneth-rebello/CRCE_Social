@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
-
+import Spinner from '../layouts/Spinner'
 
 const ProfileAbout = ({ profile, auth}) => {
 
@@ -9,7 +9,7 @@ const ProfileAbout = ({ profile, auth}) => {
     let {_id, name} = user;
 
     return (
-        <div className="profile-about">
+        auth.loading ? <Spinner/> : <div className="profile-about">
             { bio && (<div className="bio">
                 <h2 className="heading">About {name.trim().split(' ')[0]}</h2>
                 <p>{bio}</p>

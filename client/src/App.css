@@ -282,12 +282,19 @@
 .profile-top .heading{
   display: grid;
   color:whitesmoke;
+  margin:1.5rem;
+  margin-bottom: 0.2rem;
 }
 
 .profile-top p{
   display: grid;
   color: ivory;
   font-size: 1.3rem;
+  margin: 0.1rem;
+}
+
+.profile-top img{
+  margin: 2rem;
 }
 
 .profile-contact{

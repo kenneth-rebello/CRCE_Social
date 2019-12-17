@@ -93,7 +93,7 @@ export const editPicture  = (formData, history) => async dispatch => {
     try {
         let config = {
             headers:{
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'application/json'
             }
         }
 

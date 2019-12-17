@@ -1,5 +1,4 @@
 import React,{Fragment, useState} from 'react'
-import Img from 'react-image'
 
 const ProfileTop = ({ profile }) => {
 
@@ -15,10 +14,12 @@ const ProfileTop = ({ profile }) => {
     const [showFB, toggleFB] = useState(false);
     const [showMail, toggleMail] = useState(false);
 
+    console.log(picture);
+
     return (
         <Fragment>
             <div className="profile-top bg-primary p-2">
-                { picture && <Img className="round-img" src={require(`../../../public/profile-pictures/${picture}`)} alt=""/>}
+                { picture && <img className="round-img" src={`/image/${picture}`} alt="Profile"/>}
                 <h1 className="heading">{name}</h1>
                 <p>{position}</p>
                 <p>{year} - {branch}</p>

@@ -9,6 +9,7 @@ const Following = ({profile, getFollowing, match}) => {
 
     useEffect(() => {
         getFollowing(match.params.id)
+        // eslint-disable-next-line
     },[getFollowing])
 
     return (

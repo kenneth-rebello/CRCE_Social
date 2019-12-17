@@ -12,11 +12,9 @@ const EditPicture = ({editPicture, deletePicture, getProfileById, history, profi
     },[getProfileById, auth])
 
     const [fileData, setFileData] = useState('');
-    const [fileName, setFileName] = useState('');
 
     const Changer = e => {
         setFileData(e.target.files[0]);
-        setFileName(e.target.files[0].name);
     }
 
     const Submitter = e => {
@@ -38,7 +36,10 @@ const EditPicture = ({editPicture, deletePicture, getProfileById, history, profi
                 </h1>
                 <form className="form" onSubmit={e => Submitter(e)}>
                     <div className="form-group">
-                        <input name="profile "type="file"className="btn btn-light" onChange ={e =>Changer(e)}/>
+                        <input name="upload"type="file"className="btn btn-light" 
+                            onChange ={e =>Changer(e)}
+                            accept=".jpg, .jpeg, .bmp, .png, .gif"
+                        />
                     </div>
 
                     <input type="submit" value="Add" className="btn btn-dark"></input>
