@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './styles/nav.css'
 import Navbar from './Navbar'
 import io from "socket.io-client"
 import {connect} from 'react-redux'

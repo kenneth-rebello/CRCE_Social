@@ -1,0 +1,104 @@
+.auth{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-right: 1%;
+    
+  }
+  
+  @media screen and (max-width:800px){
+    .auth{
+      display: unset;
+      grid-template-columns: unset;
+    }
+  }
+  
+  
+  .demo{
+    background-color: whitesmoke;
+    color: teal;
+    opacity: 0.8;
+    display: grid;
+    width: 50%;
+    height: fit-content;
+    justify-self: left;
+    margin-left: 5rem;
+    margin-top: 5rem;
+    font-family: 'Merriweather';
+    border: 2px goldenrod solid;
+  }
+  
+  @media screen and (max-width:800px) {
+    .demo{
+      display: grid;
+      width: 80%;
+      height: fit-content;
+      justify-self: center;
+      margin: 1rem;
+    }   
+  }
+  
+  .demo h1{
+    font-size: 1rem;
+    margin:0.2rem;
+  }
+  
+  .demo p{
+    margin:0.2rem;
+    color: black;
+  }
+  
+  
+  .auth-box{
+    display: grid;
+    background-color: whitesmoke;
+    justify-self: right;
+    width: 60%;
+    padding:0.5rem;
+    padding-left:1.5rem;
+    padding-right: 3rem;
+  }
+  
+  @media screen and (max-width:800px){
+    .auth-box{
+      display: grid;
+      width: 80%;
+      height: fit-content;
+      justify-self: center;
+      margin: 1rem;
+      padding: 1rem;
+    }
+  }
+  
+  .auth .heading{
+    font-size: 2.75rem;
+  }
+
+  @media screen and (max-width:800px){
+    .auth .heading{
+        font-size: 2.3rem;
+    }
+  }
+  
+  .auth .lead{
+    font-size: 1.5rem;
+  }
+  
+  .auth .form .form-group input{
+    width: 110%;
+    border-radius: 25px;
+  }
+
+  @media screen and (max-width:800px){
+      .form-group input{
+          width: 120%;
+          margin:0.2rem;
+      }
+  }
+  
+  .auth .form .form-group select{
+    width:100%;
+    height: 3rem;
+    border-radius: 25px;
+  }

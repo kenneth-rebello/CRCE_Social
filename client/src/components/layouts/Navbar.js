@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import './styles/nav.css'
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';

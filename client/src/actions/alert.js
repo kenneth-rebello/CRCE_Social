@@ -6,7 +6,10 @@ export const setAlert = (msg, alertType="error", timeout = 3000) => dispatch => 
     const id = uuid.v4();
     dispatch({
         type: SET_ALERT,
-        payload: msg
+        payload: {
+            id,
+            msg
+        }
     });
 
     setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id}), timeout);

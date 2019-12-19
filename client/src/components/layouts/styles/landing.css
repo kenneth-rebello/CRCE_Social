@@ -1,0 +1,54 @@
+.landing-box{
+    display: grid;
+    align-self: center;
+    justify-self: center;
+    background-color: whitesmoke;
+    padding: 1rem 3rem 1rem 3rem;
+    opacity: 0.9;
+  }
+  
+  .landing-box .title{
+    font-size: 3.5rem;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+  }
+  
+  .landing-box p{
+    font-size: 30px;
+    font-family: 'Cochin';
+  }
+  
+  .landing-box a{
+    color: goldenrod;
+    font-size: 1.5rem;
+  }
+  
+  .landing-box a:hover{
+    color: red;
+    font-size: 1.8rem;
+  }
+
+  @media screen and (max-width:800px){
+    .landing-box{
+        margin: 1rem;
+        margin-top: 0.2rem;
+        align-self: unset;
+        height: fit-content;
+    }
+
+    .landing-box .title{
+        font-size: 2.3rem;
+    }
+
+    .landing-box p{
+        font-size: 20px;
+    }
+
+    .landing-box a{
+        font-size: 1.3rem;
+    }
+
+    .landing-box a:hover{
+        font-size: 1.4rem;
+    }
+ }

@@ -1,0 +1,88 @@
+.navbar{
+    background-color: teal;
+    color: whitesmoke;
+    align-items: center;
+    min-height: 100px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index:1000;
+  }
+  
+  .navbar .btn{
+    border:none;
+    background: none;
+    box-shadow: none;
+    font-size: 1rem;
+    height:100%;
+    margin-top: 25%;
+  }
+  
+  .navbar .alerts{
+    width:100%;
+    min-height:40%;
+    background-color: gold;
+    color:black;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-content: center;
+    font-size:1.5rem;
+    padding:0.2%;
+  }
+  
+  .nav-extension{
+    background-color: teal;
+    color: whitesmoke;
+    font-family: 'Roboto';
+    display: grid;
+    justify-items: right;
+    opacity:0.8;
+  }
+  
+  .sidenavbar-own{
+    height:100%;
+    margin-top: 7.5rem;
+  }
+  
+  
+  .navbar a{
+    display: grid;
+    font-family: 'Roboto';
+    align-items: center;
+    color: whitesmoke; 
+    text-decoration: none;
+    padding: 1rem;
+    font-size: 1.7rem;
+  }
+  
+  .navbar button{
+    display: grid;
+    color: whitesmoke; 
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+  
+  .navbar a:hover{
+    color:goldenrod; 
+  }
+  
+  
+  .navbar .title{
+    color: whitesmoke;
+    font-size: 2rem;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+  }
+
+  @media screen and (max-width:800px){
+      .navbar .title{
+          font-size: 1.5rem;
+          margin: auto
+      }
+  }
+  
+  .nav-goldline{
+    background-color: goldenrod;
+    height:10px;
+  }
