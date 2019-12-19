@@ -1,0 +1,91 @@
+.post-form{
+    display: grid;
+    justify-self: center;
+    grid-template-columns: 1fr;
+  }
+  
+  .post-form .button-grid{
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+  }
+  
+  .post-form .button-grid input{
+    margin: 0.5rem
+  }
+  
+  .post-form .button-grid .btn{
+    margin: 0.5rem
+  }
+
+  .post{
+    margin:1% 2%;
+    display: grid;
+    width: 90%;
+    grid-template-columns: 1fr 6fr;
+    justify-self: center;
+    border-radius: 10px;
+    border: solid 3px teal;
+  }
+  
+  .post-user{
+    display: grid;
+    grid-template-rows: fit-content fit-content;
+    background-color: teal;
+  }
+  
+  .post .item-img{
+    height:auto;
+    width:100%;
+    border-radius: 50%;
+  }
+  .post-user .heading{
+    font-size: 1rem;
+    color:whitesmoke;
+    justify-self: center;
+    align-self: center;
+    font-family: 'Merriweather', sans-serif;
+  }
+  
+  .post-data{
+    padding: 1%;
+    display: grid;
+    grid-template-rows: fit-content 10% 30%;
+  }
+  
+  .post-img{
+    height: auto;
+    width: 80%;
+  }
+  
+  .post .post-text{
+    width: 100%;
+    font-size:1.2rem;
+    justify-self: left;
+    font-family: 'Roboto Slab', serif;
+  }
+  
+  .post .post-date{
+    color: grey;
+    font-size:0.75rem;
+    justify-self: right;
+  }
+
+  @media screen and (max-width:800px){
+        .post-form .form textarea{
+            margin: 0.5rem;
+        }
+
+        .post-form .heading{
+            margin: 0.2rem;
+        }
+
+        .post-user{
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            background-color: teal;
+        }
+
+        .post-user .heading{
+            margin: 0.1rem;
+        }
+  }

@@ -1,0 +1,63 @@
+.dashboard{
+    display: grid;
+    grid-template-columns:4fr 1fr;
+  }
+  
+  
+  .dashboard .posts{
+    display: grid;
+    width: 100%;
+  }
+  
+  
+  .dashboard .user{
+    margin: 15px;
+    margin-top: 60px;
+    display: grid;
+    grid-template-rows: 80px 30px auto 60px 60px;
+    max-height: 356px;
+    position: sticky;
+    height:100vh;
+    top: 130px;
+  }
+  
+  .dashboard .user .btn{
+    width:95%
+  }
+  
+  
+  .dashboard .user img{
+    height: 256px;
+    width: 256px;
+    border-radius: 150px;
+    border: solid 3px goldenrod;
+    border-style: inset;
+  }
+  
+  .dashboard .user .user-switch{
+    display:grid;
+    grid-template-rows: auto 256px;
+  }
+  
+  
+  .dashboard .user .heading{
+    color: goldenrod;
+    font-size: 1.3rem;
+    justify-self: center;
+  }
+  
+  .dash-link{
+    font-size: 1.2rem;
+    justify-self: center;
+  }
+
+  @media screen and (max-width:800px){
+
+    .dashboard{
+        grid-template-columns: unset;
+    }
+
+      .dashboard .user{
+          display: none;
+      }
+  }

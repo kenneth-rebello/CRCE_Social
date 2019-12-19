@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import './post.css'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
 import {addPost} from '../../actions/post';
@@ -52,7 +53,7 @@ const PostForm = ({addPost}) => {
                     <button className="btn btn-light" onClick={() => toggleAddImage(!displayAddImage)}>
                         <i className="fa fa-window-close"></i>
                     </button>
-                    <input name="url" type="text" value={url} onChange ={e => Changer(e)}/>
+                    <input name="url" type="text" placeholder="Add url for image" value={url} onChange ={e => Changer(e)}/>
                 </div>}
 
                 <input type="submit" className="btn btn-dark" value="Post" />

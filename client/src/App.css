@@ -4,6 +4,80 @@
   font-size: 1rem;
 }
 
+.btn a{
+  color:inherit;
+}
+
+.btn-icon{
+  width:5%;
+  float: right;
+}
+
+.btn-dark{
+  background-color: teal;
+  color: white;
+}
+.btn-dark:hover{
+  background-color: lightseagreen;
+}
+.btn-dark:focus{
+  background-color: teal;
+}
+
+
+.btn-light{
+  background-color: lightgray;
+  color: teal  ;
+}
+.btn-light:hover{
+  background-color: lightsteelblue;
+}
+.btn-light:focus{
+  background-color: lightgray;
+}
+
+.btn-gold{
+  background-color: goldenrod;
+  color:white;
+}
+.btn-gold:hover{
+  background-color: gold;
+}
+.btn-gold:focus{
+  background-color: goldenrod;
+}
+
+.btn-green{
+  background-color: green;
+  color:white;
+}
+.btn-green:focus{
+  background-color: green;
+  color:white;
+}
+.btn-green:hover{
+  background-color: lightgreen;
+  color: green;
+}
+
+
+.btn-red{
+  background-color: red;
+  color:white;
+}
+.btn-red:focus{
+  background-color: red;
+  color:white;
+}
+.btn-red:hover{
+  background-color: lightcoral;
+  color:red;
+}
+
+.btn .fa{
+  font-size: 1rem;
+}
+
 .form-group{
   padding: 10px;
   padding-bottom: 20px;
@@ -264,83 +338,11 @@
   justify-self: center;
 }
 
-.post-form{
-  display: grid;
-  justify-self: center;
-  grid-template-columns: 1fr;
-}
-
-.post-form .button-grid{
-  display: grid;
-  grid-template-columns: 1fr 10fr;
-}
-
-.post-form .button-grid input{
-  margin: 0.5rem
-}
-
-.post-form .button-grid .btn{
-  margin: 0.5rem
-}
-
 .posts{
   display: grid;
   justify-self: center;
   width: 80%;
   margin-top:1%;
-}
-
-.post{
-  margin:1% 2%;
-  display: grid;
-  width: 90%;
-  grid-template-columns: 1fr 6fr;
-  justify-self: center;
-  border-radius: 10px;
-  border: solid 3px teal;
-}
-
-.post-user{
-  display: grid;
-  grid-template-rows: fit-content fit-content;
-  background-color: teal;
-}
-
-.post .item-img{
-  height:auto;
-  width:100%;
-  border-radius: 50%;
-}
-.post-user .heading{
-  font-size: 1rem;
-  color:whitesmoke;
-  justify-self: center;
-  align-self: center;
-  font-family: 'Merriweather', sans-serif;
-}
-
-.post-data{
-  padding: 1%;
-  display: grid;
-  grid-template-rows: fit-content 10% 30%;
-}
-
-.post-img{
-  height: auto;
-  width: 80%;
-}
-
-.post .post-text{
-  width: 100%;
-  font-size:1.2rem;
-  justify-self: left;
-  font-family: 'Roboto Slab', serif;
-}
-
-.post .post-date{
-  color: grey;
-  font-size:0.75rem;
-  justify-self: right;
 }
 
 .user-posts{
@@ -648,62 +650,6 @@
   color: goldenrod;
 }
 
-
-/* Dashboard */
-
-.dashboard{
-  display: grid;
-  grid-template-columns:4fr 1fr;
-}
-
-
-.dashboard .posts{
-  display: grid;
-  width: 100%;
-}
-
-
-.dashboard .user{
-  margin: 15px;
-  margin-top: 60px;
-  display: grid;
-  grid-template-rows: 80px 30px auto 60px 60px;
-  max-height: 356px;
-  position: sticky;
-  height:100vh;
-  top: 130px;
-}
-
-.dashboard .user .btn{
-  width:95%
-}
-
-
-.dashboard .user img{
-  height: 256px;
-  width: 256px;
-  border-radius: 150px;
-  border: solid 3px goldenrod;
-  border-style: inset;
-}
-
-.dashboard .user .user-switch{
-  display:grid;
-  grid-template-rows: auto 256px;
-}
-
-
-.dashboard .user .heading{
-  color: goldenrod;
-  font-size: 1.3rem;
-  justify-self: center;
-}
-
-.dash-link{
-  font-size: 1.2rem;
-  justify-self: center;
-}
-
 .main-form{
   display:grid;
   grid-template-columns: 4fr 1fr;
@@ -766,78 +712,6 @@
 .item-img{
   height:250px;
   width:250px;
-}
-
-/* Buttons */
-
-.btn a{
-  color:inherit;
-}
-
-.btn-icon{
-  width:5%;
-  float: right;
-}
-
-.btn-dark{
-  background-color: teal;
-  color: white;
-}
-.btn-dark:hover{
-  background-color: lightseagreen;
-}
-.btn-dark:focus{
-  background-color: teal;
-}
-
-
-.btn-light{
-  background-color: lightgray;
-  color: teal  ;
-}
-.btn-light:hover{
-  background-color: lightsteelblue;
-}
-.btn-light:focus{
-  background-color: lightgray;
-}
-
-.btn-gold{
-  background-color: goldenrod;
-  color:white;
-}
-.btn-gold:hover{
-  background-color: gold;
-}
-.btn-gold:focus{
-  background-color: goldenrod;
-}
-
-.btn-green{
-  background-color: green;
-  color:white;
-}
-.btn-green:focus{
-  background-color: green;
-  color:white;
-}
-.btn-green:hover{
-  background-color: lightgreen;
-  color: green;
-}
-
-
-.btn-red{
-  background-color: red;
-  color:white;
-}
-.btn-red:focus{
-  background-color: red;
-  color:white;
-}
-.btn-red:hover{
-  background-color: lightcoral;
-  color:red;
 }
 
 a{
