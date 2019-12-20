@@ -1,0 +1,147 @@
+
+.profile-top{
+    background-color: teal;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-rows: fit-content fit-content fit-content fit-content
+  }
+  
+  .profile-top .heading{
+    display: grid;
+    color:whitesmoke;
+    margin:1.5rem;
+    margin-bottom: 0.2rem;
+  }
+  
+  .profile-top p{
+    display: grid;
+    color: ivory;
+    font-size: 1.3rem;
+    margin: 0.1rem;
+  }
+  
+  .profile-top img{
+    margin: 2rem;
+  }
+  
+  .profile-contact{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+  
+  .profile-contact .btn{
+    color: whitesmoke;
+    height: 3.5rem;
+    border: none;
+    box-shadow: none;
+    background: none;
+  }
+  
+  .profile-contact .btn:hover{
+    color: goldenrod;
+  }
+  
+  .profile-contact i{
+    font-size: 2.3rem;
+  }
+
+
+  /* Profile Buttons  */
+
+    .profile-buttons{
+      height: fit-content;
+      width: 100%;
+    }
+
+
+    @media screen and (max-width:800px){
+        .profile-buttons{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .profile-buttons .btn{
+            font-size: 0.8rem;
+            width: 95%;
+            margin: 1%;
+        }
+    }
+  /* Profile About  */
+
+  .bio{
+    display: grid;
+    justify-items: center;
+    grid-template-rows: fit-content auto;
+    row-gap: 1px;
+    background-color: whitesmoke;
+    font-size: 1.5rem;
+    border-radius: 30px;
+    padding: 1%;
+    margin: 1%;
+  }
+  
+  .profile-about .skill-set{
+    background-color: whitesmoke;
+    display: grid;
+    padding: 1%;
+    border-radius: 30px;
+    margin: 1%;
+  }
+  
+  .profile-about .skills{
+    font-size:1.5rem;
+  }
+  
+  .skills li{
+    display: inline;
+    padding:0.5%;
+  }
+  
+  .skill-set .heading{
+    color: goldenrod;
+    font-size:2rem;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+  }
+  
+  .education{
+    display: grid;
+    justify-items:center;
+    align-items: top;
+    width:90vw;
+  }
+  
+  .education table{
+    display:grid;
+    font-size: 1.3rem;
+    padding:1%;
+    background-color: white;
+    width:90vw;
+  }
+
+  .education table td{
+      width: fit-content    ;
+      padding: 1%;
+      margin: 1%;
+      border: solid;
+  }
+  
+  .education .btn{
+    width: 100%;
+  }
+
+  @media screen and (max-width:800px){
+      .education table{
+          font-size: 1.2rem;
+      }
+
+      .collapsible-header .btn i{
+        margin: 0;
+        padding: 0;
+      }
+
+      .education .btn{
+          width: fit-content;
+      }
+  }

@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import './profile.css'
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Moment from 'react-moment';
@@ -16,7 +17,7 @@ const Education = ({ education, delEducation }) => {
                 - <Moment format='YYYY'>{edu.to}</Moment>
             </td>
             <td>
-                <button className="btn btn-red" onClick={() => delEducation(edu._id)}>Delete</button>
+                <button className="btn btn-red" onClick={() => delEducation(edu._id)}></button>
             </td>
         </tr>
     ));
@@ -24,7 +25,7 @@ const Education = ({ education, delEducation }) => {
     return (
         <Fragment>
             <div className="education">
-                <table cellSpacing="10" cellPadding="10">
+                <table cellSpacing="5" cellPadding="5">
                     <tbody>
                         {educations}
                     </tbody>

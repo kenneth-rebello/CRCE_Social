@@ -198,53 +198,6 @@
 }
 
 
-.profile-top{
-  background-color: teal;
-  display: grid;
-  align-items: center;
-  justify-items: center;
-  grid-template-rows: fit-content fit-content fit-content fit-content
-}
-
-.profile-top .heading{
-  display: grid;
-  color:whitesmoke;
-  margin:1.5rem;
-  margin-bottom: 0.2rem;
-}
-
-.profile-top p{
-  display: grid;
-  color: ivory;
-  font-size: 1.3rem;
-  margin: 0.1rem;
-}
-
-.profile-top img{
-  margin: 2rem;
-}
-
-.profile-contact{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-}
-
-.profile-contact .btn{
-  color: whitesmoke;
-  height: 3.5rem;
-  border: none;
-  box-shadow: none;
-  background: none;
-}
-
-.profile-contact .btn:hover{
-  color: goldenrod;
-}
-
-.profile-contact i{
-  font-size: 2.3rem;
-}
-
 .contact-details a{
   color: whitesmoke;
   font-size: 1.5rem;
@@ -264,61 +217,6 @@
   display: inline;
 }
 
-.education{
-  display: grid;
-  justify-items:center;
-  width:100%;
-}
-
-.education table{
-  display:grid;
-  font-size: 1.3rem;
-  padding:1%;
-  background-color: white;
-  width:100%;
-}
-
-.education .btn{
-  width: 100%;
-}
-
-
-.profile-about{
-  background-color: white;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  row-gap: 2%;
-  justify-items: center;
-}
-
-.profile-about .skill-set{
-  border-left: solid 1px black;
-  padding:2%;
-}
-
-.profile-about .skills{
-  font-size:1.5rem;
-}
-
-.profile-about .bio{
-  display: grid;
-  justify-items: center;
-  grid-template-rows: fit-content auto;
-  row-gap: 1px;
-  font-size: 1.5rem;
-  padding:2%;
-}
-
-.skills li{
-  display: inline;
-  padding:0.5%;
-}
-
-.profile-about .heading{
-  color: goldenrod;
-  font-size:2rem;
-  justify-self: left;
-}
 
 /* Posts */
 .posts-page{
@@ -689,12 +587,19 @@
 }
 
 .plain-page{
+  margin: 0;
   margin-top: 110px;
-  background-color: whitesmoke;
   width:100%;
-  min-height:550px;
+  min-height:100vh;
   background-size: cover;
   display: grid;
+  padding: 0.5%;
+}
+
+@media screen and (max-width:800px){
+  .plain-page{
+    min-width:100vw;
+  }
 }
 
 .pdf{

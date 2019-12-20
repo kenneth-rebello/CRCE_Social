@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 import Alert from './Alert'
+import UserBox from '../dashboard/UserBox';
 import { getUnseenNotifs } from '../../actions/notif';
 
 const Navbar = (props) => {
@@ -45,6 +46,7 @@ const Navbar = (props) => {
         </nav>
 
         <ul className="sidenav sidenavbar-own" id="mobile-demo">
+            <UserBox/>
             <li><Link to="/dashboard">Home</Link></li>
             {props.auth && !props.auth.loading && props.auth.user && <li><Link to={`/profile/${props.auth.user._id}`}>{props.auth.user.name}</Link></li>}
             {props.notif && props.notif.unseen &&  <li><Link to="/notifs">Notifications {props.notif.unseen.length}</Link></li>}

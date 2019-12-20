@@ -1,4 +1,5 @@
-import React,{Fragment, useState} from 'react'
+import React,{Fragment, useState} from 'react';
+import './profile.css'
 
 const ProfileTop = ({ profile }) => {
 
@@ -13,8 +14,6 @@ const ProfileTop = ({ profile }) => {
     const [showMobile, toggleMobile] = useState(false);
     const [showFB, toggleFB] = useState(false);
     const [showMail, toggleMail] = useState(false);
-
-    console.log(picture);
 
     return (
         <Fragment>
