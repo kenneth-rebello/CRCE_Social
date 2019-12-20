@@ -1,0 +1,146 @@
+.messages{
+    display: grid;
+    grid-template-rows: 10% 55% 10%;
+    height: 100vh;
+    margin: 2%;
+    margin-bottom: 2%; 
+  }
+  
+ .userhead{
+    font-size: 2rem;
+    color:goldenrod;
+    padding:0;
+  }
+  
+  .message-list{
+    display: grid;
+    background: whitesmoke;
+    overflow: scroll;
+  }
+  
+  .new-message{
+    display: grid;
+    background: whitesmoke;
+    width: 95%;
+    justify-self: center;
+    align-self: center;
+    grid-template-columns: 6fr 1fr;
+    height: 3rem;
+  }
+  
+  .message{
+    display:grid;
+    grid-template-rows: 20px max-content 10px;
+    padding: 5px;
+    margin: 10px;
+    width: auto;
+    height: fit-content;
+  }
+  
+  .msg-me{
+    display: grid;
+    justify-self: right;
+    background-color: teal;
+  }
+  
+  .msg-you{
+    justify-self: left;
+    background-color: lightseagreen;
+  }
+  
+  .message h1{
+    font-size: 1.3rem;
+    margin: 0px;
+    padding:0px;
+    font-family: 'Merriweather', sans-serif;
+    color: whitesmoke;
+  }
+  
+  .message p{
+    font-size: 1rem;
+    background-color: whitesmoke;
+    font-family: 'Roboto Slab', serif;
+    font-weight: bold; 
+  }
+  
+  .message span{
+    padding:0;
+    font-size: 0.8rem;
+    color: whitesmoke;
+  }
+
+  #new-msg{
+      padding: 3%;
+  }
+
+  /* Userlist */
+  
+.chat-window{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    height: 100vh;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  
+  .user-bar{
+    display: grid;
+    background: lightseagreen;
+    height: 100vh;
+    overflow: scroll;
+  }
+  
+  .userlist{
+    margin: 1%;
+    margin-top:5%;
+  }
+  
+  .singlechatbtn {
+    width: 100%;
+  }
+  
+  .userlist .singlechat{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-height: 50%;
+    width:100%;
+    background-color: whitesmoke;
+    border: solid;
+    font-family: 'Merriweather', sans-serif;
+  }
+  
+  .userlist .singlechat:active{
+    background-color: lightseagreen;
+  }
+  
+  .userlist .singlechat img{
+    height: 100%;
+    width:85%;
+    margin:2%;
+  }
+    
+  .userlist .singlechat .username{
+    font-size: 1rem;
+  }
+  
+  @media screen and (max-width:800px){
+    .chat-window{
+        grid-template-columns: 2fr 5fr;
+    }
+
+    .singlechatbtn {
+        height: fit-content;
+    }
+    .userlist .singlechat{
+        grid-template-columns: unset;
+        grid-template-rows: 65% 35%;
+        height: fit-content;
+    }
+
+    .userlist .singlechat .username{
+        display: grid;
+        justify-self: center;
+        align-self: center;
+        font-size: 1.2rem;
+      }
+  }

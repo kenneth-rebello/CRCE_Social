@@ -1,9 +1,10 @@
 import React from 'react'
+import './profiles.css'
 
 const ProfilePhoto = ({picture}) => {
     return (
-        <div>
-            <img className="item-img" src={`image/${picture}`} alt=""/>
+        <div className="item-img">
+            <img  src={`image/${picture}`} alt=""/>
         </div>
     )
 }

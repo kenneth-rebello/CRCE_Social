@@ -56,7 +56,7 @@ const AddEducation = ({addEducation, history}) => {
 
                     <input type="submit" className="btn btn-dark"></input>
                 
-                    <button className="btn btn-light"><Link to="/dashboard">Go Back</Link></button>
+                    <button className="btn btn-light"><Link to="/edit_profile">Go Back</Link></button>
                 </form>
             </div>
         </Fragment>

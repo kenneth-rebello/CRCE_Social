@@ -44,7 +44,7 @@ const EditPicture = ({editPicture, deletePicture, getProfileById, history, profi
 
                     <input type="submit" value="Add" className="btn btn-dark"></input>
                 
-                    <button className="btn btn-light"><Link to="/profile/me">Go Back</Link></button>
+                    <button className="btn btn-light"><Link to="/edit_profile">Go Back</Link></button>
                     {!profile.loading && profile.profile.picture && <button className="btn btn-red" onClick={()=>Deleter()}>Delete</button>}
                 </form>
             </div>

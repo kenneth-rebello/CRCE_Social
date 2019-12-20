@@ -78,6 +78,12 @@
   font-size: 1rem;
 }
 
+@media screen and (max-width:800px){
+  .btn{
+    height: fit-content;
+  }
+}
+
 .form-group{
   padding: 10px;
   padding-bottom: 20px;
@@ -117,87 +123,6 @@
   font-weight: bold;
 }
 
-
-/* Auth Components */
-
-
-/* Profile  */
-.all-profiles{
-  display: grid;
-  grid-template-rows: 5rem auto
-}
-.profiles{
-  display:grid;
-}
-
-.search-profiles form{
-  display: grid;
-  grid-template-columns: 10fr 1fr;
-  margin-top: 2%;
-}
-
-.profile{
-  display: grid;
-  grid-template-columns: 1fr 6fr;
-  background-color: teal;
-  color: whitesmoke;
-  border-radius: 10px;
-  padding:1%;
-  margin:0.5%;
-  width:90%;
-  justify-self: center;
-  max-height:20rem;
-}
-
-.profile img{
-  height: auto;
-  width: 100%;
-  border-radius: 50%;
-  border: solid whitesmoke;
-}
-.profile .profile-details{
-  display: grid;
-  grid-template-rows: fit-content, fit-content, fit-content, auto;
-}
-
-.profile .profile-details .line{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  padding-left: 5%;
-}
-
-.profile .profile-details .profile-buttons{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.profile .profile-details .profile-buttons .btn{
-  display: grid;
-  height: 30px;
-  width: 30%;
-  font-size:12px;
-  margin: 0.5%;
-}
-
-.profile .profile-details h1{
-  font-size: 2rem;
-  font-weight: bold ;
-  padding-left:5%;
-  font-family: 'Merriweather', sans-serif
-}
-
-.profile .profile-details p{
-  font-size: 1.2rem;
-  padding-left: 5%;
-}
-
-.profile .profile-details a{
-  font-size: 1rem;
-  padding-left: 5%;
-  color: whitesmoke;
-}
-
-
 .contact-details a{
   color: whitesmoke;
   font-size: 1.5rem;
@@ -217,24 +142,6 @@
   display: inline;
 }
 
-
-/* Posts */
-.posts-page{
-  display: grid;
-  grid-template-rows: fit-content fit-content auto auto; 
-}
-
-.posts-page .heading{
-  display:grid;
-  font-size: 3rem;
-  justify-self: center;
-  font-family: 'Merriweather' sans-serif;
-}
-
-.posts-page p{
-  font-size: 1.5rem;
-  justify-self: center;
-}
 
 .posts{
   display: grid;
@@ -396,121 +303,6 @@
   border-radius: 15px;
 }
 
-.chat-window{
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  height: 100vh;
-  margin-bottom: 0;
-}
-
-.user-bar{
-  display: grid;
-  background: lightseagreen;
-}
-
-.userlist{
-  margin: 1%;
-  margin-top:5%;
-}
-
-.singlechatbtn {
-  width: 100%;
-}
-
-.userlist .singlechat{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  max-height: 25%;
-  width:100%;
-  background-color: whitesmoke;
-  border: solid;
-}
-
-.userlist .singlechat:active{
-  background-color: lightseagreen;
-}
-
-.userlist .singlechat img{
-  height: auto;
-  width:85%;
-  margin:2%;
-}
-  
-.userlist .singlechat .username{
-  font-size: 1rem;
-}
-
-.messages{
-  display: grid;
-  grid-template-rows: 15% 55% 15%;
-  height: 100%;
-  margin: 2%;
-  margin-bottom: 2%; 
-}
-
-.messages .userhead{
-  font-size: 2rem;
-  color:goldenrod;
-  padding:0;
-}
-
-.message-list{
-  display: grid;
-  background: whitesmoke;
-  overflow: scroll;
-}
-
-.new-message{
-  display: grid;
-  background: whitesmoke;
-  width: 95%;
-  justify-self: center;
-  align-self: center;
-  grid-template-columns: 6fr 1fr;
-  height: 3rem;
-}
-
-.message{
-  display:grid;
-  grid-template-rows: 20px max-content 10px;
-  padding: 5px;
-  margin: 10px;
-  width: auto;
-  height: fit-content;
-}
-
-.msg-me{
-  display: grid;
-  justify-self: right;
-  background-color: teal;
-}
-
-.msg-you{
-  justify-self: left;
-  background-color: lightseagreen;
-}
-
-.message h1{
-  font-size: 1.3rem;
-  margin: 0px;
-  padding:0px;
-  font-family: 'Merriweather', sans-serif;
-  color: whitesmoke;
-}
-
-.message p{
-  font-size: 1rem;
-  background-color: whitesmoke;
-  font-family: 'Roboto Slab', serif;
-  font-weight: bold; 
-}
-
-.message span{
-  padding:0;
-  font-size: 0.8rem;
-  color: whitesmoke;
-}
-
 .notifs{
   display: grid;
 }
@@ -553,6 +345,12 @@
   grid-template-columns: 4fr 1fr;
 }
 
+@media screen and (max-width:800px){
+  .main-form{
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
 .profile-forms{
   background-color: white;
   margin: 2%;
@@ -560,6 +358,10 @@
 
 .profile-forms p{
   font-size: 1.3rem;
+}
+
+.profile-forms .btn{
+  width: 100%;
 }
 
 .edit-profile-actions{
@@ -598,7 +400,7 @@
 
 @media screen and (max-width:800px){
   .plain-page{
-    min-width:100vw;
+    min-width:100%;
   }
 }
 
@@ -612,11 +414,12 @@
   color: goldenrod;
   font-weight: bolder;
   font-family: 'Merriweather' , sans-serif;
+  margin: 1%;
+  padding: 1%;
 }
 
-.item-img{
-  height:250px;
-  width:250px;
+p{
+  margin: 1%;
 }
 
 a{

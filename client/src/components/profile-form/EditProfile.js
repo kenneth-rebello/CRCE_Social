@@ -50,7 +50,6 @@ const EditProfile = ({profile: {profile, loading}, createProfile, getCurrentProf
 
     const Submitter = e =>{
         e.preventDefault();
-        console.log(history);
         createProfile(formData, history, true);
     }
     

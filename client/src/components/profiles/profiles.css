@@ -1,0 +1,105 @@
+.search-profiles form{
+    display: grid;
+    grid-template-columns: 10fr 1fr;
+    margin-top: 2%;
+    margin-bottom: 0
+}
+
+.all-profiles{
+    display: grid;
+    grid-template-rows: 5rem auto;
+  }
+  .profiles{
+    display:grid;
+  }
+
+.profile{
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    background-color: teal;
+    color: whitesmoke;
+    border-radius: 10px;
+    padding:1%;
+    margin:0.5%;
+    width:90%;
+    justify-self: center;
+    max-height:20rem;
+  }
+  
+  .profile img{
+    height: 230px;
+    width: 230px;
+    border-radius: 50%;
+    border: solid whitesmoke;
+  }
+  .profile .profile-details{
+    display: grid;
+    grid-template-rows: fit-content, fit-content, fit-content, auto;
+  }
+  
+  .profile .profile-details .line{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding-left: 5%;
+  }
+  
+  .profile .profile-details .profile-buttons{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .profile .profile-details .profile-buttons .btn{
+    display: grid;
+    height: 30px;
+    width: 30%;
+    font-size:12px;
+    margin: 0.5%;
+  }
+  
+  .profile .profile-details h1{
+    font-size: 2rem;
+    font-weight: bold ;
+    padding-left:5%;
+    font-family: 'Merriweather', sans-serif
+  }
+  
+  .profile .profile-details p{
+    font-size: 1.2rem;
+    padding-left: 5%;
+  }
+  
+  .profile .profile-details a{
+    font-size: 1rem;
+    padding-left: 5%;
+    color: whitesmoke;
+  }
+
+  @media screen and (max-width:800px){
+    .profile{
+        grid-template-columns: 1fr 1fr ;
+    }
+
+    .profile img{
+        height: 128px;
+        width: 128px;
+    }
+
+    .profile .profile-details{
+        justify-content: right;
+    }
+
+    .profile .profile-details .line{
+        grid-template-columns: unset;
+        grid-template-rows: auto auto auto;
+        row-gap: 0;
+    }
+
+    .profile .profile-details .line p{
+        padding: 0.2rem;
+        margin: 0;
+    }
+
+    .profile .profile-details .line a{
+        margin: 0.2rem;
+    }
+  }

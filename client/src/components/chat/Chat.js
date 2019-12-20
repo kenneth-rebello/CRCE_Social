@@ -1,4 +1,5 @@
 import React,{Fragment} from 'react'
+import './chat.css'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
 import io from "socket.io-client"

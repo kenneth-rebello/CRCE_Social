@@ -1,4 +1,5 @@
 import React ,{Fragment} from 'react';
+import './post.css'
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import Moment from 'react-moment';
@@ -20,10 +21,8 @@ const PostItem = ({auth, post, addLike, removeLike, approvePost, deletePost}) =>
             <div className="post">
                 <div>
                     <Link to={`/profile/${user}`} className="post-user">
-                    
                         {picture && <img className="item-img" src={`/image/${picture}`} alt=""/>}
-                    
-                    <h1 className="heading">{name}</h1>
+                        <h1 className="name">{name}</h1>
                     </Link>
                 </div>
         

@@ -1,4 +1,5 @@
 import React, {Fragment, useEffect} from 'react';
+import './posts.css'
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getPosts} from '../../actions/post';

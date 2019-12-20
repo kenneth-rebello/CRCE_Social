@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -15,9 +15,6 @@ import { followUser, unfollowUser } from '../../actions/auth';
 
 const Profile = ({ getProfileById, getUserPosts, delAccount, followUser, unfollowUser, delUser, profile, auth, match }) => {
     
-    const [displayEducation, toggleEducation] = useState(false);
-    const [displayStatus, toggleStatus] = useState(false);
-
     useEffect(() => {
         window.$('.collapsible').collapsible();
     })

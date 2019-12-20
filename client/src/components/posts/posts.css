@@ -1,0 +1,29 @@
+/* Posts */
+.posts-page{
+    display: grid;
+    grid-template-rows: 1fr 1fr 5fr auto; 
+    row-gap: 1;
+  }
+  
+  .posts-page .heading{
+    display:grid;
+    font-size: 3rem;
+    justify-self: center;
+    font-family: 'Merriweather' sans-serif;
+    margin: 0;
+  }
+  
+  .posts-page p{
+    font-size: 1.5rem;
+    justify-self: center;
+    margin: 0;
+  }
+
+@media screen and (max-width:800px){
+    .posts-page .heading{
+        font-size: 2rem;
+    }
+    .posts-page p{
+        font-size: 1.2rem;
+    }
+}

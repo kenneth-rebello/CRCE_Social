@@ -18,13 +18,13 @@
   }
 
   .post{
-    margin:1% 2%;
+    margin:1% 1%;
     display: grid;
-    width: 90%;
+    width: 100%;
     grid-template-columns: 1fr 6fr;
     justify-self: center;
     border-radius: 10px;
-    border: solid 3px teal;
+    border: solid 2px teal;
   }
   
   .post-user{
@@ -34,16 +34,19 @@
   }
   
   .post .item-img{
-    height:auto;
-    width:100%;
+    height:128px;
+    width:128px;
     border-radius: 50%;
   }
-  .post-user .heading{
-    font-size: 1rem;
+  .post-user .name{
+    font-size: 1.3rem;
     color:whitesmoke;
     justify-self: center;
     align-self: center;
     font-family: 'Merriweather', sans-serif;
+    margin: 1%;
+    padding: 1%;
+    padding-left: 10%;
   }
   
   .post-data{
@@ -71,21 +74,32 @@
   }
 
   @media screen and (max-width:800px){
-        .post-form .form textarea{
-            margin: 0.5rem;
-        }
 
-        .post-form .heading{
-            margin: 0.2rem;
-        }
+    .post .item-img{
+      height: 64px;
+      width: 64px;
+    }
 
-        .post-user{
-            display: grid;
-            grid-template-rows: 1fr 1fr;
-            background-color: teal;
-        }
+    .post-form .form textarea{
+        margin: 0.5rem;
+    }
 
-        .post-user .heading{
-            margin: 0.1rem;
-        }
+    .post-form .heading{
+        margin: 0.2rem;
+    }
+
+    .post-user{
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        background-color: teal;
+    }
+
+    .post-user .name{
+      font-size: 0.9rem;
+      margin: 0.1rem;
+    }
+
+    .post .post-text{
+      font-size: 1rem;
+    }
   }

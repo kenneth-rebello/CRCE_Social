@@ -49,7 +49,7 @@ const AddSkill = ({auth, getProfileById, profile, addSkill, removeSkill}) => {
 
                     <input type="submit" value="Add" className="btn btn-dark"></input>
                 
-                    <button className="btn btn-light"><Link to="/dashboard">Go Back</Link></button>
+                    <button className="btn btn-light"><Link to="/edit_profile">Go Back</Link></button>
                 </form>
             </div>
             {!profile.loading && <div className="skill-list">

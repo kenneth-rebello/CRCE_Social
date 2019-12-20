@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import './chat.css';
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {loadChatUserTo} from '../../actions/chat'
