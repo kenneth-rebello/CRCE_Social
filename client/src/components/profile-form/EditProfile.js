@@ -39,7 +39,8 @@ const EditProfile = ({profile: {profile, loading}, createProfile, getCurrentProf
             dateOfBirth: loading || !profile.dateOfBirth? '' : profile.dateOfBirth,
             bio: loading || !profile.bio ? '' : profile.bio,
         });
-    }, [getCurrentProfile, profile, loading]);
+        // eslint-disable-next-line
+    }, []);
 
     let { contact, dateOfBirth, location,  position, 
         github, bio,twitter,facebook,youtube,instagram, linkedin} = formData;

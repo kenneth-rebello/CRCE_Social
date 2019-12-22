@@ -37,19 +37,19 @@ router.get('/me', auth, async function(req,res){
 //@route    GET api/profile/me
 //@desc     Create/Update a user profile
 //@access   Private
-router.post('/', [auth], async function(req, res){
+router.post('/', [auth, [
+    check('bio','Bio is required').not().isEmpty()
+]], async function(req, res){
     const errors = validationResult(req);
     if(!errors.isEmpty()){
         return res.status(400).json({errors: errors.array()});     
     }
 
     const {
-        user,
         dateOfBirth,
         contact,
         location,
         skills,
-        achievements,
         position,
         bio,
         github,
@@ -60,8 +60,19 @@ router.post('/', [auth], async function(req, res){
         instagram
     } = req.body;
 
-    let dOb = new Date(dateOfBirth)
+    if(contact){
 
+        if (contact.length < 10) return res.status(400).json({errors: [{msg: 'Phone number too short'}]})
+
+        const existing = await Profile.find({contact: contact});
+
+        if(existing.length>0){
+            return res.status(400).json({errors: [{msg: 'This number has already been used.'}]});
+        }
+    }
+
+    let dOb = new Date(dateOfBirth)
+    console.log(dOb)
     //Build Profile Object
     const ProfileFields = {};
     ProfileFields.user = req.user.id;
@@ -84,10 +95,12 @@ router.post('/', [auth], async function(req, res){
     if(instagram) ProfileFields.social.instagram = instagram;
     if(github) ProfileFields.social.github = github;
 
+    console.log(ProfileFields)
+
     try{
         
         let profile = await Profile.findOne({user: req.user.id})
-
+        console.log(profile)
         if(profile){
             profile = await Profile.findOneAndUpdate({user: req.user.id}, { $set: ProfileFields}, {new:true});
 

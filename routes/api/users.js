@@ -31,7 +31,7 @@ async function(req,res){
         
         if(user){
             return res.status(400).json({
-                errors: [{msg: 'User already exists'}]
+                errors: [{msg: 'Email already exists'}]
             });
         }
 
