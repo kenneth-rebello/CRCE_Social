@@ -82,6 +82,10 @@
   .btn{
     height: fit-content;
   }
+
+  .heading{
+    font-size: 1rem;
+  }
 }
 
 .form-group{

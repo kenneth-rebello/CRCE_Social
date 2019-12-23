@@ -5,7 +5,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const compression = require('compression');
-const enforce = require('express-sslify');
 const mongoose = require('mongoose');
 const config = require('config');
 const db = config.get('mongoURI');
@@ -42,7 +41,6 @@ try{
 app.use(bodyParser.json());
 app.use(express.json({extended: false}));
 app.use(methodOverride('_method'));
-app.use(enforce.HTTPS({trustProtoHeader: true}))
 
 //Define Routes
 app.use('/api/users', require('./routes/api/users'));

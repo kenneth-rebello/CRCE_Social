@@ -66,6 +66,10 @@
             width: 95%;
             margin: 1%;
         }
+
+        .heading{
+          font-size: 1rem;
+        }
     }
   /* Profile About  */
 
@@ -105,11 +109,11 @@
     grid-template-columns: 3fr 1fr 1fr;
   }
   
-  .education{
+  /* .education{
     display: grid;
     justify-items:center;
     align-items: top;
-    width:90vw;
+    width:99%;
   }
   
   .education table{
@@ -117,7 +121,7 @@
     font-size: 1.3rem;
     padding:1%;
     background-color: white;
-    width:90vw;
+    width:100%;
   }
 
   .education table td{
@@ -126,10 +130,10 @@
       margin: 1%;
       border: solid;
   }
-  
-  .education .btn{
+   */
+  /* .education .btn{
     width: 100%;
-  }
+  } */
 
   @media screen and (max-width:800px){
       .education table{
@@ -139,9 +143,5 @@
       .collapsible-header .btn i{
         margin: 0;
         padding: 0;
-      }
-
-      .education .btn{
-          width: fit-content;
       }
   }

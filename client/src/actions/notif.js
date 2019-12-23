@@ -43,7 +43,7 @@ export const getNotifs = () => async dispatch => {
 export const getUnseenNotifs = () => async dispatch => {
 
     try {
-
+        console.log('Here')
         const res = await axios.get('/api/notif/unseen');
 
         dispatch({

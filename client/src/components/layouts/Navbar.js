@@ -13,7 +13,7 @@ const Navbar = (props) => {
     const {getUnseenNotifs} = props;
 
     useEffect(() => {
-        getUnseenNotifs();
+        getUnseenNotifs()
     },[getUnseenNotifs])
 
     const [displayNav, toggleNav] = useState(false)

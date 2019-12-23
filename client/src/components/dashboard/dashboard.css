@@ -72,4 +72,8 @@
         height:100vh;
         top: unset;
       }
+
+      .user .heading{
+        margin: 1.5rem;
+      }
   }

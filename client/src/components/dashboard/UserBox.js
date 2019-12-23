@@ -15,7 +15,7 @@ const UserBox = ({auth, profile, post}) => {
                     (<Fragment>
                         {auth.user && <Link to={`/profile/${auth.user._id}`} className="dash-link">View Profile</Link>}
                         <div className="dash-img">
-                            {profile.profile.picture && <img src={`image/${profile.profile.picture}`} alt={`${auth.user.name}`}/>}
+                            {profile.profile.picture && <img src={`/image/${profile.profile.picture}`} alt={`${auth.user.name}`}/>}
                         </div>
                         {!profile.loading && profile.profile.position === 'Placement Officer' && <button className="btn btn-light dash-btn"><Link to="/po_form">Eligibility List</Link></button>}
                         {!profile.loading && profile.profile.position === 'Faculty' && <button className="btn btn-light dash-btn"><Link to="/add_event">Add Event</Link></button>}

@@ -3,8 +3,6 @@ import './styles/nav.css'
 import Navbar from './Navbar'
 import io from "socket.io-client"
 import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux';
-import * as notifActions from '../../actions/notif'
 
 let socket;
 
@@ -23,7 +21,6 @@ class NavClass extends Component {
     }
 
     componentDidMount(){
-        this.props.actions.getUnseenNotifs();
         socket.on('get_data', this.getData)
     }
     
@@ -34,12 +31,8 @@ class NavClass extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {actions: bindActionCreators(notifActions, dispatch)}
-}
-
 const mapStateToProps = state =>({
     notif: state.notif
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavClass)
+export default connect(mapStateToProps)(NavClass)
